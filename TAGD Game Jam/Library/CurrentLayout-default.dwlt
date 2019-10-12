@@ -482,9 +482,19 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
+<<<<<<< HEAD
+      m_SelectedIDs: ea3c0000
+      m_LastClickedID: 15594
+      m_ExpandedIDs: c0f9ffff
+=======
       m_SelectedIDs: 
       m_LastClickedID: 0
+<<<<<<< HEAD
       m_ExpandedIDs: 02f9ffff6afbffff
+=======
+      m_ExpandedIDs: 6afbffff
+>>>>>>> 12e8033dff312c4453ec4540b463ec6ad7c33b18
+>>>>>>> c9ad621d2ca1f50b9a6feb030942ef445f8b7421
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: Main Camera
@@ -552,14 +562,27 @@ MonoBehaviour:
   m_StartGridSize: 64
   m_LastFolders: []
   m_LastFoldersGridSize: -1
+<<<<<<< HEAD
+  m_LastProjectPath: C:\Users\Ultimate Blade\Documents\GitHub\TAGD-Game-Jam-Fall-2019\TAGD
+    Game Jam
+=======
   m_LastProjectPath: C:\Users\Erik\TAGD Github\TAGD Game Jam
+>>>>>>> 12e8033dff312c4453ec4540b463ec6ad7c33b18
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 122d0000
     m_LastClickedID: 11538
+<<<<<<< HEAD
     m_ExpandedIDs: 000000002e2d0000
+=======
+<<<<<<< HEAD
+    m_ExpandedIDs: 0000000006390000
+=======
+    m_ExpandedIDs: 00000000
+>>>>>>> 12e8033dff312c4453ec4540b463ec6ad7c33b18
+>>>>>>> c9ad621d2ca1f50b9a6feb030942ef445f8b7421
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -587,7 +610,11 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
+<<<<<<< HEAD
+    m_ExpandedIDs: ffffffff0000000006390000
+=======
     m_ExpandedIDs: ffffffff000000002e2d0000
+>>>>>>> 12e8033dff312c4453ec4540b463ec6ad7c33b18
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
