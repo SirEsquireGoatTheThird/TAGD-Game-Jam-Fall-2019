@@ -1,14 +1,28 @@
 ﻿
+<<<<<<< HEAD
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 
+=======
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 16
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{89260663-7F45-4881-D3F0-33824FD42243}"
+EndProject
+>>>>>>> 12e8033dff312c4453ec4540b463ec6ad7c33b18
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+<<<<<<< HEAD
 
+=======
+		{89260663-7F45-4881-D3F0-33824FD42243}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89260663-7F45-4881-D3F0-33824FD42243}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89260663-7F45-4881-D3F0-33824FD42243}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89260663-7F45-4881-D3F0-33824FD42243}.Release|Any CPU.Build.0 = Release|Any CPU
+>>>>>>> 12e8033dff312c4453ec4540b463ec6ad7c33b18
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
