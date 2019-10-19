@@ -152,8 +152,6 @@ MonoBehaviour:
   m_gridHeight: 3
   m_gridWidth: 3
   m_gridScale: 2
-  m_bulletPrefab: {fileID: 1889911665241811195, guid: 055c1a82e2ae7ed48b72ac95493ca95d,
-    type: 3}
   m_bulletPrefabArray:
   - {fileID: 4071701284472155641, guid: 478fb4239b214c447b450e4f4f871046, type: 3}
   - {fileID: 8350811989322350998, guid: c0a1970f316f2be44b4b4f5e5febb459, type: 3}
@@ -209,7 +207,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.754717, g: 0.754717, b: 0.754717, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -226,7 +224,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -250,7 +248,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 4, y: 4, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
