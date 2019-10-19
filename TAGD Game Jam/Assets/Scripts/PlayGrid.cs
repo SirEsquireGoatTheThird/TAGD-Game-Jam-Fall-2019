@@ -17,14 +17,18 @@ public class PlayGrid : MonoBehaviour
     [SerializeField]
     private GameObject[] m_bulletPrefabArray;
     private GameObject[] m_bulletsArray;
+    RaycastHit m_firstHit;
+    bool m_bulletSelected = false;
+    RaycastHit m_secondHit;
 
     // The node will act as grid points with data thats needed in each point.
     private struct Node
     {
         public Vector2Int worldPosition;
         public bool isOccupied;
+        public BoxCollider2D collider;
+        public GameObject nodeObj;
     }
-
 
     private void Start()
     { 
@@ -39,9 +43,50 @@ public class PlayGrid : MonoBehaviour
         {
             for(int i = 0; i < m_bulletsArray.Length; i++)
             {
-                DirectionMove(m_bulletsArray[i].GetComponent<BulletActor>());
+                DirectionMove(m_bulletsArray[i].GetComponent<BulletActor>(), m_bulletsArray[i].GetComponent<BulletActor>().direction);
             }
         }
+
+        if(Input.GetMouseButtonDown(0))
+        {
+            RaycastHit hitInfo = new RaycastHit();
+            bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo);
+            if(hit)
+            {
+                for (int x = 0; x < m_gridWidth; x++)
+                {
+                    for (int y = 0; y < m_gridHeight; y++)
+                    {
+                        if (hitInfo.transform.position == new Vector3(m_grid[x, y].worldPosition.x, m_grid[x, y].worldPosition.y, 0))
+                        {
+                            if (m_grid[x, y].isOccupied == true)
+                            {
+                                m_firstHit = hitInfo;
+                                m_bulletSelected = true;
+                            }
+                            if (m_grid[x, y].isOccupied == false && m_bulletSelected == true)
+                            {
+                                m_secondHit = hitInfo;
+                                Vector3 calcDirection = m_secondHit.transform.position - m_firstHit.transform.position;
+                                Vector2Int direciton = new Vector2Int(Mathf.RoundToInt(calcDirection.x), Mathf.RoundToInt(calcDirection.y));
+                                //for (int a = 0; a < m_gridWidth; x++)
+                                //{
+                                //    for (int b = 0; b < m_gridHeight; y++)
+                                //    {
+                                //        if ()
+                                //    }
+                                //}
+                                //DirectionMove();
+                                m_bulletSelected = false;
+                            }
+                        }
+                    }
+                }
+
+
+            }
+        }
+
     }
 
     private void CreateGrid()
@@ -53,7 +98,13 @@ public class PlayGrid : MonoBehaviour
             {
                 Node nodePoint = new Node();
                 nodePoint.worldPosition = new Vector2Int(x, y);
+                nodePoint.nodeObj = new GameObject();
+                nodePoint.nodeObj.transform.position = new Vector3(x, y, 0);
+                nodePoint.nodeObj.transform.parent = gameObject.transform;
+                nodePoint.nodeObj.gameObject.name = x.ToString() + " " + y.ToString();
                 nodePoint.isOccupied = false;
+                nodePoint.collider = nodePoint.nodeObj.AddComponent<BoxCollider2D>();
+                nodePoint.collider.size = new Vector2(m_gridScale * 2, m_gridScale * 2);
                 m_grid[x, y] = nodePoint;
             }
         }
@@ -70,6 +121,7 @@ public class PlayGrid : MonoBehaviour
                 for (int y = 0; y < m_gridHeight; y++)
                 {
                     scaledNodes[x, y].worldPosition = m_grid[x, y].worldPosition * m_gridScale;
+                    scaledNodes[x, y].nodeObj.transform.position = new Vector3(m_grid[x, y].worldPosition.x, m_grid[x, y].worldPosition.y , 0);
                 }
             }
 
@@ -113,7 +165,7 @@ public class PlayGrid : MonoBehaviour
         }
     }
 
-    private void DirectionMove(BulletActor bullet)
+    private void DirectionMove(BulletActor bullet, Vector2Int direc = new Vector2Int())
     {
         // bullet.indexOnGrid is the position of the bullet on the grid
         // bullet.direction is the direction the bullet faces as a vector 2, can seperate as a change in x or y
@@ -123,8 +175,8 @@ public class PlayGrid : MonoBehaviour
         // Bullet wont move if another is in its way
 
 
-        int newXIndex = bullet.indexOnGrid[0] + bullet.direction.x;
-        int newYIndex = bullet.indexOnGrid[1] + bullet.direction.y;
+        int newXIndex = bullet.indexOnGrid[0] + direc.x;
+        int newYIndex = bullet.indexOnGrid[1] + direc.y;
 
         if(newXIndex < 0)
         {

@@ -9,6 +9,7 @@ public class BulletActor : MonoBehaviour, IBullet
     [SerializeField]
     int[] m_indexOnGrid = new int[2];
     int m_order;
+    bool m_inPattern;
 
     public Vector2Int direction
     {
@@ -78,6 +79,18 @@ public class BulletActor : MonoBehaviour, IBullet
             m_order = value;
         }
     }
+
+    public bool inPattern
+    {
+        get
+        {
+            return m_inPattern;
+        }
+        set
+        {
+            m_inPattern = value;
+        }
+    } 
 
 
     // Start is called before the first frame update

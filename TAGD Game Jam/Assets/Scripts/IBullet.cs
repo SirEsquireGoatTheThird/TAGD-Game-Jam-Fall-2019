@@ -10,5 +10,5 @@ public interface IBullet
 
     int order { get; set; }
 
-
+    bool inPattern { get; set; }
 }
