@@ -17,9 +17,9 @@ public class PlayGrid : MonoBehaviour
     [SerializeField]
     private GameObject[] m_bulletPrefabArray;
     private GameObject[] m_bulletsArray;
-    RaycastHit m_firstHit;
+    RaycastHit2D m_firstHit;
     bool m_bulletSelected = false;
-    RaycastHit m_secondHit;
+    RaycastHit2D m_secondHit;
 
     // The node will act as grid points with data thats needed in each point.
     private struct Node
@@ -33,7 +33,6 @@ public class PlayGrid : MonoBehaviour
     private void Start()
     { 
         CreateGrid();
-        m_grid = ScalePositions;
         SpawnBullets();
     }
 
@@ -49,9 +48,9 @@ public class PlayGrid : MonoBehaviour
 
         if(Input.GetMouseButtonDown(0))
         {
-            RaycastHit hitInfo = new RaycastHit();
-            bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo);
-            if(hit)
+            RaycastHit2D hitInfo  = Physics2D.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition).origin, Camera.main.ScreenPointToRay(Input.mousePosition).direction);
+            Debug.DrawRay(Camera.main.ScreenPointToRay(Input.mousePosition).origin, Camera.main.ScreenPointToRay(Input.mousePosition).direction, Color.red, 10f);
+            if(hitInfo)
             {
                 for (int x = 0; x < m_gridWidth; x++)
                 {
@@ -66,9 +65,17 @@ public class PlayGrid : MonoBehaviour
                             }
                             if (m_grid[x, y].isOccupied == false && m_bulletSelected == true)
                             {
+
+
                                 m_secondHit = hitInfo;
                                 Vector3 calcDirection = m_secondHit.transform.position - m_firstHit.transform.position;
-                                Vector2Int direciton = new Vector2Int(Mathf.RoundToInt(calcDirection.x), Mathf.RoundToInt(calcDirection.y));
+                                if(Mathf.Abs(calcDirection.x) > (m_gridScale * 2)|| Mathf.Abs(calcDirection.y) > (m_gridScale * 2))
+                                {
+                                    m_secondHit = new RaycastHit2D();
+                                    continue;
+                                }
+                                Vector2Int direciton = new Vector2Int(Mathf.RoundToInt(calcDirection.normalized.x), Mathf.RoundToInt(calcDirection.normalized.y));
+                                Debug.Log(direciton);
                                 //for (int a = 0; a < m_gridWidth; x++)
                                 //{
                                 //    for (int b = 0; b < m_gridHeight; y++)
@@ -97,9 +104,9 @@ public class PlayGrid : MonoBehaviour
             for(int y = 0; y < m_gridHeight; y++)
             {
                 Node nodePoint = new Node();
-                nodePoint.worldPosition = new Vector2Int(x, y);
+                nodePoint.worldPosition = new Vector2Int(x * m_gridScale, y * m_gridScale);
                 nodePoint.nodeObj = new GameObject();
-                nodePoint.nodeObj.transform.position = new Vector3(x, y, 0);
+                nodePoint.nodeObj.transform.position = new Vector3(x * m_gridScale, y * m_gridScale, 0);
                 nodePoint.nodeObj.transform.parent = gameObject.transform;
                 nodePoint.nodeObj.gameObject.name = x.ToString() + " " + y.ToString();
                 nodePoint.isOccupied = false;
@@ -110,28 +117,9 @@ public class PlayGrid : MonoBehaviour
         }
     }
 
-    private Node[,] ScalePositions
-    {
-        get
-        {
-            Node[,] scaledNodes = m_grid;
-
-            for (int x = 0; x < m_gridWidth; x++)
-            {
-                for (int y = 0; y < m_gridHeight; y++)
-                {
-                    scaledNodes[x, y].worldPosition = m_grid[x, y].worldPosition * m_gridScale;
-                    scaledNodes[x, y].nodeObj.transform.position = new Vector3(m_grid[x, y].worldPosition.x, m_grid[x, y].worldPosition.y , 0);
-                }
-            }
-
-            return scaledNodes;
-        }
-    }
 
     private void SpawnBullets()
     {
-        Node[,] spawnGrid = ScalePositions;
         m_bulletsArray = new GameObject[m_numberOfBullets];
         Vector2Int[] rotArray = new Vector2Int[]{
             new Vector2Int(0, 1),
@@ -146,23 +134,38 @@ public class PlayGrid : MonoBehaviour
                 int randXIndex = Random.Range(0, m_gridWidth);
                 int randYIndex = Random.Range(0, m_gridHeight);
 
-                if (spawnGrid[randXIndex, randYIndex].isOccupied == false)
+                if (m_grid[randXIndex, randYIndex].isOccupied == false)
                 {
                     GameObject bullet = Instantiate(m_bulletPrefabArray[i], Vector3.zero, Quaternion.identity);
                     BulletActor actor = bullet.GetComponent<BulletActor>();
                     actor.direction = rotArray[i];
-                    actor.position = new Vector2Int(spawnGrid[randXIndex, randYIndex].worldPosition.x, spawnGrid[randXIndex, randYIndex].worldPosition.y);
+                    actor.position = new Vector2Int(m_grid[randXIndex, randYIndex].worldPosition.x, m_grid[randXIndex, randYIndex].worldPosition.y);
                     actor.indexOnGrid[0] = randXIndex;
                     actor.indexOnGrid[1] = randYIndex;
                     actor.order = i;
                     m_grid[randXIndex, randYIndex].isOccupied = true;
-                    spawnGrid[randXIndex, randYIndex].isOccupied = true;
+                    m_grid[randXIndex, randYIndex].isOccupied = true;
                     m_bulletsArray[i] = bullet;
                     break;
                 }
 
             }
         }
+    }
+
+    private int[,] PosToIndex(Vector2Int position)
+    {
+        for(int i = 0; i < m_grid.Length; i++)
+        {
+            for (int ii = 0; ii < m_grid.Length; ii++)
+            {
+                if(m_grid[i,i].worldPosition == position)
+                {
+                    return (new int[i, i]);
+                }
+            }
+        }
+        return null;
     }
 
     private void DirectionMove(BulletActor bullet, Vector2Int direc = new Vector2Int())
