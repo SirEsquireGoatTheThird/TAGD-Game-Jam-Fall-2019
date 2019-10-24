@@ -18,6 +18,7 @@ public class PlayGrid : MonoBehaviour
     private GameObject[] m_bulletPrefabArray;
     private GameObject[] m_bulletsArray;
     RaycastHit2D m_firstHit;
+    int[] m_firstHitIndex;
     bool m_bulletSelected = false;
     RaycastHit2D m_secondHit;
 
@@ -52,44 +53,34 @@ public class PlayGrid : MonoBehaviour
             Debug.DrawRay(Camera.main.ScreenPointToRay(Input.mousePosition).origin, Camera.main.ScreenPointToRay(Input.mousePosition).direction, Color.red, 10f);
             if(hitInfo)
             {
-                for (int x = 0; x < m_gridWidth; x++)
+                int[] index = PosToIndex(hitInfo.transform.position);
+
+                if(index != null)
                 {
-                    for (int y = 0; y < m_gridHeight; y++)
+                    if (m_grid[index[0], index[1]].isOccupied == true && m_bulletSelected == false)
                     {
-                        if (hitInfo.transform.position == new Vector3(m_grid[x, y].worldPosition.x, m_grid[x, y].worldPosition.y, 0))
+                        m_firstHit = hitInfo;
+                        m_firstHitIndex = PosToIndex(hitInfo.transform.position);
+                        m_bulletSelected = true;
+                    }
+                    if (m_grid[index[0], index[1]].isOccupied == false && m_bulletSelected == true)
+                    {
+                        m_secondHit = hitInfo;
+                        Vector3 calcDirection = m_secondHit.transform.position - m_firstHit.transform.position;
+                        if (Mathf.Abs(calcDirection.x) > (m_gridScale * 2) || Mathf.Abs(calcDirection.y) > (m_gridScale * 2))
                         {
-                            if (m_grid[x, y].isOccupied == true)
-                            {
-                                m_firstHit = hitInfo;
-                                m_bulletSelected = true;
-                            }
-                            if (m_grid[x, y].isOccupied == false && m_bulletSelected == true)
-                            {
-
-
-                                m_secondHit = hitInfo;
-                                Vector3 calcDirection = m_secondHit.transform.position - m_firstHit.transform.position;
-                                if(Mathf.Abs(calcDirection.x) > (m_gridScale * 2)|| Mathf.Abs(calcDirection.y) > (m_gridScale * 2))
-                                {
-                                    m_secondHit = new RaycastHit2D();
-                                    continue;
-                                }
-                                Vector2Int direciton = new Vector2Int(Mathf.RoundToInt(calcDirection.normalized.x), Mathf.RoundToInt(calcDirection.normalized.y));
-                                Debug.Log(direciton);
-                                //for (int a = 0; a < m_gridWidth; x++)
-                                //{
-                                //    for (int b = 0; b < m_gridHeight; y++)
-                                //    {
-                                //        if ()
-                                //    }
-                                //}
-                                //DirectionMove();
-                                m_bulletSelected = false;
-                            }
+                            return;
                         }
+                        if(Mathf.Abs(calcDirection.x) == (m_gridScale * 2) && Mathf.Abs(calcDirection.y) == (m_gridScale * 2))
+                        {
+                            return;
+                        }
+                        Debug.Log(calcDirection);
+                        Vector2Int direciton = new Vector2Int(Mathf.RoundToInt(calcDirection.normalized.x), Mathf.RoundToInt(calcDirection.normalized.y));
+                        DirectionMove(IndexToBullet(m_firstHitIndex), direciton);
+                        m_bulletSelected = false;
                     }
                 }
-
 
             }
         }
@@ -104,9 +95,9 @@ public class PlayGrid : MonoBehaviour
             for(int y = 0; y < m_gridHeight; y++)
             {
                 Node nodePoint = new Node();
-                nodePoint.worldPosition = new Vector2Int(x * m_gridScale, y * m_gridScale);
+                nodePoint.worldPosition = new Vector2Int(x * m_gridScale * 2, y * m_gridScale * 2);
                 nodePoint.nodeObj = new GameObject();
-                nodePoint.nodeObj.transform.position = new Vector3(x * m_gridScale, y * m_gridScale, 0);
+                nodePoint.nodeObj.transform.position = new Vector3(x * m_gridScale * 2, y * m_gridScale * 2, 0);
                 nodePoint.nodeObj.transform.parent = gameObject.transform;
                 nodePoint.nodeObj.gameObject.name = x.ToString() + " " + y.ToString();
                 nodePoint.isOccupied = false;
@@ -116,7 +107,6 @@ public class PlayGrid : MonoBehaviour
             }
         }
     }
-
 
     private void SpawnBullets()
     {
@@ -153,21 +143,36 @@ public class PlayGrid : MonoBehaviour
         }
     }
 
-    private int[,] PosToIndex(Vector2Int position)
+    private int[] PosToIndex(Vector3 position)
     {
-        for(int i = 0; i < m_grid.Length; i++)
+        Vector2Int convertedVector = new Vector2Int(Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.y));
+        for(int i = 0; i < m_gridWidth; i++)
         {
-            for (int ii = 0; ii < m_grid.Length; ii++)
+            for (int ii = 0; ii < m_gridHeight; ii++)
             {
-                if(m_grid[i,i].worldPosition == position)
+                if(m_grid[i,ii].worldPosition == convertedVector)
                 {
-                    return (new int[i, i]);
+                    int[] index = new int[2];
+                    index[0] = i;
+                    index[1] = ii;
+                    return index;
                 }
             }
         }
         return null;
     }
 
+    private BulletActor IndexToBullet(int[] index)
+    {
+        foreach(GameObject obj in m_bulletsArray)
+        {
+            if(obj.GetComponent<BulletActor>().indexOnGrid[0] == index[0] && obj.GetComponent<BulletActor>().indexOnGrid[1] == index[1])
+            {
+                return obj.GetComponent<BulletActor>();
+            }
+        }
+        return null;
+    }
     private void DirectionMove(BulletActor bullet, Vector2Int direc = new Vector2Int())
     {
         // bullet.indexOnGrid is the position of the bullet on the grid
@@ -177,6 +182,10 @@ public class PlayGrid : MonoBehaviour
         // Cap indexs within range of 0 to 2
         // Bullet wont move if another is in its way
 
+        if(bullet == null)
+        {
+            return;
+        }
 
         int newXIndex = bullet.indexOnGrid[0] + direc.x;
         int newYIndex = bullet.indexOnGrid[1] + direc.y;
