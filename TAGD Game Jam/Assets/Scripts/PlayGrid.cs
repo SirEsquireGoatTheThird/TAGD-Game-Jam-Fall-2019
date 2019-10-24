@@ -80,6 +80,11 @@ public class PlayGrid : MonoBehaviour
                         DirectionMove(IndexToBullet(m_firstHitIndex), direciton);
                         m_bulletSelected = false;
                     }
+                    if (m_grid[index[0], index[1]].isOccupied == true && m_bulletSelected == true)
+                    {
+                        m_firstHit = hitInfo;
+                        m_firstHitIndex = PosToIndex(hitInfo.transform.position);
+                    }
                 }
             }
         }
