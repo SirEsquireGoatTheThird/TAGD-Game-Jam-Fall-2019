@@ -50,7 +50,7 @@ public class PlayGrid : MonoBehaviour
         if(Input.GetMouseButtonDown(0))
         {
             RaycastHit2D hitInfo  = Physics2D.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition).origin, Camera.main.ScreenPointToRay(Input.mousePosition).direction);
-            Debug.DrawRay(Camera.main.ScreenPointToRay(Input.mousePosition).origin, Camera.main.ScreenPointToRay(Input.mousePosition).direction, Color.red, 10f);
+            // Debug.DrawRay(Camera.main.ScreenPointToRay(Input.mousePosition).origin, Camera.main.ScreenPointToRay(Input.mousePosition).direction, Color.red, 10f);
             if(hitInfo)
             {
                 int[] index = PosToIndex(hitInfo.transform.position);
@@ -81,10 +81,13 @@ public class PlayGrid : MonoBehaviour
                         m_bulletSelected = false;
                     }
                 }
-
             }
         }
 
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            m_bulletSelected = false;
+        }
     }
 
     private void CreateGrid()
