@@ -21,6 +21,7 @@ public class PlayGrid : MonoBehaviour
     int[] m_firstHitIndex;
     bool m_bulletSelected = false;
     RaycastHit2D m_secondHit;
+    private Camera m_mainCamera;
 
     // The node will act as grid points with data thats needed in each point.
     private struct Node
@@ -32,7 +33,8 @@ public class PlayGrid : MonoBehaviour
     }
 
     private void Start()
-    { 
+    {
+        m_mainCamera = Camera.main;
         CreateGrid();
         SpawnBullets();
     }
@@ -49,7 +51,7 @@ public class PlayGrid : MonoBehaviour
 
         if(Input.GetMouseButtonDown(0))
         {
-            RaycastHit2D hitInfo  = Physics2D.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition).origin, Camera.main.ScreenPointToRay(Input.mousePosition).direction);
+            RaycastHit2D hitInfo  = Physics2D.Raycast(m_mainCamera.ScreenPointToRay(Input.mousePosition).origin, m_mainCamera.ScreenPointToRay(Input.mousePosition).direction);
             // Debug.DrawRay(Camera.main.ScreenPointToRay(Input.mousePosition).origin, Camera.main.ScreenPointToRay(Input.mousePosition).direction, Color.red, 10f);
             if(hitInfo)
             {
@@ -63,23 +65,34 @@ public class PlayGrid : MonoBehaviour
                         m_firstHitIndex = PosToIndex(hitInfo.transform.position);
                         m_bulletSelected = true;
                     }
+
                     if (m_grid[index[0], index[1]].isOccupied == false && m_bulletSelected == true)
                     {
                         m_secondHit = hitInfo;
-                        Vector3 calcDirection = m_secondHit.transform.position - m_firstHit.transform.position;
-                        if (Mathf.Abs(calcDirection.x) > (m_gridScale * 2) || Mathf.Abs(calcDirection.y) > (m_gridScale * 2))
+                        int[] m_firstIndex = PosToIndex(m_firstHit.transform.position);
+                        int[] m_secondIndex = PosToIndex(m_secondHit.transform.position);
+                        int[] m_indexDiff = new int[2];
+                        m_indexDiff[0] = m_secondIndex[0] - m_firstIndex[0];
+                        m_indexDiff[1] = m_secondIndex[1] - m_firstIndex[1];
+                        //Debug.Log(m_indexDiff[0] + " " + m_indexDiff[1]);
+                        //Debug.Log("Index its suppose to be at now: " + (m_firstIndex[0] + m_indexDiff[0]) + " " + (m_firstIndex[1] + m_indexDiff[1]));
+                        //if ((Mathf.Abs(m_indexDiff[0]) > 1 || Mathf.Abs(m_indexDiff[1]) > 1))
+                        //{
+                        //    return;
+                        //}
+                        if((Mathf.Abs(m_indexDiff[0]) == 1 && Mathf.Abs(m_indexDiff[1]) == 1) || (Mathf.Abs(m_indexDiff[0]) == 2 && Mathf.Abs(m_indexDiff[1]) == 2))
                         {
                             return;
                         }
-                        if(Mathf.Abs(calcDirection.x) == (m_gridScale * 2) && Mathf.Abs(calcDirection.y) == (m_gridScale * 2))
+                        else if((Mathf.Abs(m_indexDiff[0]) == 2 && Mathf.Abs(m_indexDiff[1]) == 1) || (Mathf.Abs(m_indexDiff[0]) == 1 && Mathf.Abs(m_indexDiff[1]) == 2))
                         {
                             return;
                         }
-                        Debug.Log(calcDirection);
-                        Vector2Int direciton = new Vector2Int(Mathf.RoundToInt(calcDirection.normalized.x), Mathf.RoundToInt(calcDirection.normalized.y));
+                        Vector2Int direciton = new Vector2Int(m_indexDiff[0], m_indexDiff[1]);
                         DirectionMove(IndexToBullet(m_firstHitIndex), direciton);
                         m_bulletSelected = false;
                     }
+
                     if (m_grid[index[0], index[1]].isOccupied == true && m_bulletSelected == true)
                     {
                         m_firstHit = hitInfo;
