@@ -5,7 +5,7 @@ using UnityEngine;
 public interface IBullet
 {
     Vector2Int direction { get; set; }
-    Vector2Int position { get; set; }
+    Vector3 position { get; set; }
     int[] indexOnGrid { get; set; }
 
     int order { get; set; }

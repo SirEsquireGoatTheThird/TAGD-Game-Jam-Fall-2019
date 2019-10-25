@@ -5,7 +5,7 @@ using UnityEngine;
 public class BulletActor : MonoBehaviour, IBullet
 {
     Vector2Int m_direction;
-    Vector2Int m_position;
+    Vector3 m_position;
     [SerializeField]
     int[] m_indexOnGrid = new int[2];
     int m_order;
@@ -45,7 +45,7 @@ public class BulletActor : MonoBehaviour, IBullet
             transform.rotation = Quaternion.Euler(actualAngle);
         }
     }
-    public Vector2Int position
+    public Vector3 position
     {
         get
         {
@@ -53,8 +53,7 @@ public class BulletActor : MonoBehaviour, IBullet
         }
         set
         {
-            m_position = value;
-            transform.position = new Vector3(m_position.x, m_position.y, 0);
+            m_position = value;;
         }
     }
     public int[] indexOnGrid
@@ -90,18 +89,29 @@ public class BulletActor : MonoBehaviour, IBullet
         {
             m_inPattern = value;
         }
-    } 
+    }
 
-
-    // Start is called before the first frame update
-    void Start()
+    private void Update()
     {
+       if(VectorDifference() < 0.01f)
+        {
+            transform.position = position;
+        }
+        else
+        {
+            transform.position = Vector3.Lerp(transform.position, new Vector3(position.x, position.y, 0), 2 * Time.deltaTime);
+        }
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetTransform(Vector3 pos)
     {
-        
+        transform.position = pos;
+    }
+
+    private float VectorDifference()
+    {
+        Vector3 diff = position - transform.position;
+        return diff.magnitude;
     }
 }
