@@ -68,6 +68,7 @@
     <Compile Include="Assets\_Scripts\PatternSetScriptable.cs" />
     <Compile Include="Assets\_Scripts\PauseMenu.cs" />
     <Compile Include="Assets\_Scripts\PlayGrid.cs" />
+    <Compile Include="Assets\_Scripts\Timer.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/Ultimate Blade/Documents/GitHub/TAGD-Game-Jam-Fall-2019/TAGD Game Jam/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
