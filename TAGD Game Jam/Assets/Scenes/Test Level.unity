@@ -151,13 +151,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_gridHeight: 3
   m_gridWidth: 3
-  m_gridScale: 1.5
+  m_gridScale: 1.25
   m_bulletPrefabs:
   - {fileID: 4071701284472155641, guid: 478fb4239b214c447b450e4f4f871046, type: 3}
   - {fileID: 8350811989322350998, guid: c0a1970f316f2be44b4b4f5e5febb459, type: 3}
   - {fileID: 1942144828152752989, guid: 5338cb6731a40a444b8b327c96aa8fa6, type: 3}
   - {fileID: 6804601798261291031, guid: ec20c963138d5d440866bf600a5dece7, type: 3}
   m_backGroundObject: {fileID: 973100993}
+  m_currentPatternSet: {fileID: 11400000, guid: 2f165072582df5d48aaad9138d292015,
+    type: 2}
 --- !u!4 &217969623
 Transform:
   m_ObjectHideFlags: 0
@@ -611,12 +613,12 @@ PrefabInstance:
     - target: {fileID: 831640763616798770, guid: d99fbd48602dbfd42bdaf0403f2f333c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.64
+      value: 9.67
       objectReference: {fileID: 0}
     - target: {fileID: 831640763616798770, guid: d99fbd48602dbfd42bdaf0403f2f333c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.98
+      value: 2.97
       objectReference: {fileID: 0}
     - target: {fileID: 831640763616798770, guid: d99fbd48602dbfd42bdaf0403f2f333c,
         type: 3}

@@ -64,6 +64,8 @@
   <ItemGroup>
     <Compile Include="Assets\_Scripts\BulletActor.cs" />
     <Compile Include="Assets\_Scripts\IBullet.cs" />
+    <Compile Include="Assets\_Scripts\PatternScriptable.cs" />
+    <Compile Include="Assets\_Scripts\PatternSetScriptable.cs" />
     <Compile Include="Assets\_Scripts\PlayGrid.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/Erik/TAGD Github/TAGD Game Jam/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
