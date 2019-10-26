@@ -64,12 +64,9 @@
   <ItemGroup>
     <Compile Include="Assets\_Scripts\BulletActor.cs" />
     <Compile Include="Assets\_Scripts\IBullet.cs" />
-<<<<<<< HEAD
     <Compile Include="Assets\_Scripts\PatternScriptable.cs" />
     <Compile Include="Assets\_Scripts\PatternSetScriptable.cs" />
-=======
     <Compile Include="Assets\_Scripts\PauseMenu.cs" />
->>>>>>> 1e399cc548d4ae8be9b385a5d8d25f958a8f858b
     <Compile Include="Assets\_Scripts\PlayGrid.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/Ultimate Blade/Documents/GitHub/TAGD-Game-Jam-Fall-2019/TAGD Game Jam/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
