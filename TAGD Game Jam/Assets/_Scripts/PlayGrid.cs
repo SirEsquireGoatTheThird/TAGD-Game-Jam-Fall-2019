@@ -32,6 +32,21 @@ public class PlayGrid : MonoBehaviour
     [SerializeField]
     private GameObject m_backGroundObject;
 
+    [SerializeField]
+    private PatternSetScriptable m_currentPatternSet;
+    //Current Pattern Set
+    public PatternSetScriptable CurrentPatternSet
+    {
+        get
+        {
+            return m_currentPatternSet;
+        }
+        set
+        {
+            m_currentPatternSet = value;
+        }
+    }
+
     // The node will act as grid points with data thats needed in each point.
     private struct Node
     {
@@ -142,35 +157,34 @@ public class PlayGrid : MonoBehaviour
     {
         m_bullets = new GameObject[m_numberOfBullets];
         Vector2Int[] rotArray = new Vector2Int[]{
-            new Vector2Int(0, 1),
-            new Vector2Int(0, -1),
             new Vector2Int(1, 0),
+            new Vector2Int(0, -1),
+            new Vector2Int(0, 1),
             new Vector2Int(-1, 0)
             };
+        Vector2Int[] indexArray = new Vector2Int[]
+        {
+            new Vector2Int(0, 0),
+            new Vector2Int(0, 2),
+            new Vector2Int(2, 0),
+            new Vector2Int(2, 2)
+        };
         for (int i = 0; i < m_numberOfBullets; i++)
         {
-            while(true)
-            { 
-                int randXIndex = Random.Range(0, m_gridWidth);
-                int randYIndex = Random.Range(0, m_gridHeight);
 
-                if (m_grid[randXIndex, randYIndex].isOccupied == false)
-                {
-                    GameObject bullet = Instantiate(m_bulletPrefabs[i], Vector3.zero, Quaternion.identity);
-                    BulletActor actor = bullet.GetComponent<BulletActor>();
-                    actor.direction = rotArray[i];
-                    actor.SetTransform(m_grid[randXIndex, randYIndex].worldPosition);
-                    actor.position = m_grid[randXIndex, randYIndex].worldPosition;
-                    actor.indexOnGrid[0] = randXIndex;
-                    actor.indexOnGrid[1] = randYIndex;
-                    actor.order = i;
-                    m_grid[randXIndex, randYIndex].isOccupied = true;
-                    m_grid[randXIndex, randYIndex].isOccupied = true;
-                    m_bullets[i] = bullet;
-                    break;
-                }
+            GameObject bullet = Instantiate(m_bulletPrefabs[i], Vector3.zero, Quaternion.identity);
+            BulletActor actor = bullet.GetComponent<BulletActor>();
+            bullet.transform.localScale = new Vector3(m_gridScale, m_gridScale, 1);
+            actor.direction = rotArray[i];
+            actor.SetTransform(m_grid[indexArray[i].x, indexArray[i].y].worldPosition);
+            actor.position = m_grid[indexArray[i].x, indexArray[i].y].worldPosition;
+            actor.indexOnGrid[0] = indexArray[i].x;
+            actor.indexOnGrid[1] = indexArray[i].y;
+            actor.order = i;
+            m_grid[indexArray[i].x, indexArray[i].y].isOccupied = true;
+            m_grid[indexArray[i].x, indexArray[i].y].isOccupied = true;
+            m_bullets[i] = bullet;
 
-            }
         }
     }
 
@@ -210,6 +224,8 @@ public class PlayGrid : MonoBehaviour
         // Update position of bullet using scaled position values
         // Cap indexs within range of 0 to 2
         // Bullet wont move if another is in its way
+        
+
 
         if(bullet == null)
         {
@@ -248,6 +264,7 @@ public class PlayGrid : MonoBehaviour
         m_grid[bullet.indexOnGrid[0], bullet.indexOnGrid[1]].isOccupied = false;
         bullet.indexOnGrid[0] = newXIndex;
         bullet.indexOnGrid[1] = newYIndex;
+
 
     }
 
