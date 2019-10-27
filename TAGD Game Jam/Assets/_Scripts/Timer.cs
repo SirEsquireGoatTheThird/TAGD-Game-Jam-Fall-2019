@@ -8,9 +8,14 @@ public class Timer : MonoBehaviour
     public float duration;
     public Image fillImage;
 
+    public void Start()
+    {
+        fillImage.fillAmount = 1f;
+    }
+
     public void Update()
     {
-        if ((int)Time.time % duration == 0)
+        if (((int)Time.time - 1) % duration == 0)
         {
             fillImage.fillAmount = 1f;
             StartCoroutine(timer(duration));
