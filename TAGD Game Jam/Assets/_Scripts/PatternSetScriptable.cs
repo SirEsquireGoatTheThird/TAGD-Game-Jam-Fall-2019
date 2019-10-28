@@ -7,4 +7,5 @@ public class PatternSetScriptable : ScriptableObject
 {
     public string setName;
     public PatternScriptable[] patternSet;
+    
 }

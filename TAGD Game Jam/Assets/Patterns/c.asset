@@ -17,3 +17,4 @@ MonoBehaviour:
   - {x: 1, y: 1}
   - {x: 1, y: -1}
   icon: {fileID: 21300000, guid: 9e6bc83465fc2484286eb3e3ec82c0e4, type: 3}
+  isActivated: 0

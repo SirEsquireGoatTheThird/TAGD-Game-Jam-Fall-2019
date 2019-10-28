@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class PlayGrid : MonoBehaviour
 {
@@ -14,7 +13,7 @@ public class PlayGrid : MonoBehaviour
     [SerializeField]
     [Range(1, 20)]
     private float m_gridScale = 1;
-    
+
     // Raycast Stuff
     RaycastHit2D m_firstHit;
     int[] m_firstHitIndex;
@@ -32,9 +31,9 @@ public class PlayGrid : MonoBehaviour
     [SerializeField]
     private GameObject m_backGroundObject;
 
+    // Pattern Finding
     [SerializeField]
     private PatternSetScriptable m_currentPatternSet;
-    //Current Pattern Set
     public PatternSetScriptable CurrentPatternSet
     {
         get
@@ -46,6 +45,9 @@ public class PlayGrid : MonoBehaviour
             m_currentPatternSet = value;
         }
     }
+    private int m_numOfPatterns;
+    private Vector2Int[,] bulletIndexDifference;
+
 
     // The node will act as grid points with data thats needed in each point.
     private struct Node
@@ -59,31 +61,38 @@ public class PlayGrid : MonoBehaviour
     private void Start()
     {
         m_mainCamera = Camera.main;
-        m_backGroundObject.transform.localPosition = new Vector3(m_gridScale * 2, m_gridScale * 2, 0);
-        m_backGroundObject.transform.localScale = new Vector3(m_gridScale, m_gridScale, 1);
+        if(m_backGroundObject != null)
+        {
+            m_backGroundObject.transform.localPosition = new Vector3(m_gridScale, m_gridScale, 0);
+            m_backGroundObject.transform.localScale = new Vector3(m_gridScale / 2, m_gridScale / 2, 1);
+        }
+        
         CreateGrid();
         SpawnBullets();
+        ResetPatterns();
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            for(int i = 0; i < m_bullets.Length; i++)
+            for (int i = 0; i < m_bullets.Length; i++)
             {
                 DirectionMove(m_bullets[i].GetComponent<BulletActor>(), m_bullets[i].GetComponent<BulletActor>().direction);
+                PatternCheck();
+                ResetPatterns();
             }
         }
 
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            RaycastHit2D hitInfo  = Physics2D.Raycast(m_mainCamera.ScreenPointToRay(Input.mousePosition).origin, m_mainCamera.ScreenPointToRay(Input.mousePosition).direction);
+            RaycastHit2D hitInfo = Physics2D.Raycast(m_mainCamera.ScreenPointToRay(Input.mousePosition).origin, m_mainCamera.ScreenPointToRay(Input.mousePosition).direction);
             // Debug.DrawRay(Camera.main.ScreenPointToRay(Input.mousePosition).origin, Camera.main.ScreenPointToRay(Input.mousePosition).direction, Color.red, 10f);
-            if(hitInfo)
+            if (hitInfo)
             {
                 int[] index = PosToIndex(hitInfo.transform.position);
 
-                if(index != null)
+                if (index != null)
                 {
                     if (m_grid[index[0], index[1]].isOccupied == true && m_bulletSelected == false)
                     {
@@ -103,16 +112,18 @@ public class PlayGrid : MonoBehaviour
                         //Debug.Log(m_indexDiff[0] + " " + m_indexDiff[1]);
                         //Debug.Log("Index its suppose to be at now: " + (m_firstIndex[0] + m_indexDiff[0]) + " " + (m_firstIndex[1] + m_indexDiff[1]));
 
-                        if((Mathf.Abs(m_indexDiff[0]) == 1 && Mathf.Abs(m_indexDiff[1]) == 1) || (Mathf.Abs(m_indexDiff[0]) == 2 && Mathf.Abs(m_indexDiff[1]) == 2))
+                        if ((Mathf.Abs(m_indexDiff[0]) == 1 && Mathf.Abs(m_indexDiff[1]) == 1) || (Mathf.Abs(m_indexDiff[0]) == 2 && Mathf.Abs(m_indexDiff[1]) == 2))
                         {
                             return;
                         }
-                        else if((Mathf.Abs(m_indexDiff[0]) == 2 && Mathf.Abs(m_indexDiff[1]) == 1) || (Mathf.Abs(m_indexDiff[0]) == 1 && Mathf.Abs(m_indexDiff[1]) == 2))
+                        else if ((Mathf.Abs(m_indexDiff[0]) == 2 && Mathf.Abs(m_indexDiff[1]) == 1) || (Mathf.Abs(m_indexDiff[0]) == 1 && Mathf.Abs(m_indexDiff[1]) == 2))
                         {
                             return;
                         }
                         Vector2Int direciton = new Vector2Int(m_indexDiff[0], m_indexDiff[1]);
                         DirectionMove(IndexToBullet(m_firstHitIndex), direciton);
+                        PatternCheck();
+                        ResetPatterns();
                         m_bulletSelected = false;
                     }
 
@@ -125,7 +136,7 @@ public class PlayGrid : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             m_bulletSelected = false;
         }
@@ -134,20 +145,22 @@ public class PlayGrid : MonoBehaviour
     private void CreateGrid()
     {
         m_grid = new Node[m_gridWidth, m_gridHeight];
-        for(int x = 0; x < m_gridWidth; x++)
+        for (int x = 0; x < m_gridWidth; x++)
         {
-            for(int y = 0; y < m_gridHeight; y++)
+            for (int y = 0; y < m_gridHeight; y++)
             {
+                // Create a new nodepoint at that value
                 Node nodePoint = new Node();
-                nodePoint.worldPosition = new Vector3((x * m_gridScale * 2) + transform.position.x, (y * m_gridScale * 2) + transform.position.y, 0);
+                // Scale worldPosition by m_gridScale
+                nodePoint.worldPosition = new Vector3((x * m_gridScale) + transform.position.x, (y * m_gridScale) + transform.position.y, 0);
                 nodePoint.nodeObj = new GameObject();
-                nodePoint.nodeObj.transform.position = new Vector3((x * m_gridScale * 2) + transform.position.x, (y * m_gridScale * 2) + transform.position.y, 0);
+                nodePoint.nodeObj.transform.position = new Vector3((x * m_gridScale) + transform.position.x, (y * m_gridScale) + transform.position.y, 0);
                 nodePoint.nodeObj.transform.parent = gameObject.transform;
                 nodePoint.nodeObj.gameObject.name = x.ToString() + " " + y.ToString();
                 nodePoint.isOccupied = false;
                 nodePoint.collider = nodePoint.nodeObj.AddComponent<BoxCollider2D>();
-                nodePoint.collider.transform.position = new Vector3((x * m_gridScale * 2) + transform.position.x, (y * m_gridScale * 2) + transform.position.y, 0);
-                nodePoint.collider.size = new Vector2(m_gridScale * 2, m_gridScale * 2);
+                nodePoint.collider.transform.position = new Vector3((x * m_gridScale) + transform.position.x, (y * m_gridScale) + transform.position.y, 0);
+                nodePoint.collider.size = new Vector2(m_gridScale, m_gridScale);
                 m_grid[x, y] = nodePoint;
             }
         }
@@ -174,7 +187,7 @@ public class PlayGrid : MonoBehaviour
 
             GameObject bullet = Instantiate(m_bulletPrefabs[i], Vector3.zero, Quaternion.identity);
             BulletActor actor = bullet.GetComponent<BulletActor>();
-            bullet.transform.localScale = new Vector3(m_gridScale, m_gridScale, 1);
+            bullet.transform.localScale = new Vector3(m_gridScale / 2, m_gridScale / 2, 1);
             actor.direction = rotArray[i];
             actor.SetTransform(m_grid[indexArray[i].x, indexArray[i].y].worldPosition);
             actor.position = m_grid[indexArray[i].x, indexArray[i].y].worldPosition;
@@ -182,7 +195,7 @@ public class PlayGrid : MonoBehaviour
             actor.indexOnGrid[1] = indexArray[i].y;
             actor.order = i;
             m_grid[indexArray[i].x, indexArray[i].y].isOccupied = true;
-            m_grid[indexArray[i].x, indexArray[i].y].isOccupied = true;
+            actor.inPattern = false;
             m_bullets[i] = bullet;
 
         }
@@ -190,11 +203,11 @@ public class PlayGrid : MonoBehaviour
 
     private int[] PosToIndex(Vector3 position)
     {
-        for(int i = 0; i < m_gridWidth; i++)
+        for (int i = 0; i < m_gridWidth; i++)
         {
             for (int ii = 0; ii < m_gridHeight; ii++)
             {
-                if(m_grid[i,ii].worldPosition == position)
+                if (m_grid[i, ii].worldPosition == position)
                 {
                     int[] index = new int[2];
                     index[0] = i;
@@ -207,9 +220,9 @@ public class PlayGrid : MonoBehaviour
     }
     private BulletActor IndexToBullet(int[] index)
     {
-        foreach(GameObject obj in m_bullets)
+        foreach (GameObject obj in m_bullets)
         {
-            if(obj.GetComponent<BulletActor>().indexOnGrid[0] == index[0] && obj.GetComponent<BulletActor>().indexOnGrid[1] == index[1])
+            if (obj.GetComponent<BulletActor>().indexOnGrid[0] == index[0] && obj.GetComponent<BulletActor>().indexOnGrid[1] == index[1])
             {
                 return obj.GetComponent<BulletActor>();
             }
@@ -224,10 +237,13 @@ public class PlayGrid : MonoBehaviour
         // Update position of bullet using scaled position values
         // Cap indexs within range of 0 to 2
         // Bullet wont move if another is in its way
-        
 
+        if (bullet.inPattern == true)
+        {
+            return;
+        }
 
-        if(bullet == null)
+        if (bullet == null)
         {
             return;
         }
@@ -235,11 +251,11 @@ public class PlayGrid : MonoBehaviour
         int newXIndex = bullet.indexOnGrid[0] + direc.x;
         int newYIndex = bullet.indexOnGrid[1] + direc.y;
 
-        if(newXIndex < 0)
+        if (newXIndex < 0)
         {
             newXIndex = m_gridWidth - Mathf.Abs(newXIndex);
         }
-        else if(newXIndex > (m_gridWidth - 1))
+        else if (newXIndex > (m_gridWidth - 1))
         {
             newXIndex = Mathf.Abs(newXIndex) - m_gridWidth;
         }
@@ -265,21 +281,64 @@ public class PlayGrid : MonoBehaviour
         bullet.indexOnGrid[0] = newXIndex;
         bullet.indexOnGrid[1] = newYIndex;
 
+    }
 
+    private void PatternCheck()
+    {
+        Vector2Int[][] bulletDiffArray = new Vector2Int[m_bullets.Length][];
+        List<Vector2Int> value = new List<Vector2Int>();
+        for (int i = 0; i < m_bullets.Length; i++)
+        {
+            for (int x = 0; x < m_bullets.Length; x++)
+            {
+                BulletActor firstAct = m_bullets[i].GetComponent<BulletActor>();
+                BulletActor secondAct = m_bullets[x].GetComponent<BulletActor>();
+                value.Add(new Vector2Int(secondAct.indexOnGrid[0] - firstAct.indexOnGrid[0], secondAct.indexOnGrid[1] - firstAct.indexOnGrid[1]));
+
+            }
+            bulletDiffArray[i] = value.ToArray();
+            value = new List<Vector2Int>();
+        }
+        
+        
+        int patternCount = 0;
+
+        for (int p = 0; p < m_currentPatternSet.patternSet.Length; p++)
+        {
+            for (int i = 0; i < bulletDiffArray.Length; i++)
+            {
+                if (bulletDiffArray[i].Intersect(m_currentPatternSet.patternSet[p].differenceFromOrigin).Count() == 2)
+                {
+                    patternCount++;
+                }
+            }
+            
+        }
+
+        Debug.Log("Number of patterns found is " + patternCount);
+    }
+
+    private void ResetPatterns()
+    {
+        for(int i = 0; i < m_currentPatternSet.patternSet.Length; i++)
+        {
+
+        }
     }
 
 
-
+    
+    
     private void OnDrawGizmos()
     {
-        if(m_grid != null)
+        if (m_grid != null)
         {
-            foreach(Node x in m_grid)
+            foreach (Node x in m_grid)
             {
                 Gizmos.DrawCube(new Vector3(x.worldPosition.x, x.worldPosition.y, 0), Vector3.one / 4);
             }
         }
-            
+
     }
 
 
