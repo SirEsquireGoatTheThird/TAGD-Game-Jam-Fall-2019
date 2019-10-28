@@ -69,7 +69,6 @@ public class PlayGrid : MonoBehaviour
         
         CreateGrid();
         SpawnBullets();
-        ResetPatterns();
     }
 
     private void Update()
@@ -80,7 +79,6 @@ public class PlayGrid : MonoBehaviour
             {
                 DirectionMove(m_bullets[i].GetComponent<BulletActor>(), m_bullets[i].GetComponent<BulletActor>().direction);
                 PatternCheck();
-                ResetPatterns();
             }
         }
 
@@ -123,7 +121,6 @@ public class PlayGrid : MonoBehaviour
                         Vector2Int direciton = new Vector2Int(m_indexDiff[0], m_indexDiff[1]);
                         DirectionMove(IndexToBullet(m_firstHitIndex), direciton);
                         PatternCheck();
-                        ResetPatterns();
                         m_bulletSelected = false;
                     }
 
@@ -310,21 +307,14 @@ public class PlayGrid : MonoBehaviour
                 if (bulletDiffArray[i].Intersect(m_currentPatternSet.patternSet[p].differenceFromOrigin).Count() == 2)
                 {
                     patternCount++;
+                    // Call lock that pattern
                 }
             }
             
         }
-
-        Debug.Log("Number of patterns found is " + patternCount);
     }
 
-    private void ResetPatterns()
-    {
-        for(int i = 0; i < m_currentPatternSet.patternSet.Length; i++)
-        {
-
-        }
-    }
+    
 
 
     

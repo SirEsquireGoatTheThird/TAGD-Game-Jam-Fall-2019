@@ -20,7 +20,7 @@ public class Timer : MonoBehaviour
             fillImage.fillAmount = 1f;
             StartCoroutine(timer(duration));
         }
-        Debug.Log(Time.time);
+        //Debug.Log(Time.time);
     }
 
     public IEnumerator timer(float duration)
@@ -29,12 +29,15 @@ public class Timer : MonoBehaviour
         float time = duration;
         float value = 0;
 
-        while (Time.time - startTime < duration)
+        while ((Time.time - startTime) < duration)
         {
             time -= Time.deltaTime;
             value = time / duration;
             fillImage.fillAmount = value;
             yield return null;
         }
+        // Event happens here(basically send out unity event of attack happening then have a listener listen for it,
+        // such as the enemy)
+
     }
 }
