@@ -15,7 +15,6 @@ public class PlayGrid : MonoBehaviour
     private float m_gridScale = 1;
 
     // Raycast Stuff
-    RaycastHit2D m_firstHit;
     int[] m_firstHitIndex;
     bool m_bulletSelected = false;
     RaycastHit2D m_secondHit;
@@ -45,9 +44,8 @@ public class PlayGrid : MonoBehaviour
             m_currentPatternSet = value;
         }
     }
-    private int m_numOfPatterns;
-    private Vector2Int[,] bulletIndexDifference;
-
+    private Pattern[] patterns = new Pattern[3];
+    int patternCount = 0;
 
     // The node will act as grid points with data thats needed in each point.
     private struct Node
@@ -56,6 +54,12 @@ public class PlayGrid : MonoBehaviour
         public bool isOccupied;
         public BoxCollider2D collider;
         public GameObject nodeObj;
+    }
+
+    private struct Pattern
+    {
+        public bool used;
+        public int index;
     }
 
     private void Start()
@@ -67,70 +71,23 @@ public class PlayGrid : MonoBehaviour
             m_backGroundObject.transform.localScale = new Vector3(m_gridScale / 2, m_gridScale / 2, 1);
         }
         
+        for(int i = 0; i < m_currentPatternSet.patternSet.Length; i++)
+        {
+            Pattern pattern = new Pattern();
+            pattern.index = i;
+            pattern.used = false;
+        }
+
         CreateGrid();
         SpawnBullets();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            for (int i = 0; i < m_bullets.Length; i++)
-            {
-                DirectionMove(m_bullets[i].GetComponent<BulletActor>(), m_bullets[i].GetComponent<BulletActor>().direction);
-                PatternCheck();
-            }
-        }
 
         if (Input.GetMouseButtonDown(0))
         {
-            RaycastHit2D hitInfo = Physics2D.Raycast(m_mainCamera.ScreenPointToRay(Input.mousePosition).origin, m_mainCamera.ScreenPointToRay(Input.mousePosition).direction);
-            // Debug.DrawRay(Camera.main.ScreenPointToRay(Input.mousePosition).origin, Camera.main.ScreenPointToRay(Input.mousePosition).direction, Color.red, 10f);
-            if (hitInfo)
-            {
-                int[] index = PosToIndex(hitInfo.transform.position);
-
-                if (index != null)
-                {
-                    if (m_grid[index[0], index[1]].isOccupied == true && m_bulletSelected == false)
-                    {
-                        m_firstHit = hitInfo;
-                        m_firstHitIndex = PosToIndex(hitInfo.transform.position);
-                        m_bulletSelected = true;
-                    }
-
-                    if (m_grid[index[0], index[1]].isOccupied == false && m_bulletSelected == true)
-                    {
-                        m_secondHit = hitInfo;
-                        int[] m_firstIndex = PosToIndex(m_firstHit.transform.position);
-                        int[] m_secondIndex = PosToIndex(m_secondHit.transform.position);
-                        int[] m_indexDiff = new int[2];
-                        m_indexDiff[0] = m_secondIndex[0] - m_firstIndex[0];
-                        m_indexDiff[1] = m_secondIndex[1] - m_firstIndex[1];
-                        //Debug.Log(m_indexDiff[0] + " " + m_indexDiff[1]);
-                        //Debug.Log("Index its suppose to be at now: " + (m_firstIndex[0] + m_indexDiff[0]) + " " + (m_firstIndex[1] + m_indexDiff[1]));
-
-                        if ((Mathf.Abs(m_indexDiff[0]) == 1 && Mathf.Abs(m_indexDiff[1]) == 1) || (Mathf.Abs(m_indexDiff[0]) == 2 && Mathf.Abs(m_indexDiff[1]) == 2))
-                        {
-                            return;
-                        }
-                        else if ((Mathf.Abs(m_indexDiff[0]) == 2 && Mathf.Abs(m_indexDiff[1]) == 1) || (Mathf.Abs(m_indexDiff[0]) == 1 && Mathf.Abs(m_indexDiff[1]) == 2))
-                        {
-                            return;
-                        }
-                        Vector2Int direciton = new Vector2Int(m_indexDiff[0], m_indexDiff[1]);
-                        DirectionMove(IndexToBullet(m_firstHitIndex), direciton);
-                        PatternCheck();
-                        m_bulletSelected = false;
-                    }
-
-                    if (m_grid[index[0], index[1]].isOccupied == true && m_bulletSelected == true)
-                    {
-                        m_firstHit = hitInfo;
-                        m_firstHitIndex = PosToIndex(hitInfo.transform.position);
-                    }
-                }
-            }
+            RayCastTarget();
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -198,17 +155,17 @@ public class PlayGrid : MonoBehaviour
         }
     }
 
-    private int[] PosToIndex(Vector3 position)
+    private int[] WorldPosToIndex(Vector3 position)
     {
-        for (int i = 0; i < m_gridWidth; i++)
+        for (int x = 0; x < m_gridWidth; x++)
         {
-            for (int ii = 0; ii < m_gridHeight; ii++)
+            for (int y = 0; y < m_gridHeight; y++)
             {
-                if (m_grid[i, ii].worldPosition == position)
+                if (m_grid[x, y].worldPosition == position)
                 {
                     int[] index = new int[2];
-                    index[0] = i;
-                    index[1] = ii;
+                    index[0] = x;
+                    index[1] = y;
                     return index;
                 }
             }
@@ -219,9 +176,10 @@ public class PlayGrid : MonoBehaviour
     {
         foreach (GameObject obj in m_bullets)
         {
-            if (obj.GetComponent<BulletActor>().indexOnGrid[0] == index[0] && obj.GetComponent<BulletActor>().indexOnGrid[1] == index[1])
+            BulletActor comparable = obj.GetComponent<BulletActor>();
+            if (comparable.indexOnGrid[0] == index[0] && comparable.indexOnGrid[1] == index[1])
             {
-                return obj.GetComponent<BulletActor>();
+                return comparable;
             }
         }
         return null;
@@ -235,12 +193,7 @@ public class PlayGrid : MonoBehaviour
         // Cap indexs within range of 0 to 2
         // Bullet wont move if another is in its way
 
-        if (bullet.inPattern == true)
-        {
-            return;
-        }
-
-        if (bullet == null)
+        if (bullet == null || bullet.inPattern)
         {
             return;
         }
@@ -266,7 +219,7 @@ public class PlayGrid : MonoBehaviour
             newYIndex = Mathf.Abs(newYIndex) - m_gridHeight;
         }
 
-        if (m_grid[newXIndex, newYIndex].isOccupied == true)
+        if (m_grid[newXIndex, newYIndex].isOccupied)
         {
             return;
         }
@@ -278,53 +231,174 @@ public class PlayGrid : MonoBehaviour
         bullet.indexOnGrid[0] = newXIndex;
         bullet.indexOnGrid[1] = newYIndex;
 
+        PatternCheck();
     }
-
     private void PatternCheck()
     {
         Vector2Int[][] bulletDiffArray = new Vector2Int[m_bullets.Length][];
-        List<Vector2Int> value = new List<Vector2Int>();
+        Vector2Int[] caiou = new Vector2Int[4];
         for (int i = 0; i < m_bullets.Length; i++)
         {
             for (int x = 0; x < m_bullets.Length; x++)
             {
                 BulletActor firstAct = m_bullets[i].GetComponent<BulletActor>();
                 BulletActor secondAct = m_bullets[x].GetComponent<BulletActor>();
-                value.Add(new Vector2Int(secondAct.indexOnGrid[0] - firstAct.indexOnGrid[0], secondAct.indexOnGrid[1] - firstAct.indexOnGrid[1]));
+                Vector2Int indexDiff = new Vector2Int(secondAct.indexOnGrid[0] - firstAct.indexOnGrid[0], secondAct.indexOnGrid[1] - firstAct.indexOnGrid[1]);
+                caiou[x] = indexDiff;
 
             }
-            bulletDiffArray[i] = value.ToArray();
-            value = new List<Vector2Int>();
+            bulletDiffArray[i] = caiou;
+            caiou = new Vector2Int[4];
         }
-        
-        
-        int patternCount = 0;
 
+        // What I need to do.
+        // Concept: 
+        // The player has moved the bullet, so check if that bullet is in a pattern
+        // If the bullet is in a pattern then lock the current bullets in position
+        // Then move the unlocked bullet
+        bool patternFound = false;
+
+        
         for (int p = 0; p < m_currentPatternSet.patternSet.Length; p++)
         {
+
+            if(patterns[p].used)
+            {
+                ResetBulletsPattern();
+                continue;
+            }
+
             for (int i = 0; i < bulletDiffArray.Length; i++)
             {
-                if (bulletDiffArray[i].Intersect(m_currentPatternSet.patternSet[p].differenceFromOrigin).Count() == 2)
+                var intersectionValues = bulletDiffArray[i].Intersect(m_currentPatternSet.patternSet[p].differenceFromOrigin);
+
+                if (intersectionValues.Count() == 2)
                 {
-                    patternCount++;
-                    // Call lock that pattern
+                    Vector2Int[] intersecComp = intersectionValues.ToArray();
+                    
+                    for (int x = 0; x < m_bullets.Length; x++)
+                    {
+                        BulletActor firstAct = m_bullets[i].GetComponent<BulletActor>();
+                        BulletActor secondAct = m_bullets[x].GetComponent<BulletActor>();
+                        Vector2Int gridDiff = new Vector2Int(secondAct.indexOnGrid[0] - firstAct.indexOnGrid[0], secondAct.indexOnGrid[1] - firstAct.indexOnGrid[1]);
+
+                        if (intersecComp[0] == gridDiff || intersecComp[1] == gridDiff)
+                        {
+                            firstAct.inPattern = true;
+                            secondAct.inPattern = true;
+                            patterns[p].used = true;
+                        }
+                       
+                    }
+
+                    
                 }
+
             }
-            
+        }
+
+        for(int i = 0; i < patterns.Length; i++)
+        {
+            if(patterns[i].used)
+            {
+                patternCount++;
+            }
+        }
+        Debug.Log(patternCount);
+        patternCount = 0;
+
+    }
+    private void ResetPattern()
+    {
+        for(int i = 0; i < patterns.Length; i ++)
+        {
+            patterns[i].used = false;
+        }
+    }
+    private void MoveRemainingBullet()
+    {
+        BulletActor bulletReference;
+        for (int i = 0; i < m_bullets.Length; i++)
+        {
+            bulletReference = m_bullets[i].GetComponent<BulletActor>();
+            if(!bulletReference.inPattern)
+            {
+                DirectionMove(bulletReference, bulletReference.direction);;
+            }
         }
     }
 
-    
+    private void RayCastTarget()
+    {
+        Ray mousePos = m_mainCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit2D hitInfo = Physics2D.Raycast(mousePos.origin, mousePos.direction);
 
+        if (hitInfo)
+        {
+            int[] index = WorldPosToIndex(hitInfo.transform.position);
 
+            if (index == null)
+            {
+                return;
+            }
+
+            if (m_grid[index[0], index[1]].isOccupied && !m_bulletSelected)
+            {
+                m_firstHitIndex = WorldPosToIndex(hitInfo.transform.position);
+                m_bulletSelected = true;
+            }
+
+            if (!m_grid[index[0], index[1]].isOccupied && m_bulletSelected)
+            {
+                m_secondHit = hitInfo;
+                int[] m_secondIndex = WorldPosToIndex(m_secondHit.transform.position);
+                int[] m_indexDiff = new int[2];
+                m_indexDiff[0] = m_secondIndex[0] - m_firstHitIndex[0];
+                m_indexDiff[1] = m_secondIndex[1] - m_firstHitIndex[1];
+                // These just check for diagonal movement and 2 - 1 or 1 - 2 movements. Think of restricting chess movement of the knight
+                if((Mathf.Abs(m_indexDiff[0]) == 1 && Mathf.Abs(m_indexDiff[1]) == 1) || (Mathf.Abs(m_indexDiff[0]) == 2 && Mathf.Abs(m_indexDiff[1]) == 2))
+                {
+                    return;
+                }
+                else if((Mathf.Abs(m_indexDiff[0]) == 2 && Mathf.Abs(m_indexDiff[1]) == 1) || (Mathf.Abs(m_indexDiff[0]) == 1 && Mathf.Abs(m_indexDiff[1]) == 2))
+                {
+                    return;
+                }
+                Vector2Int direction = new Vector2Int(m_indexDiff[0], m_indexDiff[1]);
+                DirectionMove(IndexToBullet(m_firstHitIndex), direction);
+                m_bulletSelected = false;
+            }
+
+            if (m_grid[index[0], index[1]].isOccupied && m_bulletSelected)
+            {
+                m_firstHitIndex = WorldPosToIndex(hitInfo.transform.position);
+            }
+        }
+    }
     
-    
+    private void ResetBulletsPattern()
+    {
+        BulletActor reference;
+
+        for(int i = 0; i < m_bullets.Length; i ++)
+        {
+            reference = m_bullets[i].GetComponent<BulletActor>();
+            reference.inPattern = false;
+        }
+    }
+
     private void OnDrawGizmos()
     {
         if (m_grid != null)
         {
             foreach (Node x in m_grid)
             {
+                Color color = Color.grey;
+                if(x.isOccupied)
+                {
+                    color = Color.red;
+                }
+                Gizmos.color = color;
                 Gizmos.DrawCube(new Vector3(x.worldPosition.x, x.worldPosition.y, 0), Vector3.one / 4);
             }
         }

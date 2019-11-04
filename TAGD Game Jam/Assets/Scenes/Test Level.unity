@@ -520,7 +520,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_gridHeight: 3
   m_gridWidth: 3
-  m_gridScale: 2.5
+  m_gridScale: 2
   m_bulletPrefabs:
   - {fileID: 4071701284472155641, guid: 478fb4239b214c447b450e4f4f871046, type: 3}
   - {fileID: 8350811989322350998, guid: c0a1970f316f2be44b4b4f5e5febb459, type: 3}
@@ -537,7 +537,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 217969620}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.26, y: 1.49, z: 0}
+  m_LocalPosition: {x: -1.29, y: 1.89, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 973100995}
@@ -1018,7 +1018,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 973100993}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -2.41, y: 2.15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 217969623}
@@ -1313,7 +1313,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: QUIT THE GAME
+  m_Text: QUIT GAME
 --- !u!222 &1378865497
 CanvasRenderer:
   m_ObjectHideFlags: 0

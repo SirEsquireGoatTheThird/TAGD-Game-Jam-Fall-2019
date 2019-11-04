@@ -1,55 +1,55 @@
 fileFormatVersion: 2
-guid: cd067940188ede547a9fe6fac9df498e
+guid: 0e4cbeb921de179468848b1d7afc57db
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8367117139315026017
-    second: BulletRune2_0
+      213: -2490059200624915022
+    second: BulletRuneDown_0
   - first:
-      213: -3151230859730286947
-    second: BulletRune2_1
+      213: 5831497358420350180
+    second: BulletRuneDown_1
   - first:
-      213: -8674412536055071119
-    second: BulletRune2_2
+      213: -908885496453733255
+    second: BulletRuneDown_2
   - first:
-      213: 333158790059872416
-    second: BulletRune2_3
+      213: 596352361264131571
+    second: BulletRuneDown_3
   - first:
-      213: -2358993066634532671
-    second: BulletRune2_4
+      213: -4936409226657905534
+    second: BulletRuneDown_4
   - first:
-      213: 734794258525631716
-    second: BulletRune2_5
+      213: -4416884371766148403
+    second: BulletRuneDown_5
   - first:
-      213: 3625302388163553951
-    second: BulletRune2_6
+      213: -1024596677790283196
+    second: BulletRuneDown_6
   - first:
-      213: -8214424151692834094
-    second: BulletRune2_7
+      213: 1757643459321948910
+    second: BulletRuneDown_7
   - first:
-      213: -9195972251781136056
-    second: BulletRune2_8
+      213: -4206446552553484002
+    second: BulletRuneDown_8
   - first:
-      213: -6422147601972598019
-    second: BulletRune2_9
+      213: 5854057366741852635
+    second: BulletRuneDown_9
   - first:
-      213: 3642521585925198946
-    second: BulletRune2_10
+      213: 5196010139161134685
+    second: BulletRuneDown_10
   - first:
-      213: -5929844325401927127
-    second: BulletRune2_11
+      213: 2017370142749440552
+    second: BulletRuneDown_11
   - first:
-      213: 3590167824318695009
-    second: BulletRune2_12
+      213: 4387360146484160464
+    second: BulletRuneDown_12
   - first:
-      213: -6199919409380000899
-    second: BulletRune2_13
+      213: -7764896459504316959
+    second: BulletRuneDown_13
   - first:
-      213: -6398423541155979159
-    second: BulletRune2_14
+      213: 8296916936078420077
+    second: BulletRuneDown_14
   - first:
-      213: 1207354225480979209
-    second: BulletRune2_15
+      213: -2858162951685447763
+    second: BulletRuneDown_15
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -146,13 +146,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BulletRune2_0
+      name: BulletRuneDown_0
       rect:
         serializedVersion: 2
-        x: 7
-        y: 1
-        width: 18
-        height: 30
+        x: 0
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,20 +160,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 51bf06be45157614c9c49173bde88ae2
-      internalID: -8367117139315026017
+      spriteID: 756de1043e1e2334abc07c85b1b710a9
+      internalID: -2490059200624915022
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BulletRune2_1
+      name: BulletRuneDown_1
       rect:
         serializedVersion: 2
-        x: 39
-        y: 1
-        width: 18
-        height: 30
+        x: 32
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,20 +181,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 74edb886043537646affb81c6e3dfbc8
-      internalID: -3151230859730286947
+      spriteID: b7f6612be425e7d418ea7f78c022d9f4
+      internalID: 5831497358420350180
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BulletRune2_2
+      name: BulletRuneDown_2
       rect:
         serializedVersion: 2
-        x: 71
-        y: 1
-        width: 18
-        height: 30
+        x: 64
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -202,20 +202,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3e6c2aafc6cdddc4886f926163f35e04
-      internalID: -8674412536055071119
+      spriteID: 15ac3be6d3319c04992143ce83031e93
+      internalID: -908885496453733255
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BulletRune2_3
+      name: BulletRuneDown_3
       rect:
         serializedVersion: 2
-        x: 103
-        y: 1
-        width: 18
-        height: 30
+        x: 96
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -223,20 +223,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e889111a903b8a24fb63f0490d892fcd
-      internalID: 333158790059872416
+      spriteID: e73e55aef1fc0d946a5fd52cad7a151a
+      internalID: 596352361264131571
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BulletRune2_4
+      name: BulletRuneDown_4
       rect:
         serializedVersion: 2
-        x: 135
-        y: 1
-        width: 18
-        height: 30
+        x: 128
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -244,20 +244,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 464c8e3aa34224541bc68138ac2db17b
-      internalID: -2358993066634532671
+      spriteID: 5b1c53e581643a54abb6827484094d4e
+      internalID: -4936409226657905534
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BulletRune2_5
+      name: BulletRuneDown_5
       rect:
         serializedVersion: 2
-        x: 167
-        y: 1
-        width: 18
-        height: 30
+        x: 160
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -265,20 +265,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f9bb0e0bda15be147ac302e4829811e8
-      internalID: 734794258525631716
+      spriteID: 950d0eea3c0166949bc3d57748697795
+      internalID: -4416884371766148403
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BulletRune2_6
+      name: BulletRuneDown_6
       rect:
         serializedVersion: 2
-        x: 199
-        y: 1
-        width: 18
-        height: 30
+        x: 192
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -286,20 +286,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d207e326bfdd2b34089fdcc46b119c30
-      internalID: 3625302388163553951
+      spriteID: 7ee990c255ccb9f48ab32fa15e9371c6
+      internalID: -1024596677790283196
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BulletRune2_7
+      name: BulletRuneDown_7
       rect:
         serializedVersion: 2
-        x: 231
-        y: 1
-        width: 18
-        height: 30
+        x: 224
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -307,20 +307,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 51f6e261ee238cf45ab108d0f58377e5
-      internalID: -8214424151692834094
+      spriteID: 426bd7b1356030445b79535aa536e44a
+      internalID: 1757643459321948910
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BulletRune2_8
+      name: BulletRuneDown_8
       rect:
         serializedVersion: 2
-        x: 263
-        y: 1
-        width: 18
-        height: 30
+        x: 256
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -328,20 +328,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f117d3e1b6f5dea4e80b5974208a8c58
-      internalID: -9195972251781136056
+      spriteID: 4808dbc1518bf6e4291ce5f808f1e298
+      internalID: -4206446552553484002
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BulletRune2_9
+      name: BulletRuneDown_9
       rect:
         serializedVersion: 2
-        x: 295
-        y: 1
-        width: 18
-        height: 30
+        x: 288
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -349,20 +349,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0b500fd8e54d5814e9682eb87277b7d5
-      internalID: -6422147601972598019
+      spriteID: 7818ef2dd961bf341be358d318f543f8
+      internalID: 5854057366741852635
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BulletRune2_10
+      name: BulletRuneDown_10
       rect:
         serializedVersion: 2
-        x: 327
-        y: 1
-        width: 18
-        height: 30
+        x: 320
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -370,20 +370,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ffb89d67566def94a9b07458b1ffa4eb
-      internalID: 3642521585925198946
+      spriteID: 8b868aa0d3b99274e9aa35a8f317cbd7
+      internalID: 5196010139161134685
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BulletRune2_11
+      name: BulletRuneDown_11
       rect:
         serializedVersion: 2
-        x: 359
-        y: 1
-        width: 18
-        height: 30
+        x: 352
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -391,20 +391,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 11d8cb457a9b1384b933b41e9d310089
-      internalID: -5929844325401927127
+      spriteID: 1a275a865b62c2242aedd87196d49772
+      internalID: 2017370142749440552
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BulletRune2_12
+      name: BulletRuneDown_12
       rect:
         serializedVersion: 2
-        x: 391
-        y: 1
-        width: 18
-        height: 30
+        x: 384
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -412,20 +412,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ee6f1deef939d9e478a5d9d73fcbb61d
-      internalID: 3590167824318695009
+      spriteID: 78cec217bc4b6a846abf1086bed3288f
+      internalID: 4387360146484160464
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BulletRune2_13
+      name: BulletRuneDown_13
       rect:
         serializedVersion: 2
-        x: 423
-        y: 1
-        width: 18
-        height: 30
+        x: 416
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -433,20 +433,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f8f2af873ab91d348989ba51e13ced79
-      internalID: -6199919409380000899
+      spriteID: 917f82a85bda93249b37b2f0b7cb91bc
+      internalID: -7764896459504316959
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BulletRune2_14
+      name: BulletRuneDown_14
       rect:
         serializedVersion: 2
-        x: 455
-        y: 1
-        width: 18
-        height: 30
+        x: 448
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -454,20 +454,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d861b801f61c67e4db18cd8734c23b20
-      internalID: -6398423541155979159
+      spriteID: 03284408d816c7043bd5f7c2506a9a07
+      internalID: 8296916936078420077
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BulletRune2_15
+      name: BulletRuneDown_15
       rect:
         serializedVersion: 2
-        x: 487
-        y: 1
-        width: 18
-        height: 30
+        x: 480
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -475,8 +475,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d36fb019c434fa4fbcbfb0926739055
-      internalID: 1207354225480979209
+      spriteID: 4f8f2c671a319fb4384c64486def4d4e
+      internalID: -2858162951685447763
       vertices: []
       indices: 
       edges: []

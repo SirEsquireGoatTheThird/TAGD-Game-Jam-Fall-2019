@@ -9,6 +9,7 @@ public class BulletActor : MonoBehaviour, IBullet
     [SerializeField]
     int[] m_indexOnGrid = new int[2];
     int m_order;
+    [SerializeField]
     bool m_inPattern;
 
     public Vector2Int direction
@@ -20,6 +21,7 @@ public class BulletActor : MonoBehaviour, IBullet
         set
         {
             m_direction = value;
+            /*
             Vector3 actualAngle = Vector3.zero;
             // Up
             if(m_direction == new Vector2(0, 1))
@@ -43,6 +45,7 @@ public class BulletActor : MonoBehaviour, IBullet
             }
 
             transform.rotation = Quaternion.Euler(actualAngle);
+            */
         }
     }
     public Vector3 position
