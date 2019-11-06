@@ -64,9 +64,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\_Scripts\BulletActor.cs" />
+    <Compile Include="Assets\_Scripts\GameManager.cs" />
     <Compile Include="Assets\_Scripts\IBullet.cs" />
     <Compile Include="Assets\_Scripts\PatternScriptable.cs" />
     <Compile Include="Assets\_Scripts\PatternSetScriptable.cs" />
+    <Compile Include="Assets\_Scripts\PatternUpdate.cs" />
     <Compile Include="Assets\_Scripts\PauseMenu.cs" />
     <Compile Include="Assets\_Scripts\PlayGrid.cs" />
     <Compile Include="Assets\_Scripts\Timer.cs" />

@@ -21,31 +21,6 @@ public class BulletActor : MonoBehaviour, IBullet
         set
         {
             m_direction = value;
-            /*
-            Vector3 actualAngle = Vector3.zero;
-            // Up
-            if(m_direction == new Vector2(0, 1))
-            {
-                actualAngle = new Vector3(0, 0, 0);
-            }
-            // Down
-            if (m_direction == new Vector2(0, -1))
-            {
-                actualAngle = new Vector3(0, 0, 180);
-            }
-            // Right
-            if (m_direction == new Vector2(1, 0))
-            {
-                actualAngle = new Vector3(0, 0, 270);
-            }
-            // Left
-            if (m_direction == new Vector2(-1, 0))
-            {
-                actualAngle = new Vector3(0, 0, 90);
-            }
-
-            transform.rotation = Quaternion.Euler(actualAngle);
-            */
         }
     }
     public Vector3 position

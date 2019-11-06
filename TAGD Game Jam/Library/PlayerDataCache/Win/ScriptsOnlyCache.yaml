@@ -21,6 +21,7 @@ ScriptsOnlyBuild:
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
+    - UnityEditor.TestTools.TestRunner.TestListCacheData
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.StandaloneInputModule
@@ -131,7 +132,7 @@ ScriptsOnlyBuild:
     className: PlayGrid
   - hash:
       serializedVersion: 2
-      Hash: 90fe297cdf703e16e63b6740907e1b0f
+      Hash: 850d9ffaa92d7374d2aa0b358f7297a7
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PatternScriptable
@@ -509,7 +510,7 @@ ScriptsOnlyBuild:
     className: Dropdown
   - hash:
       serializedVersion: 2
-      Hash: 4c68390e29e60462b7fb2550c2d03dab
+      Hash: 48ae5274699801065cac562935a89be9
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: BulletActor
@@ -552,4 +553,4 @@ ScriptsOnlyBuild:
   platform: 5
   scenePathNames:
   - Assets/Scenes/Test Level.unity
-  playerPath: C:/Users/Ultimate Blade/Desktop/Test/TAGD Game Jam.exe
+  playerPath: C:/Users/Erik/Desktop/TAGD Game Jam run/TAGD Game Jam.exe
