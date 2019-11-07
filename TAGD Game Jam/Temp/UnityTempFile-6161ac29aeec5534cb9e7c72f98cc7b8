@@ -295,6 +295,7 @@ Assets\_Scripts\PatternScriptable.cs
 Assets\_Scripts\PatternSetScriptable.cs
 Assets\_Scripts\PatternUpdate.cs
 Assets\_Scripts\PauseMenu.cs
+Assets\_Scripts\Player_Health.cs
 Assets\_Scripts\PlayGrid.cs
 Assets\_Scripts\StatsScriptable.cs
 Assets\_Scripts\Timer.cs

@@ -54,6 +54,16 @@ public class PlayGrid : MonoBehaviour
     [SerializeField]
     private bool m_actionPhase = false;
 
+    ///////////////////////////////////
+    [SerializeField]
+    public GameObject other;
+    Player_Health Health_UI;
+    public int player_health = 5;
+    public int enemy_health = 5;
+    public int enemy_damage = 1;
+    public float duration = 30;
+    public bool attack = true;
+    ///////////////////////////////////
 
     #region Struct creations
     // The node will act as grid points with data thats needed in each point.
@@ -81,6 +91,10 @@ public class PlayGrid : MonoBehaviour
         CreatePatternStructs();
         CreateGrid();
         SpawnBullets();
+
+        /////////////////////////
+        Health_UI = other.GetComponent<Player_Health>();
+        //////////////////////////
     }
 
     private void Update()
@@ -101,6 +115,23 @@ public class PlayGrid : MonoBehaviour
         {
             m_bulletSelected = false;
         }
+
+        ////////////////////////////////
+        if ((((int)Time.time - 1) % duration == 0) && (attack == true))
+        {
+            if (Time.time > (duration - 1))
+            {
+                attack = false;
+                player_health -= enemy_damage;
+                Debug.Log(player_health);
+                Health_UI.Damage(enemy_damage);
+            }
+        }
+        if ((((int)Time.time - 1) % duration > 0))
+        {
+            attack = true;
+        }
+        ///////////////////////////////
     }
 
 
