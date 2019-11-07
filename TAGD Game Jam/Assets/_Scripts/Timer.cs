@@ -7,20 +7,24 @@ public class Timer : MonoBehaviour
 {
     public float duration;
     public Image fillImage;
+    private PlayGrid m_grid;
+    bool timeStarted = false;
 
     public void Start()
     {
         fillImage.fillAmount = 1f;
+        m_grid = FindObjectOfType<PlayGrid>();
+        duration = m_grid.duration;
+        timeStarted = false;
     }
 
     public void Update()
     {
-        if (((int)Time.time - 1) % duration == 0)
+        if(!timeStarted)
         {
-            fillImage.fillAmount = 1f;
             StartCoroutine(timer(duration));
+            timeStarted = true;
         }
-        //Debug.Log(Time.time);
     }
 
     public IEnumerator timer(float duration)
@@ -36,7 +40,8 @@ public class Timer : MonoBehaviour
             fillImage.fillAmount = value;
             yield return null;
         }
-        GameManager.Instance.EnemyAttack.Invoke();
+
+        timeStarted = false;
         // Event happens here(basically send out unity event of attack happening then have a listener listen for it,
         // such as the enemy)
 

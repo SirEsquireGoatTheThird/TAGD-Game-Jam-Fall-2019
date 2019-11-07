@@ -15,6 +15,6 @@ MonoBehaviour:
   patternName: j
   differenceFromOrigin:
   - {x: 0, y: 1}
-  - {x: 1, y: -1}
+  - {x: -1, y: -1}
   icon: {fileID: 21300000, guid: 95e0d49babf1598498fc538980cb3186, type: 3}
   isActivated: 0

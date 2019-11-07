@@ -290,7 +290,6 @@
 Assets\_Scripts\BulletActor.cs
 Assets\_Scripts\GameManager.cs
 Assets\_Scripts\IBullet.cs
-Assets\_Scripts\IDamagable.cs
 Assets\_Scripts\PatternScriptable.cs
 Assets\_Scripts\PatternSetScriptable.cs
 Assets\_Scripts\PatternUpdate.cs

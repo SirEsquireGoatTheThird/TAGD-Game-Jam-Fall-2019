@@ -54,15 +54,17 @@ public class PlayGrid : MonoBehaviour
     [SerializeField]
     private bool m_actionPhase = false;
 
+    [SerializeField]
+    StatsScriptable currentEnemy;
     ///////////////////////////////////
     [SerializeField]
     public GameObject other;
     Player_Health Health_UI;
-    public int player_health = 5;
+    public int player_health = 10;
     public int enemy_health = 5;
     public int enemy_damage = 1;
     public float duration = 30;
-    public bool attack = true;
+    private bool m_timeStarted = false;
     ///////////////////////////////////
 
     #region Struct creations
@@ -95,20 +97,40 @@ public class PlayGrid : MonoBehaviour
         /////////////////////////
         Health_UI = other.GetComponent<Player_Health>();
         //////////////////////////
+        enemy_health = currentEnemy.health;
+        enemy_damage = currentEnemy.damage;
+        duration = currentEnemy.attackTimer;
     }
 
     private void Update()
     {
+        if(enemy_health <= 0)
+        {
+            Debug.Log("Enemy Died");
+        }
+        if(player_health <= 0)
+        {
+            Debug.Log("You died");
+        }
+
 
         if (Input.GetMouseButtonDown(0))
         {
             if(!m_actionPhase)
             {
-                ResetPattern();
                 ResetBulletsPattern();
+            }
+            if(!PatternCheckWithoutMovement())
+            {
+                m_actionPhase = false;
             }
 
             RayCastTarget();
+
+            if (!PatternCheckWithoutMovement())
+            {
+                StartCoroutine(patternTime());
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -117,23 +139,35 @@ public class PlayGrid : MonoBehaviour
         }
 
         ////////////////////////////////
-        if ((((int)Time.time - 1) % duration == 0) && (attack == true))
+        if (!m_timeStarted)
         {
-            if (Time.time > (duration - 1))
-            {
-                attack = false;
-                player_health -= enemy_damage;
-                Debug.Log(player_health);
-                Health_UI.Damage(enemy_damage);
-            }
+            StartCoroutine(timer(duration));
+            m_timeStarted = true;
         }
-        if ((((int)Time.time - 1) % duration > 0))
-        {
-            attack = true;
-        }
-        ///////////////////////////////
     }
 
+    private IEnumerator timer(float duration)
+    {
+        float startTime = Time.time;
+        float time = duration;
+
+        while ((Time.time - startTime) < duration)
+        {
+            time -= Time.deltaTime;
+            yield return null;
+        }
+        player_health -= enemy_damage;
+        Health_UI.Damage(enemy_damage);
+        m_timeStarted = false;
+        // Event happens here(basically send out unity event of attack happening then have a listener listen for it,
+        // such as the enemy)
+
+    }
+    private IEnumerator patternTime()
+    {
+        yield return new WaitForSeconds(3f);
+        ResetPattern();
+    }
 
 
     #region Game Initilization
@@ -334,7 +368,7 @@ public class PlayGrid : MonoBehaviour
         // If the bullet is in a pattern then lock the current bullets in position
         // Then move the unlocked bullet
 
-
+        bool[] hasItBeenSeen = new bool[4];
         for (int p = 0; p < m_currentPatternSet.patternSet.Length; p++)
         {
 
@@ -342,6 +376,7 @@ public class PlayGrid : MonoBehaviour
             {
                 continue;
             }
+            
 
             for (int i = 0; i < bulletDiffArray.Length; i++)
             {
@@ -362,7 +397,16 @@ public class PlayGrid : MonoBehaviour
                             firstAct.inPattern = true;
                             secondAct.inPattern = true;
                             patterns[p].used = true;
+                            hasItBeenSeen[x] = true;
                             GameManager.Instance.PatternUsed.Invoke();
+                        }
+                        else if(gridDiff == Vector2Int.zero)
+                        {
+                            hasItBeenSeen[x] = true;
+                        }
+                        else
+                        {
+                            hasItBeenSeen[x] = false;
                         }
                        
                     }
@@ -379,16 +423,25 @@ public class PlayGrid : MonoBehaviour
             
         }
 
-        switch(patternCount)
+        for (int i = 0; i < hasItBeenSeen.Length; i++)
         {
-            case 1: GameManager.Instance.PlayerAttackOne.Invoke();
-                Debug.Log("Attack One");
+            if (hasItBeenSeen[i] == false)
+            {
+                BulletActor notInPattern = m_bullets[i].GetComponent<BulletActor>();
+                notInPattern.inPattern = false;
+            }
+        }
+
+        switch (patternCount)
+        {
+            case 1:
+                AttackEnemy(1);
                 break;
-            case 2: GameManager.Instance.PlayerAttackTwo.Invoke();
-                Debug.Log("Attack Two");
+            case 2:
+                AttackEnemy(3);
                 break;
-            case 3: GameManager.Instance.PlayerAttackThree.Invoke();
-                Debug.Log("Attack Three");
+            case 3:
+                AttackEnemy(6);
                 break;
             default: return;
         }
@@ -524,7 +577,10 @@ public class PlayGrid : MonoBehaviour
         return false;
     }
    
-
+    private void AttackEnemy(int damage)
+    {
+        enemy_health -= damage;
+    }
 
 
     private void OnDrawGizmos()

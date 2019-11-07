@@ -12,16 +12,14 @@ public class Player_Health : MonoBehaviour
     public Sprite fullHeart;
     public Sprite emptyHeart;
 
-    private void Update()
+
+    public void Damage(int damage)
     {
+        health -= damage;
+
         for (int i = 0; i < hearts.Length; i++)
         {
-            if (health > numOfHearts)
-            {
-                health = numOfHearts;
-            }
-
-            if (i < health)
+            if (i < (health))
             {
                 hearts[i].sprite = fullHeart;
             }
@@ -39,12 +37,5 @@ public class Player_Health : MonoBehaviour
                 hearts[i].enabled = false;
             }
         }
-
-
-    }
-
-    public void Damage(int damage)
-    {
-        health -= damage;
     }
 }
