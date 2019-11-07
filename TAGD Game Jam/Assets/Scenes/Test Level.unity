@@ -529,6 +529,7 @@ MonoBehaviour:
   m_backGroundObject: {fileID: 973100993}
   m_currentPatternSet: {fileID: 11400000, guid: 2f165072582df5d48aaad9138d292015,
     type: 2}
+  m_actionPhase: 0
 --- !u!4 &217969622
 Transform:
   m_ObjectHideFlags: 0
@@ -654,7 +655,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &445185716
 RectTransform:
   m_ObjectHideFlags: 0
@@ -681,7 +682,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 445185715}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -810,7 +811,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &616700645
 RectTransform:
   m_ObjectHideFlags: 0
@@ -837,7 +838,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 616700644}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -978,7 +979,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &728215932
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1005,7 +1006,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 728215931}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -1198,6 +1199,21 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   PatternUsed:
+    m_PersistentCalls:
+      m_Calls: []
+  EnemyAttack:
+    m_PersistentCalls:
+      m_Calls: []
+  PlayerAttackOne:
+    m_PersistentCalls:
+      m_Calls: []
+  PlayerAttackTwo:
+    m_PersistentCalls:
+      m_Calls: []
+  PlayerAttackThree:
+    m_PersistentCalls:
+      m_Calls: []
+  UnlockPattern:
     m_PersistentCalls:
       m_Calls: []
 --- !u!4 &844732972
@@ -1624,13 +1640,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cb2871c5127eaf47a746d2a5427078d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  temp:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!1 &1378865493
 GameObject:
   m_ObjectHideFlags: 0
