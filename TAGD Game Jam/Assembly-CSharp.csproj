@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Assets\_Scripts\BulletActor.cs" />
     <Compile Include="Assets\_Scripts\GameManager.cs" />
+    <Compile Include="Assets\_Scripts\Health_UI.cs" />
     <Compile Include="Assets\_Scripts\IBullet.cs" />
     <Compile Include="Assets\_Scripts\IDamagable.cs" />
     <Compile Include="Assets\_Scripts\PatternScriptable.cs" />
