@@ -18,6 +18,12 @@ public class GameManager : MonoBehaviour
     [Tooltip("")]
     public string note = "This unity events can be assigned via the inspect and code, we are assigning them via code rather than inspector. Please don't touch it in inspector.";
     public UnityEvent UpdatePatternUI;
+    public UnityEvent PatternUsed;
+    public UnityEvent EnemyAttack;
+    public UnityEvent PlayerAttackOne;
+    public UnityEvent PlayerAttackTwo;
+    public UnityEvent PlayerAttackThree;
+
 
     private void Awake()
     {
@@ -33,6 +39,11 @@ public class GameManager : MonoBehaviour
         if(UpdatePatternUI == null)
         {
             UpdatePatternUI = new UnityEvent();
+        }
+
+        if (PatternUsed == null)
+        {
+            PatternUsed = new UnityEvent();
         }
 
     }

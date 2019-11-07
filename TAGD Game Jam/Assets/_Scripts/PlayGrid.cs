@@ -46,7 +46,8 @@ public class PlayGrid : MonoBehaviour
             m_currentPatternSet = value;
         }
     }
-    private Pattern[] patterns = new Pattern[3];
+    [HideInInspector]
+    public Pattern[] patterns = new Pattern[3];
     int patternCount = 0;
 
 
@@ -60,7 +61,7 @@ public class PlayGrid : MonoBehaviour
         public GameObject nodeObj;
     }
 
-    private struct Pattern
+    public struct Pattern
     {
         public bool used;
         public int index;
@@ -167,6 +168,10 @@ public class PlayGrid : MonoBehaviour
         {
             m_backGroundObject.transform.localScale = new Vector3(m_gridScale / 2, m_gridScale / 2, 1);
         }
+    }
+    private void GridScaleBasedOnResolution()
+    {
+
     }
     #endregion
 
@@ -315,6 +320,7 @@ public class PlayGrid : MonoBehaviour
                             firstAct.inPattern = true;
                             secondAct.inPattern = true;
                             patterns[p].used = true;
+                            GameManager.Instance.PatternUsed.Invoke();
                         }
                        
                     }
@@ -332,9 +338,15 @@ public class PlayGrid : MonoBehaviour
                 patternCount++;
             }
         }
-        if(patternCount == 3 || patternCount == 0)
+        switch(patternCount)
         {
-            return;
+            case 1: GameManager.Instance.PlayerAttackOne.Invoke();
+                break;
+            case 2: GameManager.Instance.PlayerAttackTwo.Invoke();
+                break;
+            case 3: GameManager.Instance.PlayerAttackThree.Invoke();
+                break;
+            default: return;
         }
         patternCount = 0;
         MoveRemainingBullet();

@@ -7,15 +7,33 @@ using UnityEngine;
 public class PatternUpdate : MonoBehaviour
 {
     PlayGrid m_grid;
-    [SerializeField]
+    Image[] temp = new Image[6];
+    Image[] lockImages = new Image[3];
     Image[] patternImages = new Image[3];
-    GameObject[] imageChildren = new GameObject[3];
+    List<Image> patternImagesTemp = new List<Image>();
+    List<Image> lockImagesTemp = new List<Image>();
+    bool[] patterns = new bool[3];
+    
 
     private void Awake()
     {
-        GameManager.Instance.UpdatePatternUI.AddListener(UpdatePattern);
         m_grid = FindObjectOfType<PlayGrid>();
-        patternImages = GetComponentsInChildren<Image>();
+        temp = GetComponentsInChildren<Image>();
+        for (int i = 0; i < temp.Length; i++)
+        {
+            if (temp[i].transform.parent == transform)
+            {
+                patternImagesTemp.Add(temp[i]);
+            }
+            else
+            {
+                lockImagesTemp.Add(temp[i]);
+            }
+        }
+        lockImages = lockImagesTemp.ToArray();
+        patternImages = patternImagesTemp.ToArray();
+        GameManager.Instance.UpdatePatternUI.AddListener(UpdatePattern);
+        GameManager.Instance.PatternUsed.AddListener(LockPattern);
     }
 
     private void UpdatePattern()
@@ -26,5 +44,19 @@ public class PatternUpdate : MonoBehaviour
         }
     }
 
+    private void LockPattern()
+    {
+        for(int i = 0; i < m_grid.patterns.Length; i++)
+        {
+            if(m_grid.patterns[i].used)
+            {
+                lockImages[i].enabled = true;
+            }
+        }
+
+
+
+
+    }
 
 }
