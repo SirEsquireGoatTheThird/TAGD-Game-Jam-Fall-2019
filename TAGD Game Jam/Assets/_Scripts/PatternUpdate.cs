@@ -12,7 +12,6 @@ public class PatternUpdate : MonoBehaviour
     Image[] patternImages = new Image[3];
     List<Image> patternImagesTemp = new List<Image>();
     List<Image> lockImagesTemp = new List<Image>();
-    bool[] patterns = new bool[3];
     
 
     private void Awake()
@@ -34,6 +33,7 @@ public class PatternUpdate : MonoBehaviour
         patternImages = patternImagesTemp.ToArray();
         GameManager.Instance.UpdatePatternUI.AddListener(UpdatePattern);
         GameManager.Instance.PatternUsed.AddListener(LockPattern);
+        GameManager.Instance.UnlockPattern.AddListener(UnLockPattern);
     }
 
     private void UpdatePattern()
@@ -53,10 +53,16 @@ public class PatternUpdate : MonoBehaviour
                 lockImages[i].enabled = true;
             }
         }
-
-
-
-
     }
-
+    
+    private void UnLockPattern()
+    {
+        for (int i = 0; i < m_grid.patterns.Length; i++)
+        {
+            if (!m_grid.patterns[i].used)
+            {
+                lockImages[i].enabled = false;
+            }
+        }
+    }
 }

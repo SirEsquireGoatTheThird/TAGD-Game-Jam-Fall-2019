@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public UnityEvent PlayerAttackOne;
     public UnityEvent PlayerAttackTwo;
     public UnityEvent PlayerAttackThree;
+    public UnityEvent UnlockPattern;
 
 
     private void Awake()
@@ -41,11 +42,30 @@ public class GameManager : MonoBehaviour
             UpdatePatternUI = new UnityEvent();
         }
 
+        if (PlayerAttackOne == null)
+        {
+            PlayerAttackOne = new UnityEvent();
+        }
+        if (PlayerAttackTwo == null)
+        {
+            PlayerAttackTwo = new UnityEvent();
+        }
+        if (PlayerAttackThree == null)
+        {
+            PlayerAttackThree = new UnityEvent();
+        }
         if (PatternUsed == null)
         {
             PatternUsed = new UnityEvent();
         }
-
+        if(EnemyAttack == null)
+        {
+            EnemyAttack = new UnityEvent();
+        }
+        if(UnlockPattern == null)
+        {
+            UnlockPattern = new UnityEvent();
+        }
     }
 
 
