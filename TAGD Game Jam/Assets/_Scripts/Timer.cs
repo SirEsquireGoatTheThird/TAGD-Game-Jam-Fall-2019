@@ -36,6 +36,7 @@ public class Timer : MonoBehaviour
             fillImage.fillAmount = value;
             yield return null;
         }
+        GameManager.Instance.EnemyAttack.Invoke();
         // Event happens here(basically send out unity event of attack happening then have a listener listen for it,
         // such as the enemy)
 

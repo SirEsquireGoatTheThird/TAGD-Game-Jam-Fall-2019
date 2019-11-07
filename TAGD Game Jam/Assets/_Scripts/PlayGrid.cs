@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
@@ -50,6 +51,9 @@ public class PlayGrid : MonoBehaviour
     public Pattern[] patterns = new Pattern[3];
     int patternCount = 0;
 
+    [SerializeField]
+    private bool m_actionPhase = false;
+
 
     #region Struct creations
     // The node will act as grid points with data thats needed in each point.
@@ -82,8 +86,10 @@ public class PlayGrid : MonoBehaviour
     private void Update()
     {
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !m_actionPhase)
         {
+            ResetPattern();
+            ResetBulletsPattern();
             RayCastTarget();
         }
 
@@ -169,10 +175,6 @@ public class PlayGrid : MonoBehaviour
             m_backGroundObject.transform.localScale = new Vector3(m_gridScale / 2, m_gridScale / 2, 1);
         }
     }
-    private void GridScaleBasedOnResolution()
-    {
-
-    }
     #endregion
 
     #region Reset Game Values
@@ -182,6 +184,7 @@ public class PlayGrid : MonoBehaviour
         {
             patterns[i].used = false;
         }
+        GameManager.Instance.UnlockPattern.Invoke();
     }
     private void ResetBulletsPattern()
     {
@@ -239,6 +242,7 @@ public class PlayGrid : MonoBehaviour
             return;
         }
 
+
         // Apply vector difference of indexs on grid
         int newXIndex = bullet.indexOnGrid[0] + direc.x;
         int newYIndex = bullet.indexOnGrid[1] + direc.y;
@@ -279,6 +283,10 @@ public class PlayGrid : MonoBehaviour
         {
             PatternCheck();
         }
+        else
+        {
+            m_actionPhase = false;
+        }
 
     }
     private void PatternCheck()
@@ -297,7 +305,6 @@ public class PlayGrid : MonoBehaviour
 
             if(patterns[p].used)
             {
-                ResetBulletsPattern();
                 continue;
             }
 
@@ -329,22 +336,24 @@ public class PlayGrid : MonoBehaviour
                 }
 
             }
-        }
 
-        for(int i = 0; i < patterns.Length; i++)
-        {
-            if(patterns[i].used)
+            if (patterns[p].used)
             {
                 patternCount++;
             }
+            
         }
+
         switch(patternCount)
         {
             case 1: GameManager.Instance.PlayerAttackOne.Invoke();
+                Debug.Log("Attack One");
                 break;
             case 2: GameManager.Instance.PlayerAttackTwo.Invoke();
+                Debug.Log("Attack Two");
                 break;
             case 3: GameManager.Instance.PlayerAttackThree.Invoke();
+                Debug.Log("Attack Three");
                 break;
             default: return;
         }
@@ -401,6 +410,9 @@ public class PlayGrid : MonoBehaviour
                     return;
                 }
                 Vector2Int direction = new Vector2Int(m_indexDiff[0], m_indexDiff[1]);
+                m_actionPhase = true;
+                ResetPattern();
+                ResetBulletsPattern();
                 DirectionMove(IndexToBullet(m_firstHitIndex), direction);
                 m_bulletSelected = false;
             }
@@ -478,7 +490,7 @@ public class PlayGrid : MonoBehaviour
         }
         return false;
     }
-
+   
 
 
 
