@@ -11,6 +11,7 @@ public class BulletActor : MonoBehaviour, IBullet
     int m_order;
     [SerializeField]
     bool m_inPattern;
+    public bool inPosition;
 
     public Vector2Int direction
     {
@@ -31,7 +32,8 @@ public class BulletActor : MonoBehaviour, IBullet
         }
         set
         {
-            m_position = value;;
+            inPosition = false;
+            m_position = value;
         }
     }
     public int[] indexOnGrid
@@ -74,6 +76,7 @@ public class BulletActor : MonoBehaviour, IBullet
        if(VectorDifference() < 0.01f)
         {
             transform.position = position;
+            inPosition = true;
         }
         else
         {
