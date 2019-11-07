@@ -86,10 +86,14 @@ public class PlayGrid : MonoBehaviour
     private void Update()
     {
 
-        if (Input.GetMouseButtonDown(0) && !m_actionPhase)
+        if (Input.GetMouseButtonDown(0))
         {
-            ResetPattern();
-            ResetBulletsPattern();
+            if(!m_actionPhase)
+            {
+                ResetPattern();
+                ResetBulletsPattern();
+            }
+
             RayCastTarget();
         }
 
@@ -411,8 +415,6 @@ public class PlayGrid : MonoBehaviour
                 }
                 Vector2Int direction = new Vector2Int(m_indexDiff[0], m_indexDiff[1]);
                 m_actionPhase = true;
-                ResetPattern();
-                ResetBulletsPattern();
                 DirectionMove(IndexToBullet(m_firstHitIndex), direction);
                 m_bulletSelected = false;
             }
