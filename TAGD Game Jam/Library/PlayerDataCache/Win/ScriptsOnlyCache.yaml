@@ -2,10 +2,15 @@ ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
     - BulletActor
+    - Enemy_Health
+    - GameManager
     - PatternScriptable
     - PatternSetScriptable
+    - PatternUpdate
     - PauseMenu
     - PlayGrid
+    - Player_Health
+    - StatsScriptable
     - Timer
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridPaintingState
@@ -18,20 +23,62 @@ ScriptsOnlyBuild:
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.StandaloneInputModule
+    - UnityEngine.UI.AspectRatioFitter
     - UnityEngine.UI.Button
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
+    - UnityEngine.UI.HorizontalLayoutGroup
     - UnityEngine.UI.Image
     - UnityEngine.UI.Shadow
     - UnityEngine.UI.Text
   sceneClasses:
+    Assets/Scenes/Lose.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 9672}
+    - Class: 114
+      Script: {instanceID: 9840}
+    - Class: 114
+      Script: {instanceID: 9880}
+    - Class: 114
+      Script: {instanceID: 10212}
+    - Class: 114
+      Script: {instanceID: 11126}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
     Assets/Scenes/Test Level.unity:
     - Class: 1
       Script: {instanceID: 0}
@@ -56,33 +103,47 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9670}
+      Script: {instanceID: 9672}
     - Class: 114
-      Script: {instanceID: 9730}
+      Script: {instanceID: 9732}
     - Class: 114
-      Script: {instanceID: 9740}
+      Script: {instanceID: 9742}
     - Class: 114
-      Script: {instanceID: 9786}
+      Script: {instanceID: 9788}
     - Class: 114
-      Script: {instanceID: 9838}
+      Script: {instanceID: 9840}
     - Class: 114
-      Script: {instanceID: 9878}
+      Script: {instanceID: 9880}
     - Class: 114
-      Script: {instanceID: 10210}
+      Script: {instanceID: 10062}
     - Class: 114
-      Script: {instanceID: 10278}
+      Script: {instanceID: 10212}
     - Class: 114
-      Script: {instanceID: 10604}
+      Script: {instanceID: 10216}
     - Class: 114
-      Script: {instanceID: 10646}
+      Script: {instanceID: 10282}
     - Class: 114
-      Script: {instanceID: 11118}
+      Script: {instanceID: 10500}
     - Class: 114
-      Script: {instanceID: 11314}
+      Script: {instanceID: 10610}
     - Class: 114
-      Script: {instanceID: 11482}
+      Script: {instanceID: 10652}
     - Class: 114
-      Script: {instanceID: 11492}
+      Script: {instanceID: 10870}
+    - Class: 114
+      Script: {instanceID: 11102}
+    - Class: 114
+      Script: {instanceID: 11126}
+    - Class: 114
+      Script: {instanceID: 11322}
+    - Class: 114
+      Script: {instanceID: 11380}
+    - Class: 114
+      Script: {instanceID: 11390}
+    - Class: 114
+      Script: {instanceID: 11494}
+    - Class: 114
+      Script: {instanceID: 11504}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -90,6 +151,47 @@ ScriptsOnlyBuild:
     - Class: 157
       Script: {instanceID: 0}
     - Class: 212
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    Assets/Scenes/Win.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 9672}
+    - Class: 114
+      Script: {instanceID: 9840}
+    - Class: 114
+      Script: {instanceID: 9880}
+    - Class: 114
+      Script: {instanceID: 10212}
+    - Class: 114
+      Script: {instanceID: 11126}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
       Script: {instanceID: 0}
     - Class: 213
       Script: {instanceID: 0}
@@ -126,7 +228,7 @@ ScriptsOnlyBuild:
     className: TMP_Dropdown
   - hash:
       serializedVersion: 2
-      Hash: 43c77236487fc1ebf8683660e4a8a724
+      Hash: 0d13b3e4e59a411ce9ee8f12d3dd2266
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayGrid
@@ -276,6 +378,12 @@ ScriptsOnlyBuild:
     className: Shadow
   - hash:
       serializedVersion: 2
+      Hash: c4fc4b5eea7f4e1f1dfd90330f2b7ca9
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GameManager
+  - hash:
+      serializedVersion: 2
       Hash: cc4274b586df3c02688bac01b88bd16c
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.EventSystems
@@ -322,6 +430,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: SignalTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 1f6d3d7b93a9378670a2aa523097c1ba
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: StatsScriptable
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -420,6 +534,12 @@ ScriptsOnlyBuild:
     className: TextMeshProUGUI
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PatternUpdate
+  - hash:
+      serializedVersion: 2
       Hash: f336e086360abe49a3323e5f1583c35a
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -454,6 +574,18 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PatternSetScriptable
+  - hash:
+      serializedVersion: 2
+      Hash: de3b64f1e17b5aeaad8f063456525030
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Enemy_Health
+  - hash:
+      serializedVersion: 2
+      Hash: de3b64f1e17b5aeaad8f063456525030
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Player_Health
   - hash:
       serializedVersion: 2
       Hash: df434544c9f7b33d1cc7e635b180d279
@@ -510,7 +642,7 @@ ScriptsOnlyBuild:
     className: Dropdown
   - hash:
       serializedVersion: 2
-      Hash: 48ae5274699801065cac562935a89be9
+      Hash: 04101ce52ed2a282ea66e964914b66b3
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: BulletActor
@@ -553,4 +685,6 @@ ScriptsOnlyBuild:
   platform: 5
   scenePathNames:
   - Assets/Scenes/Test Level.unity
+  - Assets/Scenes/Win.unity
+  - Assets/Scenes/Lose.unity
   playerPath: C:/Users/Erik/Desktop/TAGD Game Jam run/TAGD Game Jam.exe
