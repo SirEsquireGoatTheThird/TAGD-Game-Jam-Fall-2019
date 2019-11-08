@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class PlayGrid : MonoBehaviour
 {
@@ -60,6 +61,7 @@ public class PlayGrid : MonoBehaviour
     [SerializeField]
     public GameObject other;
     Player_Health Health_UI;
+    Enemy_Health Enemy_UI;
     public int player_health = 10;
     public int enemy_health = 5;
     public int enemy_damage = 1;
@@ -96,6 +98,7 @@ public class PlayGrid : MonoBehaviour
 
         /////////////////////////
         Health_UI = other.GetComponent<Player_Health>();
+        Enemy_UI = other.GetComponent<Enemy_Health>();
         //////////////////////////
         enemy_health = currentEnemy.health;
         enemy_damage = currentEnemy.damage;
@@ -107,10 +110,12 @@ public class PlayGrid : MonoBehaviour
         if(enemy_health <= 0)
         {
             Debug.Log("Enemy Died");
+            SceneManager.LoadScene("Win");
         }
         if(player_health <= 0)
         {
             Debug.Log("You died");
+            SceneManager.LoadScene("Lose");
         }
 
 
@@ -580,6 +585,9 @@ public class PlayGrid : MonoBehaviour
     private void AttackEnemy(int damage)
     {
         enemy_health -= damage;
+        /////////////////////////////
+        Enemy_UI.Damage(damage);
+        /////////////////////////////
     }
 
 
