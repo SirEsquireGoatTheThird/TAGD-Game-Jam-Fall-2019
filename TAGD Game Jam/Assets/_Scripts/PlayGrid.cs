@@ -16,6 +16,7 @@ public class PlayGrid : MonoBehaviour
     [SerializeField]
     private float m_gridScale = 1;
 
+
     // Raycast Stuff
     int[] m_firstHitIndex;
     bool m_bulletSelected = false;
@@ -111,7 +112,7 @@ public class PlayGrid : MonoBehaviour
         if(enemy_health <= 0)
         {
             Debug.Log("Enemy Died");
-            SceneManager.LoadScene("Win");
+            //SceneManager.LoadScene("Win");
         }
         if(player_health <= 0)
         {
@@ -120,22 +121,9 @@ public class PlayGrid : MonoBehaviour
         }
 
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !m_actionPhase)
         {
-            if(!m_actionPhase)
-            {
-                ResetBulletsPattern();
-            }
-            if(!PatternCheckWithoutMovement())
-            {
-                m_actionPhase = false;
-            }
             RayCastTarget();
-
-            if (!PatternCheckWithoutMovement() && !m_actionPhase)
-            {
-                StartCoroutine(patternTime());
-            }
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -342,45 +330,23 @@ public class PlayGrid : MonoBehaviour
         int newYIndex = bullet.indexOnGrid[1] + direc.y;
 
         // This code if block is for wrapping of the bullet
-        if (newXIndex < 0)
-        {
-            newXIndex = m_gridWidth - Mathf.Abs(newXIndex);
-        }
-        else if (newXIndex > (m_gridWidth - 1))
-        {
-            newXIndex = Mathf.Abs(newXIndex) - m_gridWidth;
-        }
+        int[] wrappedIndex = WrapIndex(newXIndex, newYIndex);
 
-        if (newYIndex < 0)
-        {
-            newYIndex = m_gridHeight - Mathf.Abs(newYIndex);
-        }
-        else if (newYIndex > (m_gridHeight - 1))
-        {
-            newYIndex = Mathf.Abs(newYIndex) - m_gridHeight;
-        }
+
 
         // Don't let the bullet move if the space it wants to move to is occupied
-        if (m_grid[newXIndex, newYIndex].isOccupied)
+        if (m_grid[wrappedIndex[0], wrappedIndex[1]].isOccupied)
         {
             return;
         }
 
 
-        bullet.position = m_grid[newXIndex, newYIndex].worldPosition;
-        m_grid[newXIndex, newYIndex].isOccupied = true;
+        bullet.position = m_grid[wrappedIndex[0], wrappedIndex[1]].worldPosition;
+        m_grid[wrappedIndex[0], wrappedIndex[1]].isOccupied = true;
         m_grid[bullet.indexOnGrid[0], bullet.indexOnGrid[1]].isOccupied = false;
-        bullet.indexOnGrid[0] = newXIndex;
-        bullet.indexOnGrid[1] = newYIndex;
+        bullet.indexOnGrid[0] = wrappedIndex[0];
+        bullet.indexOnGrid[1] = wrappedIndex[1];
 
-        if(PatternCheckWithoutMovement())
-        {
-            PatternCheck();
-        }
-        else
-        {
-            m_actionPhase = false;
-        }
 
     }
     private void PatternCheck()
@@ -393,7 +359,7 @@ public class PlayGrid : MonoBehaviour
         // If the bullet is in a pattern then lock the current bullets in position
         // Then move the unlocked bullet
 
-        bool[] hasItBeenSeen = new bool[4];
+        //bool[] hasItBeenSeen = new bool[4];
         for (int p = 0; p < m_currentPatternSet.patternSet.Length; p++)
         {
 
@@ -405,8 +371,9 @@ public class PlayGrid : MonoBehaviour
 
             for (int i = 0; i < bulletDiffArray.Length; i++)
             {
-                var intersectionValues = bulletDiffArray[i].Intersect(m_currentPatternSet.patternSet[p].differenceFromOrigin);
+                //var intersectionValues = bulletDiffArray[i].Intersect(m_currentPatternSet.patternSet[p].differenceFromOrigin);
 
+                /*
                 if (intersectionValues.Count() == 2)
                 {
                     Vector2Int[] intersecComp = intersectionValues.ToArray();
@@ -435,8 +402,61 @@ public class PlayGrid : MonoBehaviour
                         }
                        
                     }
-
                     
+                    
+                }
+                */
+                // We get the bullet at i and get the index on grid. We add the differences from the patterns and check if that grid is occupied
+                // If it is occupied get the bullets at that index and set their inPattern variable to true, the remaining index set it to false.
+                // Case 1: loop through all the bullets. at the origin you add the differences, if both of the differnces at my_grid == true then
+                // a pattern is found in the code. We can use IndexToBullet() to get the bullet at that index to find that value.
+
+                int[] currentIndex = m_bullets[i].GetComponent<BulletActor>().indexOnGrid;
+                Vector2Int firstDiff = m_currentPatternSet.patternSet[p].differenceFromOrigin[0];
+                Vector2Int secondDiff = m_currentPatternSet.patternSet[p].differenceFromOrigin[1];
+
+                int[] firstIndexDiff = new int[]{
+                    currentIndex[0] + firstDiff.x,
+                    currentIndex[1] + firstDiff.y
+                    };
+
+                int[] secondIndexDiff = new int[]{
+                    currentIndex[0] + secondDiff.x,
+                    currentIndex[1] + secondDiff.y
+                };
+
+
+                if(firstIndexDiff[0] >= m_gridWidth || firstIndexDiff[1] >= m_gridHeight)
+                {
+                    continue;
+                }
+                if(secondIndexDiff[0] >= m_gridWidth || secondIndexDiff[1] >= m_gridHeight)
+                {
+                    continue;
+                }
+                if (firstIndexDiff[0] < 0 || firstIndexDiff[1] < 0)
+                {
+                    continue;
+                }
+                if (secondIndexDiff[0] < 0 || secondIndexDiff[1] < 0)
+                {
+                    continue;
+                }
+
+
+                if (m_grid[firstIndexDiff[0], firstIndexDiff[1]].isOccupied && m_grid[secondIndexDiff[0], secondIndexDiff[1]].isOccupied)
+                {
+                    patterns[p].used = true;
+                    BulletActor currentBullet = m_bullets[i].GetComponent<BulletActor>();
+                    BulletActor firstBullet = IndexToBullet(firstIndexDiff);
+                    BulletActor secondBullet = IndexToBullet(secondIndexDiff);
+                    BulletActor bulletNotInPattern = GetLastBullet(currentBullet, firstBullet, secondBullet);
+
+                    currentBullet.inPattern = true;
+                    firstBullet.inPattern = true;
+                    secondBullet.inPattern = true;
+                    bulletNotInPattern.inPattern = false;
+                    GameManager.Instance.PatternUsed.Invoke();
                 }
 
             }
@@ -446,15 +466,6 @@ public class PlayGrid : MonoBehaviour
                 patternCount++;
             }
             
-        }
-
-        for (int i = 0; i < hasItBeenSeen.Length; i++)
-        {
-            if (hasItBeenSeen[i] == false)
-            {
-                BulletActor notInPattern = m_bullets[i].GetComponent<BulletActor>();
-                notInPattern.inPattern = false;
-            }
         }
 
         switch (patternCount)
@@ -482,7 +493,7 @@ public class PlayGrid : MonoBehaviour
             bulletReference = m_bullets[i].GetComponent<BulletActor>();
             if(!bulletReference.inPattern)
             {
-                DirectionMove(bulletReference, bulletReference.direction);;
+                DirectionMove(bulletReference, bulletReference.direction);
             }
         }
     }
@@ -523,8 +534,8 @@ public class PlayGrid : MonoBehaviour
                     return;
                 }
                 Vector2Int direction = new Vector2Int(m_indexDiff[0], m_indexDiff[1]);
-                m_actionPhase = true;
                 DirectionMove(IndexToBullet(m_firstHitIndex), direction);
+                StartActionPhase();
                 time -= 5;
                 GameManager.Instance.UpdateTimeDuration.Invoke();
                 m_bulletSelected = false;
@@ -577,26 +588,47 @@ public class PlayGrid : MonoBehaviour
 
             for (int i = 0; i < bulletDiffArray.Length; i++)
             {
-                var intersectionValues = bulletDiffArray[i].Intersect(m_currentPatternSet.patternSet[p].differenceFromOrigin);
+                // We get the bullet at i and get the index on grid. We add the differences from the patterns and check if that grid is occupied
+                // If it is occupied get the bullets at that index and set their inPattern variable to true, the remaining index set it to false.
+                // Case 1: loop through all the bullets. at the origin you add the differences, if both of the differnces at my_grid == true then
+                // a pattern is found in the code. We can use IndexToBullet() to get the bullet at that index to find that value.
 
-                if (intersectionValues.Count() == 2)
+                int[] currentIndex = m_bullets[i].GetComponent<BulletActor>().indexOnGrid;
+                Vector2Int firstDiff = m_currentPatternSet.patternSet[p].differenceFromOrigin[0];
+                Vector2Int secondDiff = m_currentPatternSet.patternSet[p].differenceFromOrigin[1];
+
+                int[] firstIndexDiff = new int[]{
+                    currentIndex[0] + firstDiff.x,
+                    currentIndex[1] + firstDiff.y
+                    };
+
+                int[] secondIndexDiff = new int[]{
+                    currentIndex[0] + secondDiff.x,
+                    currentIndex[1] + secondDiff.y
+                };
+
+
+                if (firstIndexDiff[0] >= m_gridWidth || firstIndexDiff[1] >= m_gridHeight)
                 {
-                    Vector2Int[] intersecComp = intersectionValues.ToArray();
+                    continue;
+                }
+                if (secondIndexDiff[0] >= m_gridWidth || secondIndexDiff[1] >= m_gridHeight)
+                {
+                    continue;
+                }
+                if (firstIndexDiff[0] < 0 || firstIndexDiff[1] < 0)
+                {
+                    continue;
+                }
+                if (secondIndexDiff[0] < 0 || secondIndexDiff[1] < 0)
+                {
+                    continue;
+                }
 
-                    for (int x = 0; x < m_bullets.Length; x++)
-                    {
-                        BulletActor firstAct = m_bullets[i].GetComponent<BulletActor>();
-                        BulletActor secondAct = m_bullets[x].GetComponent<BulletActor>();
-                        Vector2Int gridDiff = new Vector2Int(secondAct.indexOnGrid[0] - firstAct.indexOnGrid[0], secondAct.indexOnGrid[1] - firstAct.indexOnGrid[1]);
 
-                        if (intersecComp[0] == gridDiff || intersecComp[1] == gridDiff)
-                        {
-                            return true;
-                        }
-
-                    }
-
-
+                if (m_grid[firstIndexDiff[0], firstIndexDiff[1]].isOccupied && m_grid[secondIndexDiff[0], secondIndexDiff[1]].isOccupied)
+                {
+                    return true;
                 }
 
             }
@@ -612,7 +644,83 @@ public class PlayGrid : MonoBehaviour
         /////////////////////////////
     }
 
+    private int[] WrapIndex(int newXIndex, int newYIndex)
+    {
+        if (newXIndex < 0)
+        {
+            newXIndex = m_gridWidth - Mathf.Abs(newXIndex);
+        }
+        else if (newXIndex > (m_gridWidth - 1))
+        {
+            newXIndex = Mathf.Abs(newXIndex) - m_gridWidth;
+        }
 
+        if (newYIndex < 0)
+        {
+            newYIndex = m_gridHeight - Mathf.Abs(newYIndex);
+        }
+        else if (newYIndex > (m_gridHeight - 1))
+        {
+            newYIndex = Mathf.Abs(newYIndex) - m_gridHeight;
+        }
+
+        int[] returnValue = new int[2];
+        returnValue[0] = newXIndex;
+        returnValue[1] = newYIndex;
+
+        return returnValue;
+        
+    }
+
+    private BulletActor GetLastBullet(BulletActor one, BulletActor two, BulletActor three)
+    {
+        BulletActor bulletReference;
+        for (int i = 0; i < m_bullets.Length; i++)
+        {
+            bulletReference = m_bullets[i].GetComponent<BulletActor>();
+            if(bulletReference == one || bulletReference == two || bulletReference == three)
+            {
+                continue;
+
+            }
+            else
+            {
+                return bulletReference;
+            }
+        }
+        return null;
+    }
+
+    private void StartActionPhase()
+    {
+        m_actionPhase = true;
+        int runTime = 0;
+        while(PatternCheckWithoutMovement())
+        {
+            PatternCheck();
+            runTime++;
+        }
+        ResetBulletsPattern();
+
+        if(runTime > 0)
+        {
+            MoveAllBullets();
+        }
+        StartCoroutine(patternTime());
+
+        m_actionPhase = false;
+    }
+
+    private void MoveAllBullets()
+    {
+        BulletActor bulletReference;
+        for (int i = 0; i < m_bullets.Length; i++)
+        {
+            bulletReference = m_bullets[i].GetComponent<BulletActor>();
+            DirectionMove(bulletReference, bulletReference.direction);
+
+        }
+    }
     private void OnDrawGizmos()
     {
         if (m_grid != null)
