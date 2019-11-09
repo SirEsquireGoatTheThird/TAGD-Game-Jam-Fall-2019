@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public UnityEvent PatternUsed;
     public UnityEvent UnlockPattern;
     public UnityEvent UpdateTimeDuration;
+    public UnityEvent PlayerDamaged;
 
 
     private void Awake()
@@ -45,6 +46,10 @@ public class GameManager : MonoBehaviour
         if(UnlockPattern == null)
         {
             UnlockPattern = new UnityEvent();
+        }
+        if (PlayerDamaged == null)
+        {
+            PlayerDamaged = new UnityEvent();
         }
     }
 
