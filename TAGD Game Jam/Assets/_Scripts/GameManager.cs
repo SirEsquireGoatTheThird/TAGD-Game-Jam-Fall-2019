@@ -19,11 +19,8 @@ public class GameManager : MonoBehaviour
     public string note = "This unity events can be assigned via the inspect and code, we are assigning them via code rather than inspector. Please don't touch it in inspector.";
     public UnityEvent UpdatePatternUI;
     public UnityEvent PatternUsed;
-    public UnityEvent EnemyAttack;
-    public UnityEvent PlayerAttackOne;
-    public UnityEvent PlayerAttackTwo;
-    public UnityEvent PlayerAttackThree;
     public UnityEvent UnlockPattern;
+    public UnityEvent UpdateTimeDuration;
 
 
     private void Awake()
@@ -41,26 +38,9 @@ public class GameManager : MonoBehaviour
         {
             UpdatePatternUI = new UnityEvent();
         }
-
-        if (PlayerAttackOne == null)
+        if (UpdateTimeDuration == null)
         {
-            PlayerAttackOne = new UnityEvent();
-        }
-        if (PlayerAttackTwo == null)
-        {
-            PlayerAttackTwo = new UnityEvent();
-        }
-        if (PlayerAttackThree == null)
-        {
-            PlayerAttackThree = new UnityEvent();
-        }
-        if (PatternUsed == null)
-        {
-            PatternUsed = new UnityEvent();
-        }
-        if(EnemyAttack == null)
-        {
-            EnemyAttack = new UnityEvent();
+            UpdateTimeDuration = new UnityEvent();
         }
         if(UnlockPattern == null)
         {

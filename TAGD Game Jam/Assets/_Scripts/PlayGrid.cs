@@ -14,7 +14,6 @@ public class PlayGrid : MonoBehaviour
     private int m_gridWidth = 3;
     private Node[,] m_grid;
     [SerializeField]
-    [Range(1, 20)]
     private float m_gridScale = 1;
 
     // Raycast Stuff
@@ -66,7 +65,7 @@ public class PlayGrid : MonoBehaviour
     public int enemy_health = 5;
     public int enemy_damage = 1;
     public float duration = 30;
-    private bool m_timeStarted = false;
+    private float time;
     ///////////////////////////////////
 
     #region Struct creations
@@ -91,6 +90,7 @@ public class PlayGrid : MonoBehaviour
     {
         m_mainCamera = Camera.main;
         GameManager.Instance.UpdatePatternUI.Invoke();
+        SetScaleOfGridByScreenResolution();
         ScaleBackgroundImageToGrid();
         CreatePatternStructs();
         CreateGrid();
@@ -103,6 +103,7 @@ public class PlayGrid : MonoBehaviour
         enemy_health = currentEnemy.health;
         enemy_damage = currentEnemy.damage;
         duration = currentEnemy.attackTimer;
+        time = duration;
     }
 
     private void Update()
@@ -129,10 +130,9 @@ public class PlayGrid : MonoBehaviour
             {
                 m_actionPhase = false;
             }
-
             RayCastTarget();
 
-            if (!PatternCheckWithoutMovement())
+            if (!PatternCheckWithoutMovement() && !m_actionPhase)
             {
                 StartCoroutine(patternTime());
             }
@@ -143,31 +143,17 @@ public class PlayGrid : MonoBehaviour
             m_bulletSelected = false;
         }
 
-        ////////////////////////////////
-        if (!m_timeStarted)
+        time -= Time.deltaTime;
+
+        if (time < 0)
         {
-            StartCoroutine(timer(duration));
-            m_timeStarted = true;
+            player_health -= enemy_damage;
+            Health_UI.Damage(enemy_damage);
+            time = duration;
         }
+        
     }
 
-    private IEnumerator timer(float duration)
-    {
-        float startTime = Time.time;
-        float time = duration;
-
-        while ((Time.time - startTime) < duration)
-        {
-            time -= Time.deltaTime;
-            yield return null;
-        }
-        player_health -= enemy_damage;
-        Health_UI.Damage(enemy_damage);
-        m_timeStarted = false;
-        // Event happens here(basically send out unity event of attack happening then have a listener listen for it,
-        // such as the enemy)
-
-    }
     private IEnumerator patternTime()
     {
         yield return new WaitForSeconds(3f);
@@ -176,6 +162,40 @@ public class PlayGrid : MonoBehaviour
 
 
     #region Game Initilization
+    private void SetScaleOfGridByScreenResolution()
+    {
+        float y = m_mainCamera.pixelHeight;
+        float x = m_mainCamera.pixelWidth;
+
+
+        // First get the bounds of the screen via ratios for screen ratio to height and width
+        float ratioY = y / 135;
+        float ratioX = x / 240;
+
+        // Used to determine the starting point on the bottom left of the object
+        float xPos = ratioX * 15;
+        float yPos = ratioY * 23;
+
+        float xPosCenter = ratioX * 69;
+        float yPosCenter = ratioY * 77;
+
+        Vector3 origin = m_mainCamera.ScreenToWorldPoint(new Vector3(xPosCenter, yPosCenter, 0));
+        transform.position = origin;
+
+        // Adds the length of the container
+        float width = xPos + (108 * ratioX);
+
+        Vector3 startPos = m_mainCamera.ScreenToWorldPoint(new Vector3(xPos, yPos, 0));
+        Vector3 endPos = m_mainCamera.ScreenToWorldPoint(new Vector3(width, yPos, 0));
+
+        //Debug.Log(startPos);
+        //Debug.Log(endPos);
+
+        m_gridScale = Mathf.Abs(origin.x - startPos.x) / 1.75f;
+        
+
+
+    }
     private void CreateGrid()
     {
         m_grid = new Node[m_gridWidth, m_gridHeight];
@@ -505,6 +525,8 @@ public class PlayGrid : MonoBehaviour
                 Vector2Int direction = new Vector2Int(m_indexDiff[0], m_indexDiff[1]);
                 m_actionPhase = true;
                 DirectionMove(IndexToBullet(m_firstHitIndex), direction);
+                time -= 5;
+                GameManager.Instance.UpdateTimeDuration.Invoke();
                 m_bulletSelected = false;
             }
 
