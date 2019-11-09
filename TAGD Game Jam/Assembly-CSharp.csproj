@@ -72,6 +72,7 @@
     <Compile Include="Assets\_Scripts\PauseMenu.cs" />
     <Compile Include="Assets\_Scripts\Player_Health.cs" />
     <Compile Include="Assets\_Scripts\PlayGrid.cs" />
+    <Compile Include="Assets\_Scripts\ScreenShake.cs" />
     <Compile Include="Assets\_Scripts\Sfx_Handler.cs" />
     <Compile Include="Assets\_Scripts\SongHandler.cs" />
     <Compile Include="Assets\_Scripts\StatsScriptable.cs" />
