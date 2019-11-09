@@ -12,6 +12,7 @@ public class BulletActor : MonoBehaviour, IBullet
     [SerializeField]
     bool m_inPattern;
     public bool inPosition;
+    public int Speed;
 
     public Vector2Int direction
     {
@@ -80,7 +81,7 @@ public class BulletActor : MonoBehaviour, IBullet
         }
         else
         {
-            transform.position = Vector3.Lerp(transform.position, new Vector3(position.x, position.y, 0), 2 * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, new Vector3(position.x, position.y, 0), Speed * Time.deltaTime);
         }
         
     }

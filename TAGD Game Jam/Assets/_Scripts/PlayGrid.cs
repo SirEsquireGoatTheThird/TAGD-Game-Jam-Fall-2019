@@ -144,7 +144,7 @@ public class PlayGrid : MonoBehaviour
 
     private IEnumerator patternTime()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
         ResetPattern();
     }
 
@@ -346,66 +346,18 @@ public class PlayGrid : MonoBehaviour
         m_grid[bullet.indexOnGrid[0], bullet.indexOnGrid[1]].isOccupied = false;
         bullet.indexOnGrid[0] = wrappedIndex[0];
         bullet.indexOnGrid[1] = wrappedIndex[1];
-
-
     }
-    private void PatternCheck()
+    private BulletActor PatternCheck()
     {
-        Vector2Int[][] bulletDiffArray = BulletIndexDifferences();
-
-        // What I need to do.
-        // Concept: 
-        // The player has moved the bullet, so check if that bullet is in a pattern
-        // If the bullet is in a pattern then lock the current bullets in position
-        // Then move the unlocked bullet
-
-        //bool[] hasItBeenSeen = new bool[4];
+        BulletActor bullet = null;
         for (int p = 0; p < m_currentPatternSet.patternSet.Length; p++)
         {
-
             if(patterns[p].used)
             {
                 continue;
             }
-            
-
-            for (int i = 0; i < bulletDiffArray.Length; i++)
+            for (int i = 0; i < m_bullets.Length; i++)
             {
-                //var intersectionValues = bulletDiffArray[i].Intersect(m_currentPatternSet.patternSet[p].differenceFromOrigin);
-
-                /*
-                if (intersectionValues.Count() == 2)
-                {
-                    Vector2Int[] intersecComp = intersectionValues.ToArray();
-                    
-                    for (int x = 0; x < m_bullets.Length; x++)
-                    {
-                        BulletActor firstAct = m_bullets[i].GetComponent<BulletActor>();
-                        BulletActor secondAct = m_bullets[x].GetComponent<BulletActor>();
-                        Vector2Int gridDiff = new Vector2Int(secondAct.indexOnGrid[0] - firstAct.indexOnGrid[0], secondAct.indexOnGrid[1] - firstAct.indexOnGrid[1]);
-
-                        if (intersecComp[0] == gridDiff || intersecComp[1] == gridDiff)
-                        {
-                            firstAct.inPattern = true;
-                            secondAct.inPattern = true;
-                            patterns[p].used = true;
-                            hasItBeenSeen[x] = true;
-                            GameManager.Instance.PatternUsed.Invoke();
-                        }
-                        else if(gridDiff == Vector2Int.zero)
-                        {
-                            hasItBeenSeen[x] = true;
-                        }
-                        else
-                        {
-                            hasItBeenSeen[x] = false;
-                        }
-                       
-                    }
-                    
-                    
-                }
-                */
                 // We get the bullet at i and get the index on grid. We add the differences from the patterns and check if that grid is occupied
                 // If it is occupied get the bullets at that index and set their inPattern variable to true, the remaining index set it to false.
                 // Case 1: loop through all the bullets. at the origin you add the differences, if both of the differnces at my_grid == true then
@@ -456,6 +408,7 @@ public class PlayGrid : MonoBehaviour
                     firstBullet.inPattern = true;
                     secondBullet.inPattern = true;
                     bulletNotInPattern.inPattern = false;
+                    bullet = bulletNotInPattern;
                     GameManager.Instance.PatternUsed.Invoke();
                 }
 
@@ -467,6 +420,7 @@ public class PlayGrid : MonoBehaviour
             }
             
         }
+        
 
         switch (patternCount)
         {
@@ -479,11 +433,9 @@ public class PlayGrid : MonoBehaviour
             case 3:
                 AttackEnemy(6);
                 break;
-            default: return;
         }
         patternCount = 0;
-        MoveRemainingBullet();
-
+        return bullet;
     }
     private void MoveRemainingBullet()
     {
@@ -534,8 +486,9 @@ public class PlayGrid : MonoBehaviour
                     return;
                 }
                 Vector2Int direction = new Vector2Int(m_indexDiff[0], m_indexDiff[1]);
-                DirectionMove(IndexToBullet(m_firstHitIndex), direction);
-                StartActionPhase();
+                BulletActor bullet = IndexToBullet(m_firstHitIndex);
+                DirectionMove(bullet, direction);
+                StartCoroutine(ActionPhase(bullet));
                 time -= 5;
                 GameManager.Instance.UpdateTimeDuration.Invoke();
                 m_bulletSelected = false;
@@ -569,24 +522,13 @@ public class PlayGrid : MonoBehaviour
     }
     private bool PatternCheckWithoutMovement()
     {
-        Vector2Int[][] bulletDiffArray = BulletIndexDifferences();
-
-        // What I need to do.
-        // Concept: 
-        // The player has moved the bullet, so check if that bullet is in a pattern
-        // If the bullet is in a pattern then lock the current bullets in position
-        // Then move the unlocked bullet
-
-
         for (int p = 0; p < m_currentPatternSet.patternSet.Length; p++)
         {
-
             if(patterns[p].used)
             {
                 continue;
             }
-
-            for (int i = 0; i < bulletDiffArray.Length; i++)
+            for (int i = 0; i < m_bullets.Length; i++)
             {
                 // We get the bullet at i and get the index on grid. We add the differences from the patterns and check if that grid is occupied
                 // If it is occupied get the bullets at that index and set their inPattern variable to true, the remaining index set it to false.
@@ -635,7 +577,6 @@ public class PlayGrid : MonoBehaviour
         }
         return false;
     }
-   
     private void AttackEnemy(int damage)
     {
         enemy_health -= damage;
@@ -643,7 +584,6 @@ public class PlayGrid : MonoBehaviour
         Enemy_UI.Damage(damage);
         /////////////////////////////
     }
-
     private int[] WrapIndex(int newXIndex, int newYIndex)
     {
         if (newXIndex < 0)
@@ -671,7 +611,6 @@ public class PlayGrid : MonoBehaviour
         return returnValue;
         
     }
-
     private BulletActor GetLastBullet(BulletActor one, BulletActor two, BulletActor three)
     {
         BulletActor bulletReference;
@@ -690,36 +629,79 @@ public class PlayGrid : MonoBehaviour
         }
         return null;
     }
-
-    private void StartActionPhase()
+    // Idea. 
+    // Make ActionPhase() a coroutine and have it wait for bullets to finish moving until its done then move
+    // How to get which bullet is moveing?
+    // Know which bullet will move in adavance? Add parameter to ActionPhase(BulletActor bullet?)
+    // Could loop through bullets and see which one is moving, then from there wait until its in position to finish
+    // If so then continue loop? Should work? I'll try the later first.
+    private IEnumerator ActionPhase(BulletActor bullet)
     {
         m_actionPhase = true;
         int runTime = 0;
+        if(bullet != null)
+        {
+            while(!bullet.inPosition)
+            {
+                yield return null;
+            }
+        }
         while(PatternCheckWithoutMovement())
         {
-            PatternCheck();
+            BulletActor movingBullet = PatternCheck();
+            DirectionMove(movingBullet, movingBullet.direction);
+            if(movingBullet != null)
+            {
+                while(!movingBullet.inPosition)
+                {
+                    yield return null;
+                }
+            }
             runTime++;
         }
         ResetBulletsPattern();
 
         if(runTime > 0)
         {
-            MoveAllBullets();
+            BulletActor bulletReference;
+            for (int i = 0; i < m_bullets.Length; i++)
+            {
+                bulletReference = m_bullets[i].GetComponent<BulletActor>();
+                DirectionMove(bulletReference, bulletReference.direction);
+                if (bulletReference != null)
+                {
+                    while (!bulletReference.inPosition)
+                    {
+                        yield return null;
+                    }
+                }
+
+            }
         }
         StartCoroutine(patternTime());
 
         m_actionPhase = false;
     }
-
-    private void MoveAllBullets()
+    private IEnumerator WaitForBullet(BulletActor bullet)
+    {
+        while(!bullet.inPosition)
+        {
+            yield return null;
+        }
+    }
+    private BulletActor WhichBulletIsMoving()
     {
         BulletActor bulletReference;
         for (int i = 0; i < m_bullets.Length; i++)
         {
             bulletReference = m_bullets[i].GetComponent<BulletActor>();
-            DirectionMove(bulletReference, bulletReference.direction);
+            if(!bulletReference.inPosition)
+            {
+                return bulletReference;
+            }
 
         }
+        return null;
     }
     private void OnDrawGizmos()
     {
