@@ -15,6 +15,7 @@ public class Player_Health : MonoBehaviour
 
     public void Damage(int damage)
     {
+        GameManager.Instance.PlayerDamaged.Invoke();
         health -= damage;
 
         for (int i = 0; i < hearts.Length; i++)

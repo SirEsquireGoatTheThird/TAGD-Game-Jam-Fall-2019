@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
 	"process_id" : 22272,
+=======
+	"process_id" : 14220,
+>>>>>>> 3978585beeda9c9605fe986952add7bcd8a23cc4
 	"version" : "2019.2.8f1",
 	"app_path" : "C:/Program Files/Unity/Hub/Editor/2019.2.8f1/Editor/Unity.exe",
 	"app_contents_path" : "C:/Program Files/Unity/Hub/Editor/2019.2.8f1/Editor/Data"
