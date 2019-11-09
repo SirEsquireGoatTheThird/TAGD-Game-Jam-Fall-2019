@@ -98,6 +98,7 @@ MonoBehaviour:
   m_indexOnGrid: 0000000000000000
   m_inPattern: 0
   inPosition: 0
+  Speed: 5
 --- !u!95 &1575206880292395115
 Animator:
   serializedVersion: 3
