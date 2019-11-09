@@ -204,6 +204,7 @@ GameObject:
   - component: {fileID: 63644523}
   - component: {fileID: 63644522}
   - component: {fileID: 63644521}
+  - component: {fileID: 63644524}
   m_Layer: 5
   m_Name: Uncovered Timer
   m_TagString: Untagged
@@ -267,6 +268,18 @@ RectTransform:
   m_AnchoredPosition: {x: -1.5, y: -0.000061035156}
   m_SizeDelta: {x: 1, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &63644524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63644520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3299f32a25269934d99acb335be5fad6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &71779775
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,6 +289,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 71779776}
+  - component: {fileID: 71779777}
   m_Layer: 5
   m_Name: Enemy Container
   m_TagString: Untagged
@@ -303,6 +317,18 @@ RectTransform:
   m_AnchoredPosition: {x: -0.5, y: 0.5}
   m_SizeDelta: {x: -3, y: 3}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &71779777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 71779775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3299f32a25269934d99acb335be5fad6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &80975303
 GameObject:
   m_ObjectHideFlags: 0
@@ -1204,6 +1230,7 @@ GameObject:
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
   - component: {fileID: 519420033}
+  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1385,6 +1412,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &519420034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3299f32a25269934d99acb335be5fad6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &547188852
 GameObject:
   m_ObjectHideFlags: 0
@@ -2057,6 +2096,7 @@ GameObject:
   m_Component:
   - component: {fileID: 838185410}
   - component: {fileID: 838185411}
+  - component: {fileID: 838185412}
   m_Layer: 5
   m_Name: Enemy
   m_TagString: Untagged
@@ -2118,6 +2158,18 @@ MonoBehaviour:
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 1
   m_ChildScaleHeight: 1
+--- !u!114 &838185412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838185409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3299f32a25269934d99acb335be5fad6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &844732970
 GameObject:
   m_ObjectHideFlags: 0
@@ -2159,6 +2211,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   UpdateTimeDuration:
+    m_PersistentCalls:
+      m_Calls: []
+  PlayerDamaged:
     m_PersistentCalls:
       m_Calls: []
 --- !u!4 &844732972
@@ -2833,6 +2888,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1298340889}
   - component: {fileID: 1298340890}
+  - component: {fileID: 1298340891}
   m_Layer: 5
   m_Name: PatternsObject
   m_TagString: Untagged
@@ -2872,6 +2928,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2cb2871c5127eaf47a746d2a5427078d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1298340891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1298340888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3299f32a25269934d99acb335be5fad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1378865493
@@ -3486,6 +3554,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1770554004}
+  - component: {fileID: 1770554005}
   m_Layer: 5
   m_Name: Hearts
   m_TagString: Untagged
@@ -3522,6 +3591,18 @@ RectTransform:
   m_AnchoredPosition: {x: -1, y: 281.5}
   m_SizeDelta: {x: -2, y: -567}
   m_Pivot: {x: 0, y: 0.5}
+--- !u!114 &1770554005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1770554003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3299f32a25269934d99acb335be5fad6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1823827062
 GameObject:
   m_ObjectHideFlags: 0
@@ -3969,6 +4050,7 @@ GameObject:
   - component: {fileID: 2026724695}
   - component: {fileID: 2026724696}
   - component: {fileID: 2026724697}
+  - component: {fileID: 2026724698}
   m_Layer: 5
   m_Name: Midground Canvas
   m_TagString: Untagged
@@ -4127,6 +4209,18 @@ MonoBehaviour:
   - {fileID: 108384039}
   fullHeart: {fileID: 21300000, guid: c587e6648cee03f43b07d08c43927f96, type: 3}
   emptyHeart: {fileID: 21300000, guid: 8f88170f810ca4e4f8d2b45b046599b2, type: 3}
+--- !u!114 &2026724698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2026724690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3299f32a25269934d99acb335be5fad6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2027987694
 GameObject:
   m_ObjectHideFlags: 0

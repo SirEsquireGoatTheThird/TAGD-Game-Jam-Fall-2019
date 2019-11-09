@@ -19,16 +19,19 @@ public class Sfx_Handler : MonoBehaviour
 
     void play_sfx_gun()
     {
+        audioSource_SFX.pitch = Random.Range(.8F, 1.3F);
         audioSource_SFX.PlayOneShot(sfx_gun);
     }
 
     void play_sfx_bulletmove()
     {
+        audioSource_SFX.pitch = Random.Range(.7F, 1.2F);
         audioSource_SFX.PlayOneShot(sfx_bulletmove);
     }
 
     void play_sfx_hurt()
     {
+        audioSource_SFX.pitch = Random.Range(.8F, 1.2F);
         audioSource_SFX.PlayOneShot(sfx_hurt);
     }
 
