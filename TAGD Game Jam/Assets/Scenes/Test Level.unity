@@ -265,7 +265,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.72400004, y: 0.772}
   m_AnchorMax: {x: 0.77652097, y: 0.86500007}
-  m_AnchoredPosition: {x: -1.5, y: -0.000061035156}
+  m_AnchoredPosition: {x: -1.5, y: 0}
   m_SizeDelta: {x: 1, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &63644524
@@ -876,10 +876,10 @@ MonoBehaviour:
   m_gridWidth: 3
   m_gridScale: 1
   m_bulletPrefabs:
-  - {fileID: 4071701284472155641, guid: 478fb4239b214c447b450e4f4f871046, type: 3}
-  - {fileID: 8350811989322350998, guid: c0a1970f316f2be44b4b4f5e5febb459, type: 3}
-  - {fileID: 1942144828152752989, guid: 5338cb6731a40a444b8b327c96aa8fa6, type: 3}
-  - {fileID: 6804601798261291031, guid: ec20c963138d5d440866bf600a5dece7, type: 3}
+  - {fileID: 4745463339433342128, guid: 94c8be5b941a111499aec7c032a43c86, type: 3}
+  - {fileID: 7642036972382132427, guid: 896079c2dc57a24478cbfb02c5143a17, type: 3}
+  - {fileID: 6251132531604383119, guid: 017cf51239cb63f4d8a66c6597f20055, type: 3}
+  - {fileID: 7099710192414010044, guid: f3737bc870440eb4a875e64e3c0f4a46, type: 3}
   m_backGroundObject: {fileID: 973100993}
   m_currentPatternSet: {fileID: 11400000, guid: 2f165072582df5d48aaad9138d292015,
     type: 2}
