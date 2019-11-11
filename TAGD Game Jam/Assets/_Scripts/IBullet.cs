@@ -8,7 +8,6 @@ public interface IBullet
     Vector3 position { get; set; }
     int[] indexOnGrid { get; set; }
 
-    int order { get; set; }
-
+    int indexInArray { get; set; }
     bool inPattern { get; set; }
 }

@@ -7,6 +7,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7647693283557645452, guid: b8ea939299459b54483585f2fd2881c2,
+        type: 3}
+      propertyPath: m_Name
+      value: Bullet 4 Ghost
+      objectReference: {fileID: 0}
     - target: {fileID: 4537767209373994819, guid: b8ea939299459b54483585f2fd2881c2,
         type: 3}
       propertyPath: m_Sprite
@@ -27,11 +32,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7647693283557645452, guid: b8ea939299459b54483585f2fd2881c2,
-        type: 3}
-      propertyPath: m_Name
-      value: Bullet 4 Ghost
       objectReference: {fileID: 0}
     - target: {fileID: 2567565075304857520, guid: b8ea939299459b54483585f2fd2881c2,
         type: 3}
@@ -88,5 +88,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -4439090574800165282, guid: b8ea939299459b54483585f2fd2881c2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b8ea939299459b54483585f2fd2881c2, type: 3}

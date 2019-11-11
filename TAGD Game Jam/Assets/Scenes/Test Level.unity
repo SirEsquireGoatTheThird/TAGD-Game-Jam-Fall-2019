@@ -886,10 +886,12 @@ MonoBehaviour:
   m_actionPhase: 0
   currentEnemy: {fileID: 11400000, guid: 1c1c0eea4ec7a8144a594a968ac6a99c, type: 2}
   other: {fileID: 2026724690}
-  player_health: 10
-  enemy_health: 5
-  enemy_damage: 1
   duration: 30
+  m_ghostBullets:
+  - {fileID: 8812431901809321103, guid: 861d158125414e448ad747483a32a688, type: 3}
+  - {fileID: 4080129211230225463, guid: e6b253c9d0fb31e468056480be63707b, type: 3}
+  - {fileID: 2471241304459315838, guid: b17e9e9a2db812c449e19ecc608e3b7d, type: 3}
+  - {fileID: 5551666925884358648, guid: e0312c4db3463cb4ab1003abef13eb05, type: 3}
 --- !u!4 &217969622
 Transform:
   m_ObjectHideFlags: 0
