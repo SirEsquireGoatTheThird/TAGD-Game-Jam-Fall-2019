@@ -63,9 +63,9 @@ public class PlayGrid : MonoBehaviour
     private GameObject other;
     Player_Health Health_UI;
     Enemy_Health Enemy_UI;
-    private int player_health = 10;
-    private int enemy_health = 5;
-    private int enemy_damage = 1;
+    public int player_health = 10;
+    public int enemy_health = 5;
+    public int enemy_damage = 1;
     public float duration = 30;
     private float time;
 

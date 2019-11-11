@@ -8,5 +8,4 @@ public class StatsScriptable : ScriptableObject
     public int health;
     public int damage;
     public int attackTimer;
-    public Sprite enemyIcon;
 }
