@@ -55,6 +55,10 @@ public class PlayGrid : MonoBehaviour
 
     //Variables used for enemy stuff 
     [SerializeField]
+    //////////////////
+    private StatsScriptable[] enemy;
+    private int i = 0;
+    //////////////////
     private StatsScriptable currentEnemy;
     [SerializeField]
     private GameObject other;
@@ -92,6 +96,9 @@ public class PlayGrid : MonoBehaviour
 
     private void Start()
     {
+        ///////////
+        currentEnemy = enemy[0];
+        ///////////
         m_mainCamera = Camera.main;
         GameManager.Instance.UpdatePatternUI.Invoke();
         SetScaleOfGridByScreenResolution();
@@ -115,12 +122,21 @@ public class PlayGrid : MonoBehaviour
         if(enemy_health <= 0)
         {
             Debug.Log("Enemy Died");
-            //SceneManager.LoadScene("Win");
+            i += 1;
+            if(i < 4)
+            {
+                currentEnemy = enemy[i];
+                enemy_health = currentEnemy.health;
+                enemy_damage = currentEnemy.damage;
+                duration = currentEnemy.attackTimer;
+                time = duration;
+                Debug.Log("Spawn Next Enemy");
+                Enemy_UI.health = enemy_health;
+            }
         }
         if(player_health <= 0)
         {
             Debug.Log("You died");
-            SceneManager.LoadScene("Lose");
         }
 
 
