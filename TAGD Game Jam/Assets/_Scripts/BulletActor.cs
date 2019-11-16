@@ -8,11 +8,11 @@ public class BulletActor : MonoBehaviour, IBullet
     Vector3 m_position;
     [SerializeField]
     int[] m_indexOnGrid = new int[2];
-    int m_order;
     [SerializeField]
     bool m_inPattern;
     public bool inPosition;
     public int Speed;
+    private int m_indexInArray;
 
     public Vector2Int direction
     {
@@ -48,18 +48,13 @@ public class BulletActor : MonoBehaviour, IBullet
             m_indexOnGrid = value;
         }
     }
-    public int order
-    {
-        get
-        {
-            return m_order;
-        }
-        set
-        {
-            m_order = value;
-        }
-    }
 
+    public int indexInArray
+    {
+        get { return m_indexInArray; }
+        set { m_indexInArray = value; }
+        
+    }
     public bool inPattern
     {
         get

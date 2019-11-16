@@ -50,16 +50,17 @@ public class PlayGrid : MonoBehaviour
     }
     [HideInInspector]
     public Pattern[] patterns = new Pattern[3];
-    int patternCount = 0;
+    private int patternCount = 0;
 
     [SerializeField]
     private bool m_actionPhase = false;
 
+
+    //Variables used for enemy stuff 
     [SerializeField]
-    StatsScriptable currentEnemy;
-    ///////////////////////////////////
+    private StatsScriptable currentEnemy;
     [SerializeField]
-    public GameObject other;
+    private GameObject other;
     Player_Health Health_UI;
     Enemy_Health Enemy_UI;
     public int player_health = 10;
@@ -67,7 +68,12 @@ public class PlayGrid : MonoBehaviour
     public int enemy_damage = 1;
     public float duration = 30;
     private float time;
-    ///////////////////////////////////
+
+    // Variables used for storing the ghost prefab to show the player where they can move their bullet
+    [SerializeField]
+    private GameObject[] m_ghostBullets;
+    private List<GameObject> m_spawnedGhostBullets = new List<GameObject>();
+
 
     #region Struct creations
     // The node will act as grid points with data thats needed in each point.
@@ -234,7 +240,7 @@ public class PlayGrid : MonoBehaviour
             actor.position = m_grid[indexArray[i].x, indexArray[i].y].worldPosition;
             actor.indexOnGrid[0] = indexArray[i].x;
             actor.indexOnGrid[1] = indexArray[i].y;
-            actor.order = i;
+            actor.indexInArray = i;
             m_grid[indexArray[i].x, indexArray[i].y].isOccupied = true;
             actor.inPattern = false;
             m_bullets[i] = bullet;
@@ -437,18 +443,6 @@ public class PlayGrid : MonoBehaviour
         patternCount = 0;
         return bullet;
     }
-    private void MoveRemainingBullet()
-    {
-        BulletActor bulletReference;
-        for (int i = 0; i < m_bullets.Length; i++)
-        {
-            bulletReference = m_bullets[i].GetComponent<BulletActor>();
-            if(!bulletReference.inPattern)
-            {
-                DirectionMove(bulletReference, bulletReference.direction);
-            }
-        }
-    }
     private void RayCastTarget()
     {
         Ray mousePos = m_mainCamera.ScreenPointToRay(Input.mousePosition);
@@ -467,7 +461,59 @@ public class PlayGrid : MonoBehaviour
             {
                 m_firstHitIndex = WorldPosToIndex(hitInfo.transform.position);
                 m_bulletSelected = true;
+
+                m_firstHitIndex = WorldPosToIndex(hitInfo.transform.position);
+
+                int[] upIndex = new int[]
+                {
+                index[0],
+                WrapIndex(index[0], index[1] + 1)[1]
+                };
+                int[] downIndex = new int[]
+                {
+                index[0],
+                WrapIndex(index[0], index[1] - 1)[1]
+                };
+                int[] rightIndex = new int[]
+                {
+                WrapIndex(index[0] + 1, index[1])[0],
+                index[1]
+                };
+                int[] leftIndex = new int[]
+                {
+                WrapIndex(index[0] - 1, index[1])[0],
+                index[1]
+                };
+
+
+                if (!m_grid[upIndex[0], upIndex[1]].isOccupied)
+                {
+                    GameObject objSpawned = Instantiate(m_ghostBullets[IndexToBullet(index).indexInArray], m_grid[upIndex[0], upIndex[1]].worldPosition, Quaternion.identity);
+                    objSpawned.transform.localScale = new Vector3(m_gridScale / 2, m_gridScale / 2, 1);
+                    m_spawnedGhostBullets.Add(objSpawned);
+                }
+                if (!m_grid[downIndex[0], downIndex[1]].isOccupied)
+                {
+                    GameObject objSpawned = Instantiate(m_ghostBullets[IndexToBullet(index).indexInArray], m_grid[downIndex[0], downIndex[1]].worldPosition, Quaternion.identity);
+                    objSpawned.transform.localScale = new Vector3(m_gridScale / 2, m_gridScale / 2, 1);
+                    m_spawnedGhostBullets.Add(objSpawned);
+                }
+                if (!m_grid[rightIndex[0], rightIndex[1]].isOccupied)
+                {
+                    GameObject objSpawned = Instantiate(m_ghostBullets[IndexToBullet(index).indexInArray], m_grid[rightIndex[0], rightIndex[1]].worldPosition, Quaternion.identity);
+                    objSpawned.transform.localScale = new Vector3(m_gridScale / 2, m_gridScale / 2, 1);
+                    m_spawnedGhostBullets.Add(objSpawned);
+                }
+                if (!m_grid[leftIndex[0], leftIndex[1]].isOccupied)
+                {
+                    GameObject objSpawned = Instantiate(m_ghostBullets[IndexToBullet(index).indexInArray], m_grid[leftIndex[0], leftIndex[1]].worldPosition, Quaternion.identity);
+                    objSpawned.transform.localScale = new Vector3(m_gridScale / 2, m_gridScale / 2, 1);
+                    m_spawnedGhostBullets.Add(objSpawned);
+                }
             }
+
+            //Spawn the ghost bullet at (+-1, 0), (0, +-1) index differences including wrapping as long as that index is no occupied
+
 
             if (!m_grid[index[0], index[1]].isOccupied && m_bulletSelected)
             {
@@ -487,39 +533,86 @@ public class PlayGrid : MonoBehaviour
                 }
                 Vector2Int direction = new Vector2Int(m_indexDiff[0], m_indexDiff[1]);
                 BulletActor bullet = IndexToBullet(m_firstHitIndex);
+                // Move the selected bullet to the next location
                 DirectionMove(bullet, direction);
+
+                // Start the Action Phase
                 StartCoroutine(ActionPhase(bullet));
-                time -= 5;
                 GameManager.Instance.UpdateTimeDuration.Invoke();
                 m_bulletSelected = false;
+
+                //Clear out the bullet preview list
+                foreach(GameObject obj in m_spawnedGhostBullets)
+                {
+                    Destroy(obj);
+                }
+
+                m_spawnedGhostBullets.Clear();
+
             }
 
             if (m_grid[index[0], index[1]].isOccupied && m_bulletSelected)
             {
                 m_firstHitIndex = WorldPosToIndex(hitInfo.transform.position);
+
+                foreach (GameObject obj in m_spawnedGhostBullets)
+                {
+                    Destroy(obj);
+                }
+
+                m_spawnedGhostBullets.Clear();
+
+                int[] upIndex = new int[]
+                {
+                index[0],
+                WrapIndex(index[0], index[1] + 1)[1]
+                };
+                int[] downIndex = new int[]
+                {
+                index[0],
+                WrapIndex(index[0], index[1] - 1)[1]
+                };
+                int[] rightIndex = new int[]
+                {
+                WrapIndex(index[0] + 1, index[1])[0],
+                index[1]
+                };
+                int[] leftIndex = new int[]
+                {
+                WrapIndex(index[0] - 1, index[1])[0],
+                index[1]
+                };
+
+
+                if (!m_grid[upIndex[0], upIndex[1]].isOccupied)
+                {
+                    GameObject objSpawned = Instantiate(m_ghostBullets[IndexToBullet(index).indexInArray], m_grid[upIndex[0], upIndex[1]].worldPosition, Quaternion.identity);
+                    objSpawned.transform.localScale = new Vector3(m_gridScale / 2, m_gridScale / 2, 1);
+                    m_spawnedGhostBullets.Add(objSpawned);
+                }
+                if (!m_grid[downIndex[0], downIndex[1]].isOccupied)
+                {
+                    GameObject objSpawned = Instantiate(m_ghostBullets[IndexToBullet(index).indexInArray], m_grid[downIndex[0], downIndex[1]].worldPosition, Quaternion.identity);
+                    objSpawned.transform.localScale = new Vector3(m_gridScale / 2, m_gridScale / 2, 1);
+                    m_spawnedGhostBullets.Add(objSpawned);
+                }
+                if (!m_grid[rightIndex[0], rightIndex[1]].isOccupied)
+                {
+                    GameObject objSpawned = Instantiate(m_ghostBullets[IndexToBullet(index).indexInArray], m_grid[rightIndex[0], rightIndex[1]].worldPosition, Quaternion.identity);
+                    objSpawned.transform.localScale = new Vector3(m_gridScale / 2, m_gridScale / 2, 1);
+                    m_spawnedGhostBullets.Add(objSpawned);
+                }
+                if (!m_grid[leftIndex[0], leftIndex[1]].isOccupied)
+                {
+                    GameObject objSpawned = Instantiate(m_ghostBullets[IndexToBullet(index).indexInArray], m_grid[leftIndex[0], leftIndex[1]].worldPosition, Quaternion.identity);
+                    objSpawned.transform.localScale = new Vector3(m_gridScale / 2, m_gridScale / 2, 1);
+                    m_spawnedGhostBullets.Add(objSpawned);
+                }
+
             }
         }
     }
-    private Vector2Int[][] BulletIndexDifferences()
-    {
-        Vector2Int[][] bulletDiffArray = new Vector2Int[4][];
-        Vector2Int[] caiou = new Vector2Int[4];
-        for (int i = 0; i < 4; i++)
-        {
-            for (int x = 0; x < 4; x++)
-            {
-                BulletActor firstAct = m_bullets[i].GetComponent<BulletActor>();
-                BulletActor secondAct = m_bullets[x].GetComponent<BulletActor>();
-                Vector2Int indexDiff = new Vector2Int(secondAct.indexOnGrid[0] - firstAct.indexOnGrid[0], secondAct.indexOnGrid[1] - firstAct.indexOnGrid[1]);
-                caiou[x] = indexDiff;
-
-            }
-            bulletDiffArray[i] = caiou;
-            caiou = new Vector2Int[4];
-        }
-
-        return bulletDiffArray;
-    }
+    
     private bool PatternCheckWithoutMovement()
     {
         for (int p = 0; p < m_currentPatternSet.patternSet.Length; p++)
@@ -638,6 +731,7 @@ public class PlayGrid : MonoBehaviour
     private IEnumerator ActionPhase(BulletActor bullet)
     {
         m_actionPhase = true;
+        time -= 5;
         int runTime = 0;
         if(bullet != null)
         {

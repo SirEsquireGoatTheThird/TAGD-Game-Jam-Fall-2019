@@ -11,6 +11,7 @@ public class SongHandler : MonoBehaviour
     void Start()
     {
         audioSource_Song = GetComponent<AudioSource>();
+        audioSource_Song.volume = .8F;
     }
 
     void Update()
