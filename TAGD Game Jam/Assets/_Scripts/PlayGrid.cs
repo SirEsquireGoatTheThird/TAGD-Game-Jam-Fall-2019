@@ -8,19 +8,16 @@ using UnityEngine.SceneManagement;
 public class PlayGrid : MonoBehaviour
 {
     // Grid Initialization Stuff
-    [SerializeField]
     private int m_gridHeight = 3;
-    [SerializeField]
     private int m_gridWidth = 3;
     private Node[,] m_grid;
-    [SerializeField]
     private float m_gridScale = 1;
 
 
     // Raycast Stuff
-    int[] m_firstHitIndex;
-    bool m_bulletSelected = false;
-    RaycastHit2D m_secondHit;
+    private int[] m_firstHitIndex;
+    private bool m_bulletSelected = false;
+    private RaycastHit2D m_secondHit;
     private Camera m_mainCamera;
 
     // Bullet Stuff
