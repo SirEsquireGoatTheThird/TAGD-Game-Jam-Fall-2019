@@ -872,20 +872,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c13fe8012e92dc44801c8ce2fe5ab5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_gridHeight: 3
+  m_gridWidth: 3
+  m_gridScale: 1
   m_bulletPrefabs:
   - {fileID: 4745463339433342128, guid: 94c8be5b941a111499aec7c032a43c86, type: 3}
   - {fileID: 7642036972382132427, guid: 896079c2dc57a24478cbfb02c5143a17, type: 3}
   - {fileID: 6251132531604383119, guid: 017cf51239cb63f4d8a66c6597f20055, type: 3}
   - {fileID: 7099710192414010044, guid: f3737bc870440eb4a875e64e3c0f4a46, type: 3}
   m_backGroundObject: {fileID: 973100993}
-  m_currentPatternSet: {fileID: 11400000, guid: 0013ec4cfe35336468b646037987bc54,
+  m_currentPatternSet: {fileID: 11400000, guid: 2f165072582df5d48aaad9138d292015,
     type: 2}
   m_actionPhase: 0
   currentEnemy: {fileID: 11400000, guid: 1c1c0eea4ec7a8144a594a968ac6a99c, type: 2}
   other: {fileID: 2026724690}
-  player_health: 10
-  enemy_health: 5
-  enemy_damage: 1
   duration: 30
   m_ghostBullets:
   - {fileID: 8812431901809321103, guid: 861d158125414e448ad747483a32a688, type: 3}

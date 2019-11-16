@@ -2,7 +2,6 @@ ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
     - BulletActor
-    - BulletVFX
     - Enemy_Health
     - GameManager
     - PatternScriptable
@@ -22,9 +21,15 @@ ScriptsOnlyBuild:
     - UnityEditor.Tilemaps.GridPalettes
     - UnityEditor.Tilemaps.SceneViewGridManager
     - UnityEditor.Tilemaps.TileDragAndDropManager
+    UnityEditor.Graphs.dll:
+    - UnityEditor.Graphs.AnimationBlendTree.Graph
+    - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
+    - UnityEditor.Graphs.AnimationStateMachine.Graph
+    - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
-    - UnityEditor.TestTools.TestRunner.TestListCacheData
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.StandaloneInputModule
@@ -55,15 +60,15 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9682}
+      Script: {instanceID: 9670}
     - Class: 114
-      Script: {instanceID: 9852}
+      Script: {instanceID: 9840}
     - Class: 114
-      Script: {instanceID: 9892}
+      Script: {instanceID: 9880}
     - Class: 114
-      Script: {instanceID: 10224}
+      Script: {instanceID: 10212}
     - Class: 114
-      Script: {instanceID: 11140}
+      Script: {instanceID: 11128}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -106,55 +111,53 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9682}
+      Script: {instanceID: 9670}
     - Class: 114
-      Script: {instanceID: 9726}
+      Script: {instanceID: 9714}
     - Class: 114
-      Script: {instanceID: 9744}
+      Script: {instanceID: 9732}
     - Class: 114
-      Script: {instanceID: 9754}
+      Script: {instanceID: 9742}
     - Class: 114
-      Script: {instanceID: 9800}
+      Script: {instanceID: 9788}
     - Class: 114
-      Script: {instanceID: 9852}
+      Script: {instanceID: 9840}
     - Class: 114
-      Script: {instanceID: 9892}
+      Script: {instanceID: 9880}
     - Class: 114
-      Script: {instanceID: 10074}
+      Script: {instanceID: 10062}
     - Class: 114
-      Script: {instanceID: 10224}
+      Script: {instanceID: 10212}
     - Class: 114
-      Script: {instanceID: 10228}
+      Script: {instanceID: 10216}
     - Class: 114
-      Script: {instanceID: 10294}
+      Script: {instanceID: 10282}
     - Class: 114
-      Script: {instanceID: 10512}
+      Script: {instanceID: 10500}
     - Class: 114
-      Script: {instanceID: 10622}
+      Script: {instanceID: 10610}
     - Class: 114
-      Script: {instanceID: 10664}
+      Script: {instanceID: 10652}
+    - Class: 114
+      Script: {instanceID: 10860}
     - Class: 114
       Script: {instanceID: 10872}
     - Class: 114
-      Script: {instanceID: 10884}
+      Script: {instanceID: 11104}
     - Class: 114
-      Script: {instanceID: 11116}
+      Script: {instanceID: 11128}
     - Class: 114
-      Script: {instanceID: 11140}
+      Script: {instanceID: 11324}
     - Class: 114
-      Script: {instanceID: 11336}
+      Script: {instanceID: 11332}
     - Class: 114
-      Script: {instanceID: 11344}
+      Script: {instanceID: 11384}
     - Class: 114
-      Script: {instanceID: 11396}
+      Script: {instanceID: 11394}
     - Class: 114
-      Script: {instanceID: 11406}
+      Script: {instanceID: 11498}
     - Class: 114
-      Script: {instanceID: 11510}
-    - Class: 114
-      Script: {instanceID: 11520}
-    - Class: 114
-      Script: {instanceID: 11662}
+      Script: {instanceID: 11508}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -189,15 +192,15 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9682}
+      Script: {instanceID: 9670}
     - Class: 114
-      Script: {instanceID: 9852}
+      Script: {instanceID: 9840}
     - Class: 114
-      Script: {instanceID: 9892}
+      Script: {instanceID: 9880}
     - Class: 114
-      Script: {instanceID: 10224}
+      Script: {instanceID: 10212}
     - Class: 114
-      Script: {instanceID: 11140}
+      Script: {instanceID: 11128}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -245,7 +248,7 @@ ScriptsOnlyBuild:
     className: TMP_Dropdown
   - hash:
       serializedVersion: 2
-      Hash: 1f09941a477f80c3b58ee824e6e96bc0
+      Hash: 202def68e14a949e5b7befaef577177c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayGrid
@@ -449,7 +452,7 @@ ScriptsOnlyBuild:
     className: SignalTrack
   - hash:
       serializedVersion: 2
-      Hash: 1f6d3d7b93a9378670a2aa523097c1ba
+      Hash: 914733f58a8cd3ea0ad6e338d3da872c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: StatsScriptable
@@ -711,12 +714,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: ff5703b157fe5c81fcd45d07a14cc434
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: BulletVFX
   platform: 5
   scenePathNames:
   - Assets/Scenes/Test Level.unity
