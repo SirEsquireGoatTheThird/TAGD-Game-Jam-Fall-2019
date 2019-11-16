@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayGrid : MonoBehaviour
 {
@@ -75,6 +76,23 @@ public class PlayGrid : MonoBehaviour
     private GameObject[] m_ghostBullets;
     private List<GameObject> m_spawnedGhostBullets = new List<GameObject>();
 
+    // VFX Stuff
+    [SerializeField]
+    private GameObject m_patternMadeVFX;
+    [SerializeField]
+    private GameObject m_smallVape;
+    [SerializeField]
+    private GameObject m_bigVape;
+
+    //End Game time
+    [SerializeField]
+    private float m_waitTime;
+
+    [SerializeField]
+    private Image m_enemyIcon;
+
+    private bool enemyDied = false;
+
 
     #region Struct creations
     // The node will act as grid points with data thats needed in each point.
@@ -121,21 +139,10 @@ public class PlayGrid : MonoBehaviour
 
     private void Update()
     {
-        if(enemy_health <= 0)
+        if(enemy_health <= 0 && !enemyDied)
         {
-            Debug.Log("Enemy Died");
-            i += 1;
-            if(i < 4)
-            {
-                currentEnemy = enemy[i];
-                enemy_health = currentEnemy.health;
-                enemy_damage = currentEnemy.damage;
-                duration = currentEnemy.attackTimer;
-                time = duration;
-                Debug.Log("Spawn Next Enemy");
-                Enemy_UI.health = enemy_health;
-                Enemy_UI.UpdateOrbValues(enemy_health);
-            }
+            StartCoroutine(NextLevel());
+            return;
         }
         if(player_health <= 0)
         {
@@ -170,6 +177,48 @@ public class PlayGrid : MonoBehaviour
         ResetPattern();
     }
 
+    private IEnumerator NextLevel()
+    {
+        enemyDied = true;
+        GameObject smolVape = Instantiate(m_smallVape, m_enemyIcon.transform.position, Quaternion.identity);
+
+        yield return new WaitForSeconds(2f);
+        Destroy(smolVape);
+
+        GameObject bigVape = Instantiate(m_bigVape, m_enemyIcon.transform.position, Quaternion.identity);
+        yield return new WaitForSeconds(1f);
+
+        i += 1;
+        if (i < 4)
+        {
+            currentEnemy = enemy[i];
+            enemy_health = currentEnemy.health;
+            enemy_damage = currentEnemy.damage;
+            duration = currentEnemy.attackTimer;
+            time = duration;
+            Enemy_UI.health = enemy_health;
+            Enemy_UI.UpdateOrbValues(enemy_health);
+            m_enemyIcon.sprite = enemy[i].icon;
+            for(int index = 0; index < m_bullets.Length; index++)
+            {
+                Destroy(m_bullets[index]);
+            }
+            //Reset grid occupence
+            for (int x = 0; x < m_gridWidth; x++)
+            {
+                for (int y = 0; y < m_gridHeight; y++)
+                {
+                    m_grid[x, y].isOccupied = false;
+                }
+            }
+            m_actionPhase = false;
+            enemyDied = false;
+            SpawnBullets();
+
+        }
+        Destroy(bigVape);
+
+    }
 
     #region Game Initilization
     private void SetScaleOfGridByScreenResolution()
@@ -432,6 +481,16 @@ public class PlayGrid : MonoBehaviour
                     bulletNotInPattern.inPattern = false;
                     bullet = bulletNotInPattern;
                     GameManager.Instance.PatternUsed.Invoke();
+
+                    //Spawn VFX of object
+                    GameObject vfx1 = Instantiate(m_patternMadeVFX, currentBullet.transform);
+                    GameObject vfx2 = Instantiate(m_patternMadeVFX, firstBullet.transform);
+                    GameObject vfx3 = Instantiate(m_patternMadeVFX, secondBullet.transform);
+
+                    Destroy(vfx1, 1f);
+                    Destroy(vfx2, 1f);
+                    Destroy(vfx3, 1f);
+
                 }
 
             }

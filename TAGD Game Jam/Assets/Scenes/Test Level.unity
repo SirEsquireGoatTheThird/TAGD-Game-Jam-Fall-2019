@@ -896,6 +896,14 @@ MonoBehaviour:
   - {fileID: 4080129211230225463, guid: e6b253c9d0fb31e468056480be63707b, type: 3}
   - {fileID: 2471241304459315838, guid: b17e9e9a2db812c449e19ecc608e3b7d, type: 3}
   - {fileID: 5551666925884358648, guid: e0312c4db3463cb4ab1003abef13eb05, type: 3}
+  m_patternMadeVFX: {fileID: 4079685128481291577, guid: 276464a180557274b94ad7418d233105,
+    type: 3}
+  m_smallVape: {fileID: 3587230832806158263, guid: 0f5b4a3214052f443a5da3df3ce9b187,
+    type: 3}
+  m_bigVape: {fileID: 7207194970552191187, guid: 066ce518b0e97134589f36cf4881b884,
+    type: 3}
+  m_waitTime: 3
+  m_enemyIcon: {fileID: 1487315178}
 --- !u!4 &217969622
 Transform:
   m_ObjectHideFlags: 0
@@ -950,7 +958,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5924665, y: 0.13585186}
   m_AnchorMax: {x: 0.84185416, y: 0.20600002}
-  m_AnchoredPosition: {x: -412, y: -49}
+  m_AnchoredPosition: {x: -412, y: -49.00006}
   m_SizeDelta: {x: -404, y: 28}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &328036137
@@ -3080,7 +3088,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.116209574, y: 0.0325926}
   m_AnchorMax: {x: 0.45064673, y: 0.12218518}
-  m_AnchoredPosition: {x: -3.000061, y: 5}
+  m_AnchoredPosition: {x: -3, y: 5}
   m_SizeDelta: {x: -2, y: 7}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1298340890

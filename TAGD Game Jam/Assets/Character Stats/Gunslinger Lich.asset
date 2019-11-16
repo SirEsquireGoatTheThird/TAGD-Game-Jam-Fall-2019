@@ -15,5 +15,4 @@ MonoBehaviour:
   health: 25
   damage: 2
   attackTimer: 80
-  enemyIcon: {fileID: -2469484084191693879, guid: fb70995af2bf9ea45ad9dd8080045104,
-    type: 3}
+  icon: {fileID: -2469484084191693879, guid: fb70995af2bf9ea45ad9dd8080045104, type: 3}
