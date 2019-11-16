@@ -35,7 +35,6 @@ public class BulletVFX : MonoBehaviour
     {
         if((animatior_comp.GetCurrentAnimatorStateInfo(0).IsName("shoot") && animatior_comp.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9) || animatior_comp.GetCurrentAnimatorStateInfo(0).IsName("Nothing"))
         {
-            Debug.Log(pattern_used_count);
             visible.enabled = false;
         }
     }
