@@ -134,6 +134,7 @@ public class PlayGrid : MonoBehaviour
                 time = duration;
                 Debug.Log("Spawn Next Enemy");
                 Enemy_UI.health = enemy_health;
+                Enemy_UI.UpdateOrbValues(enemy_health);
             }
         }
         if(player_health <= 0)
