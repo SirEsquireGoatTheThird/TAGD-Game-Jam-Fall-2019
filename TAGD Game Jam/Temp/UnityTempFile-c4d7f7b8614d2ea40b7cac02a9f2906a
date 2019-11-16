@@ -1,11 +1,14 @@
 /target:library
 /nowarn:0169
-/out:Temp/UnityEditor.UI.dll
+/out:Temp/Unity.2D.Sprite.Editor.dll
+/unsafe
 /debug:portable
 /optimize-
 /nostdlib+
 /preferreduilang:en-US
 /langversion:latest
+/reference:Library/ScriptAssemblies/UnityEditor.UI.dll
+/reference:Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll
 /reference:Library/ScriptAssemblies/UnityEngine.UI.dll
 /reference:Library/ScriptAssemblies/UnityEditor.TestRunner.dll
 /reference:Library/ScriptAssemblies/UnityEngine.TestRunner.dll
@@ -73,8 +76,9 @@
 /reference:"C:/Program Files/Unity/Hub/Editor/2019.2.8f1/Editor/Data/UnityExtensions/Unity/UnityVR/Editor/UnityEditor.VR.dll"
 /reference:"C:/Program Files/Unity/Hub/Editor/2019.2.8f1/Editor/Data/Managed/UnityEditor.Graphs.dll"
 /reference:"C:/Program Files/Unity/Hub/Editor/2019.2.8f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll"
-/reference:"C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll"
-/reference:"C:/Users/William/Documents/GitHub/TAGD-Game-Jam-Fall-2019/TAGD Game Jam/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll"
+/reference:"C:/Program Files/Unity/Hub/Editor/2019.2.8f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll"
+/reference:"C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/16.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll"
+/reference:"C:/Users/Erik/TAGD Github/TAGD Game Jam/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll"
 /reference:"C:/Program Files/Unity/Hub/Editor/2019.2.8f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll"
 /reference:"C:/Program Files/Unity/Hub/Editor/2019.2.8f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/System.dll"
 /reference:"C:/Program Files/Unity/Hub/Editor/2019.2.8f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/System.Core.dll"
@@ -287,38 +291,33 @@
 /define:ENABLE_LEGACY_INPUT_MANAGER
 /define:CSHARP_7_OR_LATER
 /define:CSHARP_7_3_OR_NEWER
-"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\EventSystem\EventSystemEditor.cs"
-"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\EventSystem\EventTriggerEditor.cs"
-"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\Properties\AssemblyInfo.cs"
-"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\AspectRatioFitterEditor.cs"
-"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\ButtonEditor.cs"
-"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\CanvasScalerEditor.cs"
-"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\ContentSizeFitterEditor.cs"
-"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\DropdownEditor.cs"
-"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\GraphicEditor.cs"
-"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\GridLayoutGroupEditor.cs"
-"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\HorizontalOrVerticalLayoutGroupEditor.cs"
-"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\ImageEditor.cs"
-"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\InputFieldEditor.cs"
-"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\InterceptedEventsPreview.cs"
-"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\LayoutElementEditor.cs"
-"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\LayoutPropertiesPreview.cs"
-"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\MaskEditor.cs"
-"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\MenuOptions.cs"
-"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\PrefabLayoutRebuilder.cs"
-"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\PropertyDrawers\AnimationTriggersDrawer.cs"
-"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\PropertyDrawers\ColorBlockDrawer.cs"
-"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\PropertyDrawers\DropdownOptionListDrawer.cs"
-"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\PropertyDrawers\FontDataDrawer.cs"
-"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\PropertyDrawers\NavigationDrawer.cs"
-"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\PropertyDrawers\SpriteStateDrawer.cs"
-"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\RawImageEditor.cs"
-"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\RectMask2DEditor.cs"
-"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\ScrollbarEditor.cs"
-"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\ScrollRectEditor.cs"
-"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\SelectableEditor.cs"
-"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\SelfControllerEditor.cs"
-"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\SliderEditor.cs"
-"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\SpriteDrawUtility.cs"
-"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\TextEditor.cs"
-"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.ugui\Editor\UI\ToggleEditor.cs"
+"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.2d.sprite\Editor\AssemblyInfo.cs"
+"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.2d.sprite\Editor\Interface\IAssetDatabase.cs"
+"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.2d.sprite\Editor\Interface\IEvent.cs"
+"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.2d.sprite\Editor\Interface\IGL.cs"
+"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.2d.sprite\Editor\Interface\IGUIUtility.cs"
+"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.2d.sprite\Editor\Interface\IHandles.cs"
+"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.2d.sprite\Editor\Interface\ISpriteEditorDataProvider.cs"
+"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.2d.sprite\Editor\Interface\ITexture.cs"
+"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.2d.sprite\Editor\Interface\IUndoSystem.cs"
+"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.2d.sprite\Editor\ShapeEditor\ShapeEditor.cs"
+"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.2d.sprite\Editor\ShapeEditor\ShapeEditorRectSelection.cs"
+"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.2d.sprite\Editor\SpriteEditor\SpriteEditorHandles.cs"
+"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.2d.sprite\Editor\SpriteEditor\SpriteEditorMenu.cs"
+"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.2d.sprite\Editor\SpriteEditor\SpriteEditorUtility.cs"
+"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.2d.sprite\Editor\SpriteEditor\SpriteEditorWindow.cs"
+"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.2d.sprite\Editor\SpriteEditor\SpriteRect.cs"
+"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.2d.sprite\Editor\SpriteEditor\SpriteUtilityWindow.cs"
+"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.2d.sprite\Editor\SpriteEditorModule\ISpriteEditorModule.cs"
+"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.2d.sprite\Editor\SpriteEditorModule\SpriteEditorData.cs"
+"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.2d.sprite\Editor\SpriteEditorModule\SpriteFrameModule\SpriteFrameModule.cs"
+"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.2d.sprite\Editor\SpriteEditorModule\SpriteFrameModule\SpriteFrameModuleBase.cs"
+"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.2d.sprite\Editor\SpriteEditorModule\SpriteFrameModule\SpriteFrameModuleBaseView.cs"
+"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.2d.sprite\Editor\SpriteEditorModule\SpriteFrameModule\SpriteFrameModuleView.cs"
+"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.2d.sprite\Editor\SpriteEditorModule\SpriteFrameModule\SpritePolygonModeModule.cs"
+"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.2d.sprite\Editor\SpriteEditorModule\SpriteFrameModule\SpritePolygonModeModuleView.cs"
+"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.2d.sprite\Editor\SpriteEditorModule\SpriteOutlineModule.cs"
+"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.2d.sprite\Editor\SpriteEditorModule\SpritePhysicsShapeModule.cs"
+"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.2d.sprite\Editor\SpriteEditorModule\SpriteSecondaryTexturesModule.cs"
+"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.2d.sprite\Editor\SpriteEditorModule\TextureImporterDataProvider.cs"
+"C:\Program Files\Unity\Hub\Editor\2019.2.8f1\Editor\Data\Resources\PackageManager\BuiltInPackages\com.unity.2d.sprite\Editor\SpriteEditorModule\TextureImporterDataProviderImplementation.cs"

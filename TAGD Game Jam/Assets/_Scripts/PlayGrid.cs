@@ -555,6 +555,13 @@ public class PlayGrid : MonoBehaviour
             {
                 m_firstHitIndex = WorldPosToIndex(hitInfo.transform.position);
 
+                foreach (GameObject obj in m_spawnedGhostBullets)
+                {
+                    Destroy(obj);
+                }
+
+                m_spawnedGhostBullets.Clear();
+
                 int[] upIndex = new int[]
                 {
                 index[0],
