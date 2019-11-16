@@ -21,11 +21,18 @@ public class Enemy_Health : MonoBehaviour
     {
         m_healthSets = Mathf.FloorToInt(health / 5);
         m_currentTotalHealth = health;
+        ShowHealthOrbs();
     }
 
     private void ShowHealthOrbs()
     {
-
+       for(int bulletNum = 0; bulletNum < m_healthSets; bulletNum++)
+        {
+            for(int i = 0; i < healthOrbs.Length; i++)
+            {
+                healthOrbs[i].enabled = true;
+            }
+        }
     }
 
     public void Damage(int damage)
