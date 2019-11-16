@@ -67,6 +67,7 @@
     <Compile Include="Assets\_Scripts\Enemy_Health.cs" />
     <Compile Include="Assets\_Scripts\GameManager.cs" />
     <Compile Include="Assets\_Scripts\IBullet.cs" />
+    <Compile Include="Assets\_Scripts\Menu.cs" />
     <Compile Include="Assets\_Scripts\PatternScriptable.cs" />
     <Compile Include="Assets\_Scripts\PatternSetScriptable.cs" />
     <Compile Include="Assets\_Scripts\PatternUpdate.cs" />
