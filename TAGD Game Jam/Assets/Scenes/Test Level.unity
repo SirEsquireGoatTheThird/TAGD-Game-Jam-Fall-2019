@@ -815,7 +815,11 @@ MonoBehaviour:
   m_currentPatternSet: {fileID: 11400000, guid: 0013ec4cfe35336468b646037987bc54,
     type: 2}
   m_actionPhase: 0
-  currentEnemy: {fileID: 11400000, guid: 1c1c0eea4ec7a8144a594a968ac6a99c, type: 2}
+  enemy:
+  - {fileID: 11400000, guid: 1c1c0eea4ec7a8144a594a968ac6a99c, type: 2}
+  - {fileID: 11400000, guid: 39de8572f33b871448e5db9ebf425692, type: 2}
+  - {fileID: 11400000, guid: 1cd92ae7e857d3049abec1f954b411bd, type: 2}
+  - {fileID: 11400000, guid: 71a4a08bfcc07ff4196480808bebf354, type: 2}
   other: {fileID: 2026724690}
   player_health: 10
   enemy_health: 5
@@ -2858,7 +2862,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.116209574, y: 0.0325926}
   m_AnchorMax: {x: 0.45064673, y: 0.12218518}
-  m_AnchoredPosition: {x: -3, y: 5}
+  m_AnchoredPosition: {x: -3.000061, y: 5}
   m_SizeDelta: {x: -2, y: 7}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1298340890
