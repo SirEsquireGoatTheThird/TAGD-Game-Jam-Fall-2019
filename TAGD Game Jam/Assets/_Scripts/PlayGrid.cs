@@ -752,7 +752,7 @@ public class PlayGrid : MonoBehaviour
         }
         ResetBulletsPattern();
 
-        /*
+      
         if(runTime > 0)
         {
             BulletActor bulletReference;
@@ -770,7 +770,7 @@ public class PlayGrid : MonoBehaviour
 
             }
         }
-        */
+        
         StartCoroutine(patternTime());
 
         m_actionPhase = false;

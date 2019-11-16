@@ -11,6 +11,21 @@ public class Enemy_Health : MonoBehaviour
     public Image[] hearts;
     public Sprite fullHeart;
     public Sprite emptyHeart;
+    private int m_healthSets;
+    private int m_currentHealthSet;
+    private int m_currenttotalHealth;
+
+
+    private void Start()
+    {
+        m_healthSets = Mathf.FloorToInt(health / 5);
+    }
+
+    private void LoseHealthSet()
+    {
+
+    }
+
 
 
     public void Damage(int damage)
