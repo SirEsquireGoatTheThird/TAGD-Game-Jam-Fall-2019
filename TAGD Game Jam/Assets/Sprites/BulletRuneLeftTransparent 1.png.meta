@@ -1,55 +1,55 @@
 fileFormatVersion: 2
-guid: 632bac7c41b7d024fb35932b71148bfa
+guid: cc63f84cbe11acd4bac1b63462951148
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2222682521485567659
-    second: BulletRuneLeftTransparent_0
+      213: -6659757604855844216
+    second: BulletRuneLeftTransparent 1_0
   - first:
-      213: -250663213416744704
-    second: BulletRuneLeftTransparent_1
+      213: 4122386874584619205
+    second: BulletRuneLeftTransparent 1_1
   - first:
-      213: -1328465103106833036
-    second: BulletRuneLeftTransparent_2
+      213: -8066678248816741871
+    second: BulletRuneLeftTransparent 1_2
   - first:
-      213: -6094634637790328968
-    second: BulletRuneLeftTransparent_3
+      213: 9106441880985517207
+    second: BulletRuneLeftTransparent 1_3
   - first:
-      213: 616875163617404516
-    second: BulletRuneLeftTransparent_4
+      213: -7703362584517862246
+    second: BulletRuneLeftTransparent 1_4
   - first:
-      213: -1855804338154301684
-    second: BulletRuneLeftTransparent_5
+      213: 6961054111994135986
+    second: BulletRuneLeftTransparent 1_5
   - first:
-      213: 2622746366268228288
-    second: BulletRuneLeftTransparent_6
+      213: -7564316235146559933
+    second: BulletRuneLeftTransparent 1_6
   - first:
-      213: 3043308724917108611
-    second: BulletRuneLeftTransparent_7
+      213: 3223287850296953056
+    second: BulletRuneLeftTransparent 1_7
   - first:
-      213: 5941029485427409622
-    second: BulletRuneLeftTransparent_8
+      213: -3594523539699193934
+    second: BulletRuneLeftTransparent 1_8
   - first:
-      213: 193493149857659901
-    second: BulletRuneLeftTransparent_9
+      213: 5015423218164625145
+    second: BulletRuneLeftTransparent 1_9
   - first:
-      213: 4076992648397541389
-    second: BulletRuneLeftTransparent_10
+      213: -3705737555640764133
+    second: BulletRuneLeftTransparent 1_10
   - first:
-      213: -7817016754669172930
-    second: BulletRuneLeftTransparent_11
+      213: -4108516469909688198
+    second: BulletRuneLeftTransparent 1_11
   - first:
-      213: -4737525390625961516
-    second: BulletRuneLeftTransparent_12
+      213: -8026336851833757342
+    second: BulletRuneLeftTransparent 1_12
   - first:
-      213: -8565231897663623646
-    second: BulletRuneLeftTransparent_13
+      213: 1940023093466508332
+    second: BulletRuneLeftTransparent 1_13
   - first:
-      213: -4512732984997313502
-    second: BulletRuneLeftTransparent_14
+      213: -5071138853565059009
+    second: BulletRuneLeftTransparent 1_14
   - first:
-      213: 3540445828572982488
-    second: BulletRuneLeftTransparent_15
+      213: 4695412513096141720
+    second: BulletRuneLeftTransparent 1_15
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
-    crunchedCompression: 1
+    crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
@@ -125,7 +125,7 @@ TextureImporter:
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
-    crunchedCompression: 1
+    crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
@@ -137,7 +137,7 @@ TextureImporter:
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
-    crunchedCompression: 1
+    crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
@@ -146,7 +146,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BulletRuneLeftTransparent_0
+      name: BulletRuneLeftTransparent 1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -160,14 +160,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce2dfacfd8ec53448a0901815f79970e
-      internalID: 2222682521485567659
+      spriteID: 9b91f66202fed5e4d95954acc81151bb
+      internalID: -6659757604855844216
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BulletRuneLeftTransparent_1
+      name: BulletRuneLeftTransparent 1_1
       rect:
         serializedVersion: 2
         x: 32
@@ -181,14 +181,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d5a414e29c39b7e4e91b4b567b08fa7b
-      internalID: -250663213416744704
+      spriteID: 6449ed031f756474598f72ac07024ac6
+      internalID: 4122386874584619205
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BulletRuneLeftTransparent_2
+      name: BulletRuneLeftTransparent 1_2
       rect:
         serializedVersion: 2
         x: 64
@@ -202,14 +202,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3192646cf8f3b5c47ba569ec7abac1d6
-      internalID: -1328465103106833036
+      spriteID: b47d0782bcd5478408664a9383259ab1
+      internalID: -8066678248816741871
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BulletRuneLeftTransparent_3
+      name: BulletRuneLeftTransparent 1_3
       rect:
         serializedVersion: 2
         x: 96
@@ -223,14 +223,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 074f49642f64a534fa3211890bd0180b
-      internalID: -6094634637790328968
+      spriteID: 6bdfaabd2781f5d47b1276ab4994f592
+      internalID: 9106441880985517207
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BulletRuneLeftTransparent_4
+      name: BulletRuneLeftTransparent 1_4
       rect:
         serializedVersion: 2
         x: 128
@@ -244,14 +244,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b089cb1411b6c614eade21158c38b6eb
-      internalID: 616875163617404516
+      spriteID: c63826073f6099949b8b90245db95254
+      internalID: -7703362584517862246
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BulletRuneLeftTransparent_5
+      name: BulletRuneLeftTransparent 1_5
       rect:
         serializedVersion: 2
         x: 160
@@ -265,14 +265,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cc6fb4d8bdb23b442a7eeb64b65d3274
-      internalID: -1855804338154301684
+      spriteID: d492da4782d21dc4fade4ddfb55694ce
+      internalID: 6961054111994135986
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BulletRuneLeftTransparent_6
+      name: BulletRuneLeftTransparent 1_6
       rect:
         serializedVersion: 2
         x: 192
@@ -286,14 +286,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eb2038c257eaee946a669ef0b2bd02cf
-      internalID: 2622746366268228288
+      spriteID: 6f4c81f8bf615f24682c09911b3cb003
+      internalID: -7564316235146559933
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BulletRuneLeftTransparent_7
+      name: BulletRuneLeftTransparent 1_7
       rect:
         serializedVersion: 2
         x: 224
@@ -307,14 +307,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fcdb2db9851ef7341951cee5e4f2c10d
-      internalID: 3043308724917108611
+      spriteID: ee37d5afc9184b84191f658028e450a2
+      internalID: 3223287850296953056
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BulletRuneLeftTransparent_8
+      name: BulletRuneLeftTransparent 1_8
       rect:
         serializedVersion: 2
         x: 256
@@ -328,14 +328,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cb8bafbbdab697d408118142b2b21360
-      internalID: 5941029485427409622
+      spriteID: dac2f3f896852ca44b76f74c30cb13f5
+      internalID: -3594523539699193934
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BulletRuneLeftTransparent_9
+      name: BulletRuneLeftTransparent 1_9
       rect:
         serializedVersion: 2
         x: 288
@@ -349,14 +349,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 082c663246a7f634da18895e781ffa72
-      internalID: 193493149857659901
+      spriteID: eb981c582f496c7469ea0b2576595a49
+      internalID: 5015423218164625145
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BulletRuneLeftTransparent_10
+      name: BulletRuneLeftTransparent 1_10
       rect:
         serializedVersion: 2
         x: 320
@@ -370,14 +370,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ec1dada5902733946873f15b8d7bb3eb
-      internalID: 4076992648397541389
+      spriteID: c2d10e6f5e2f8e146ac265ae74b249e9
+      internalID: -3705737555640764133
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BulletRuneLeftTransparent_11
+      name: BulletRuneLeftTransparent 1_11
       rect:
         serializedVersion: 2
         x: 352
@@ -391,14 +391,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 75b16fd3df0fb23478a9b3c34a2eebe2
-      internalID: -7817016754669172930
+      spriteID: 4743b641b0d70cc41b61b3f0c7685a84
+      internalID: -4108516469909688198
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BulletRuneLeftTransparent_12
+      name: BulletRuneLeftTransparent 1_12
       rect:
         serializedVersion: 2
         x: 384
@@ -412,14 +412,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0621b3bd6f43c9a44a713a408eaaa06e
-      internalID: -4737525390625961516
+      spriteID: 5e41c1503d1063543b06625d41eeca99
+      internalID: -8026336851833757342
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BulletRuneLeftTransparent_13
+      name: BulletRuneLeftTransparent 1_13
       rect:
         serializedVersion: 2
         x: 416
@@ -433,14 +433,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c260596aa5b36ac4c8b772dfce2f2da1
-      internalID: -8565231897663623646
+      spriteID: cb64da18588ec424bbe73e73967a4537
+      internalID: 1940023093466508332
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BulletRuneLeftTransparent_14
+      name: BulletRuneLeftTransparent 1_14
       rect:
         serializedVersion: 2
         x: 448
@@ -454,14 +454,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6cee01de90233b942ba136a383bed61d
-      internalID: -4512732984997313502
+      spriteID: fbf823e46c0132a44a3587bb1f8c3af0
+      internalID: -5071138853565059009
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BulletRuneLeftTransparent_15
+      name: BulletRuneLeftTransparent 1_15
       rect:
         serializedVersion: 2
         x: 480
@@ -475,8 +475,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0199cb7140222c94b83457fdb12556c1
-      internalID: 3540445828572982488
+      spriteID: 7c0a638715773bd46804717fb7271ad9
+      internalID: 4695412513096141720
       vertices: []
       indices: 
       edges: []

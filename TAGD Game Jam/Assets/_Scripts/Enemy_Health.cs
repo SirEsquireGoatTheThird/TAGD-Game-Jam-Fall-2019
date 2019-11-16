@@ -9,9 +9,24 @@ public class Enemy_Health : MonoBehaviour
     public int numOfHearts;
 
     public Image[] hearts;
+    public Image[] healthOrbs;
     public Sprite fullHeart;
     public Sprite emptyHeart;
+    private int m_healthSets;
+    private int m_currentHealthSet;
+    private int m_currentTotalHealth;
 
+
+    private void Start()
+    {
+        m_healthSets = Mathf.FloorToInt(health / 5);
+        m_currentTotalHealth = health;
+    }
+
+    private void ShowHealthOrbs()
+    {
+
+    }
 
     public void Damage(int damage)
     {
