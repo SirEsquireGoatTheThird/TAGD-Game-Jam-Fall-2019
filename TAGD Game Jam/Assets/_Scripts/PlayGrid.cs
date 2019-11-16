@@ -115,6 +115,8 @@ public class PlayGrid : MonoBehaviour
         enemy_damage = currentEnemy.damage;
         duration = currentEnemy.attackTimer;
         time = duration;
+        Enemy_UI.health = enemy_health;
+        Enemy_UI.UpdateOrbValues(enemy_health);
     }
 
     private void Update()
