@@ -8,19 +8,16 @@ using UnityEngine.SceneManagement;
 public class PlayGrid : MonoBehaviour
 {
     // Grid Initialization Stuff
-    [SerializeField]
     private int m_gridHeight = 3;
-    [SerializeField]
     private int m_gridWidth = 3;
     private Node[,] m_grid;
-    [SerializeField]
     private float m_gridScale = 1;
 
 
     // Raycast Stuff
-    int[] m_firstHitIndex;
-    bool m_bulletSelected = false;
-    RaycastHit2D m_secondHit;
+    private int[] m_firstHitIndex;
+    private bool m_bulletSelected = false;
+    private RaycastHit2D m_secondHit;
     private Camera m_mainCamera;
 
     // Bullet Stuff
@@ -555,6 +552,13 @@ public class PlayGrid : MonoBehaviour
             {
                 m_firstHitIndex = WorldPosToIndex(hitInfo.transform.position);
 
+                foreach (GameObject obj in m_spawnedGhostBullets)
+                {
+                    Destroy(obj);
+                }
+
+                m_spawnedGhostBullets.Clear();
+
                 int[] upIndex = new int[]
                 {
                 index[0],
@@ -748,6 +752,7 @@ public class PlayGrid : MonoBehaviour
         }
         ResetBulletsPattern();
 
+        /*
         if(runTime > 0)
         {
             BulletActor bulletReference;
@@ -765,6 +770,7 @@ public class PlayGrid : MonoBehaviour
 
             }
         }
+        */
         StartCoroutine(patternTime());
 
         m_actionPhase = false;
