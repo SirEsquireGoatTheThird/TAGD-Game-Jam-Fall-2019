@@ -13,7 +13,6 @@ public class Enemy_Health : MonoBehaviour
     public Sprite fullHeart;
     public Sprite emptyHeart;
     private int m_healthSets;
-    private int m_currentHealthSet;
     private int m_currentTotalHealth;
     private int m_currentHealthInSet;
 
@@ -75,8 +74,15 @@ public class Enemy_Health : MonoBehaviour
         ShowHealthOrbs();
     }
 
-    public void UpdateOrbValues()
+    public void UpdateOrbValues(int health)
     {
-
+        m_currentTotalHealth = health;
+        m_healthSets = Mathf.FloorToInt(m_currentTotalHealth / 5);
+        m_healthSets--;
+        ShowHealthOrbs();
+        for(int i = 0; i < hearts.Length; i++)
+        {
+            hearts[i].sprite = fullHeart;
+        }
     }
 }

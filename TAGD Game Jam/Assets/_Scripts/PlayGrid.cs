@@ -115,6 +115,8 @@ public class PlayGrid : MonoBehaviour
         enemy_damage = currentEnemy.damage;
         duration = currentEnemy.attackTimer;
         time = duration;
+        Enemy_UI.health = enemy_health;
+        Enemy_UI.UpdateOrbValues(enemy_health);
     }
 
     private void Update()
@@ -132,6 +134,7 @@ public class PlayGrid : MonoBehaviour
                 time = duration;
                 Debug.Log("Spawn Next Enemy");
                 Enemy_UI.health = enemy_health;
+                Enemy_UI.UpdateOrbValues(enemy_health);
             }
         }
         if(player_health <= 0)
@@ -768,8 +771,16 @@ public class PlayGrid : MonoBehaviour
         }
         ResetBulletsPattern();
 
-      
-        if(runTime > 0)
+        for (int i = 0; i < m_bullets.Length; i++)
+        {
+            SpriteRenderer bulletReference;
+            bulletReference = m_bullets[i].GetComponent<SpriteRenderer>();
+            bulletReference.color = Color.grey;
+
+        }
+
+
+        if (runTime > 0)
         {
             BulletActor bulletReference;
             for (int i = 0; i < m_bullets.Length; i++)
@@ -786,7 +797,15 @@ public class PlayGrid : MonoBehaviour
 
             }
         }
-        
+
+        for (int i = 0; i < m_bullets.Length; i++)
+        {
+            SpriteRenderer bulletReference;
+            bulletReference = m_bullets[i].GetComponent<SpriteRenderer>();
+            bulletReference.color = Color.white;
+
+        }
+
         StartCoroutine(patternTime());
 
         m_actionPhase = false;
