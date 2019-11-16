@@ -7,16 +7,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7647693283557645452, guid: b8ea939299459b54483585f2fd2881c2,
+    - target: {fileID: 2094273363759635210, guid: b8ea939299459b54483585f2fd2881c2,
         type: 3}
-      propertyPath: m_Name
-      value: Bullet 1 Ghost
-      objectReference: {fileID: 0}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 1747c1e23c1026643b0b216aa55cec62, type: 2}
     - target: {fileID: 4537767209373994819, guid: b8ea939299459b54483585f2fd2881c2,
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 98399938247776434, guid: 0e96f46730e12b847b69529fdfa2996c,
+      objectReference: {fileID: 7644404425020612714, guid: 8f85a2fcb72f096429734f2137eaf39a,
         type: 3}
     - target: {fileID: 4537767209373994819, guid: b8ea939299459b54483585f2fd2881c2,
         type: 3}
@@ -32,6 +32,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7647693283557645452, guid: b8ea939299459b54483585f2fd2881c2,
+        type: 3}
+      propertyPath: m_Name
+      value: Bullet 1 Ghost
       objectReference: {fileID: 0}
     - target: {fileID: 2567565075304857520, guid: b8ea939299459b54483585f2fd2881c2,
         type: 3}
@@ -88,11 +93,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2094273363759635210, guid: b8ea939299459b54483585f2fd2881c2,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 1747c1e23c1026643b0b216aa55cec62, type: 2}
     m_RemovedComponents:
     - {fileID: -4439090574800165282, guid: b8ea939299459b54483585f2fd2881c2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b8ea939299459b54483585f2fd2881c2, type: 3}
