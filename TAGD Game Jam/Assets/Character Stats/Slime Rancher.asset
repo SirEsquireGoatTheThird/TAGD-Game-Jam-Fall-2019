@@ -15,4 +15,4 @@ MonoBehaviour:
   health: 20
   damage: 1
   attackTimer: 80
-  icon: {fileID: 21300000, guid: 7a94dbcb6fed1bf458dd3e0aaf521679, type: 3}
+  icon: {fileID: 21300000, guid: fca070d0a95514c45a915bf1d64010c2, type: 3}

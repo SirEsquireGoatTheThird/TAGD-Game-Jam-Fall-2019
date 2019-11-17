@@ -49,6 +49,8 @@ public class PlayGrid : MonoBehaviour
     [HideInInspector]
     public Pattern[] patterns = new Pattern[3];
     private int patternCount = 0;
+    [SerializeField]
+    private PatternSetScriptable[] m_patternSets;
 
     [SerializeField]
     private bool m_actionPhase = false;
@@ -114,6 +116,7 @@ public class PlayGrid : MonoBehaviour
 
     private void Start()
     {
+        m_currentPatternSet = m_patternSets[i];
         ///////////
         currentEnemy = enemy[0];
         ///////////
@@ -189,7 +192,7 @@ public class PlayGrid : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         i += 1;
-        if (i < 4)
+        if (i < enemy.Length)
         {
             currentEnemy = enemy[i];
             enemy_health = currentEnemy.health;
@@ -199,6 +202,7 @@ public class PlayGrid : MonoBehaviour
             Enemy_UI.health = enemy_health;
             Enemy_UI.UpdateOrbValues(enemy_health);
             m_enemyIcon.sprite = enemy[i].icon;
+            GameManager.Instance.NextEnemy.Invoke();
             for(int index = 0; index < m_bullets.Length; index++)
             {
                 Destroy(m_bullets[index]);
@@ -214,6 +218,11 @@ public class PlayGrid : MonoBehaviour
             m_actionPhase = false;
             enemyDied = false;
             SpawnBullets();
+
+            //Change the pattern set
+            m_currentPatternSet = m_patternSets[i];
+            CreatePatternStructs();
+            GameManager.Instance.UpdatePatternUI.Invoke();
 
         }
         Destroy(bigVape);

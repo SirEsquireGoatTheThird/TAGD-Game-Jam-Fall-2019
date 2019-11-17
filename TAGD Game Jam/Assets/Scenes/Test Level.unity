@@ -880,11 +880,19 @@ MonoBehaviour:
   m_backGroundObject: {fileID: 973100993}
   m_currentPatternSet: {fileID: 11400000, guid: 2f165072582df5d48aaad9138d292015,
     type: 2}
+  m_patternSets:
+  - {fileID: 11400000, guid: 2f165072582df5d48aaad9138d292015, type: 2}
+  - {fileID: 11400000, guid: 058dfe06fa8c1534abf240dbaaac57e9, type: 2}
+  - {fileID: 11400000, guid: cfa90a6c524f3774fa0e7df0d246ffa7, type: 2}
+  - {fileID: 11400000, guid: 98c2db3d663d4d74cb7cf70ff6b4f7a2, type: 2}
+  - {fileID: 11400000, guid: 0013ec4cfe35336468b646037987bc54, type: 2}
+  - {fileID: 11400000, guid: 2a223c9f1f0e2a74e80f33367c55bb27, type: 2}
   m_actionPhase: 0
   enemy:
   - {fileID: 11400000, guid: 1c1c0eea4ec7a8144a594a968ac6a99c, type: 2}
   - {fileID: 11400000, guid: 39de8572f33b871448e5db9ebf425692, type: 2}
   - {fileID: 11400000, guid: 1cd92ae7e857d3049abec1f954b411bd, type: 2}
+  - {fileID: 11400000, guid: b7da2f9304ac76647b5f67d33d3e1ad9, type: 2}
   - {fileID: 11400000, guid: 71a4a08bfcc07ff4196480808bebf354, type: 2}
   other: {fileID: 2026724690}
   player_health: 10
@@ -958,7 +966,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5924665, y: 0.13585186}
   m_AnchorMax: {x: 0.84185416, y: 0.20600002}
-  m_AnchoredPosition: {x: -412, y: -49.00006}
+  m_AnchoredPosition: {x: -412, y: -49}
   m_SizeDelta: {x: -404, y: 28}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &328036137
@@ -2387,6 +2395,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   PlayerDamaged:
+    m_PersistentCalls:
+      m_Calls: []
+  NextEnemy:
     m_PersistentCalls:
       m_Calls: []
 --- !u!4 &844732972
@@ -4645,6 +4656,8 @@ MonoBehaviour:
   - {fileID: 1772390216}
   fullHeart: {fileID: 21300000, guid: c587e6648cee03f43b07d08c43927f96, type: 3}
   emptyHeart: {fileID: 21300000, guid: 8f88170f810ca4e4f8d2b45b046599b2, type: 3}
+  m_brokenOrb: {fileID: 21300000, guid: bb9f3ec1cd47a6c4c8e85b5d5f0a324f, type: 3}
+  m_healthOrb: {fileID: 21300000, guid: 200f459f716b1414f832b1743ad47511, type: 3}
 --- !u!114 &2026724698
 MonoBehaviour:
   m_ObjectHideFlags: 0
