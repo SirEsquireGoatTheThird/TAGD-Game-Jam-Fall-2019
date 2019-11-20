@@ -226,7 +226,9 @@ public class PlayGrid : MonoBehaviour
 
         }
         Destroy(bigVape);
-
+        player_health += 5;
+        player_health = Mathf.Clamp(player_health, 0, 10);
+        Health_UI.SetHealth(player_health);
     }
 
     #region Game Initilization

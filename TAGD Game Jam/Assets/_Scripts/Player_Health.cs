@@ -18,9 +18,20 @@ public class Player_Health : MonoBehaviour
         GameManager.Instance.PlayerDamaged.Invoke();
         health -= damage;
 
+        UpdateHearts(health);
+    }
+
+    public void SetHealth(int newhealth)
+    {
+        health = newhealth;
+        UpdateHearts(health);
+    }
+
+    private void UpdateHearts(int currentHealth)
+    {
         for (int i = 0; i < hearts.Length; i++)
         {
-            if (i < (health))
+            if (i < (currentHealth))
             {
                 hearts[i].sprite = fullHeart;
             }
