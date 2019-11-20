@@ -17,6 +17,7 @@ public class Timer : MonoBehaviour
         duration = m_grid.duration;
         GameManager.Instance.UpdateTimeDuration.AddListener(UpdateTimer);
         time = duration;
+        GameManager.Instance.NextEnemy.AddListener(ResetTimer);
     }
 
     public void Update()
@@ -40,5 +41,11 @@ public class Timer : MonoBehaviour
     private void UpdateTimer()
     {
         time = Mathf.Clamp(time - 5, 0, duration);
+    }
+
+    private void ResetTimer()
+    {
+        duration = m_grid.duration;
+        time = duration;
     }
 }

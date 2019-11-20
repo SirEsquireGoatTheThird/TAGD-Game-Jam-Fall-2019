@@ -13,6 +13,8 @@ public class BulletActor : MonoBehaviour, IBullet
     public bool inPosition;
     public int Speed;
     private int m_indexInArray;
+    private int[] m_initalIndexOnGrid;
+    private Vector3 m_initalPosition;
 
     public Vector2Int direction
     {
@@ -64,6 +66,28 @@ public class BulletActor : MonoBehaviour, IBullet
         set
         {
             m_inPattern = value;
+        }
+    }
+    public Vector3 InitialPosition
+    {
+        get
+        {
+            return m_initalPosition;
+        }
+        set
+        {
+            m_initalPosition = value;
+        }
+    }
+    public int[] InitialIndexOnGrid
+    {
+        get
+        {
+            return m_initalIndexOnGrid;
+        }
+        set
+        {
+            m_initalIndexOnGrid = value;
         }
     }
 

@@ -15,4 +15,4 @@ MonoBehaviour:
   health: 10
   damage: 1
   attackTimer: 70
-  enemyIcon: {fileID: 21300000, guid: 109f2bd7ed7ca974481ff83c856ec4c5, type: 3}
+  icon: {fileID: 21300000, guid: 109f2bd7ed7ca974481ff83c856ec4c5, type: 3}

@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     public UnityEvent UnlockPattern;
     public UnityEvent UpdateTimeDuration;
     public UnityEvent PlayerDamaged;
-
+    public UnityEvent NextEnemy;
 
     private void Awake()
     {
@@ -50,6 +50,10 @@ public class GameManager : MonoBehaviour
         if (PlayerDamaged == null)
         {
             PlayerDamaged = new UnityEvent();
+        }
+        if (NextEnemy == null)
+        {
+            NextEnemy = new UnityEvent();
         }
     }
 
