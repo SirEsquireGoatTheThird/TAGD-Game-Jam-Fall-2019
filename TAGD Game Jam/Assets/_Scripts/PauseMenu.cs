@@ -39,7 +39,7 @@ public class PauseMenu : MonoBehaviour
 
     public void LoadMenu()
     {
-        Debug.Log("Main Menu");
+        SceneManager.LoadScene("Menu");
     }
 
     public void QuitGame()

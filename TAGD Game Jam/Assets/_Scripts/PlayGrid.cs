@@ -850,40 +850,20 @@ public class PlayGrid : MonoBehaviour
 
         if (runTime > 0)
         {
-            // This is the function I need to change to instead move the bullets that can currently move to the next position
-            bool[] canMove = new bool[]
-            {
-                false,
-                false,
-                false,
-                false
-            };
             BulletActor bulletReference;
             for (int i = 0; i < m_bullets.Length; i++)
             {
                 bulletReference = m_bullets[i].GetComponent<BulletActor>();
-                if(CanBulletMoveThere(bulletReference, bulletReference.direction))
+                DirectionMove(bulletReference, bulletReference.direction);
+                if (bulletReference != null)
                 {
-                    canMove[i] = true;
-                }
-            }
-            for(int i = 0; i < canMove.Length; i++)
-            {
-                if(canMove[i])
-                {
-                    bulletReference = m_bullets[i].GetComponent<BulletActor>();
-                    DirectionMove(bulletReference, bulletReference.direction);
-                    if (bulletReference != null)
+                    while (!bulletReference.inPosition)
                     {
-                        while (!bulletReference.inPosition)
-                        {
-                            yield return null;
-                        }
+                        yield return null;
                     }
                 }
-                
-            }
 
+            }
         }
 
         for (int i = 0; i < m_bullets.Length; i++)
@@ -898,30 +878,26 @@ public class PlayGrid : MonoBehaviour
 
         m_actionPhase = false;
     }
-    private bool CanBulletMoveThere(BulletActor bullet, Vector2Int direc = new Vector2Int())
+    private IEnumerator WaitForBullet(BulletActor bullet)
     {
-        if (bullet == null || bullet.inPattern)
+        while(!bullet.inPosition)
         {
-            return false;
+            yield return null;
         }
-
-
-        // Apply vector difference of indexs on grid
-        int newXIndex = bullet.indexOnGrid[0] + direc.x;
-        int newYIndex = bullet.indexOnGrid[1] + direc.y;
-
-        // This code if block is for wrapping of the bullet
-        int[] wrappedIndex = WrapIndex(newXIndex, newYIndex);
-
-
-
-        // Don't let the bullet move if the space it wants to move to is occupied
-        if (m_grid[wrappedIndex[0], wrappedIndex[1]].isOccupied)
+    }
+    private BulletActor WhichBulletIsMoving()
+    {
+        BulletActor bulletReference;
+        for (int i = 0; i < m_bullets.Length; i++)
         {
-            return false;
-        }
+            bulletReference = m_bullets[i].GetComponent<BulletActor>();
+            if(!bulletReference.inPosition)
+            {
+                return bulletReference;
+            }
 
-        return true;
+        }
+        return null;
     }
     private void OnDrawGizmos()
     {
