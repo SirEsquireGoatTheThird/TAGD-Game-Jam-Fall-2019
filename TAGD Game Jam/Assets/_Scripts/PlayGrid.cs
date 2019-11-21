@@ -821,13 +821,13 @@ public class PlayGrid : MonoBehaviour
             }
         }
 
-        i = 0;
+        int z = 0;
         while (PatternCheckWithoutMovement())
         {
             BulletActor movingBullet = PatternCheck();
             DirectionMove(movingBullet, movingBullet.direction);
-            AttackEnemy(1 + i);
-            i = Mathf.Clamp(i + 1, 0, 1);
+            AttackEnemy(1 + z);
+            z = Mathf.Clamp(z + 1, 0, 1);
             if(movingBullet != null)
             {
                 while(!movingBullet.inPosition)
