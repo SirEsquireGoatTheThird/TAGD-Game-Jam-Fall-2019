@@ -23,14 +23,6 @@ ScriptsOnlyBuild:
     - UnityEditor.Tilemaps.GridPalettes
     - UnityEditor.Tilemaps.SceneViewGridManager
     - UnityEditor.Tilemaps.TileDragAndDropManager
-    UnityEditor.Graphs.dll:
-    - UnityEditor.Graphs.AnimationBlendTree.Graph
-    - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
-    - UnityEditor.Graphs.AnimationStateMachine.Graph
-    - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
-    - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -58,6 +50,10 @@ ScriptsOnlyBuild:
     - Class: 74
       Script: {instanceID: 0}
     - Class: 81
+      Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
       Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
@@ -106,6 +102,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
@@ -132,6 +132,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
+    - Class: 168
+      Script: {instanceID: 0}
+    - Class: 169
+      Script: {instanceID: 0}
     - Class: 213
       Script: {instanceID: 0}
     - Class: 222
@@ -156,6 +160,10 @@ ScriptsOnlyBuild:
     - Class: 74
       Script: {instanceID: 0}
     - Class: 81
+      Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
       Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
@@ -299,6 +307,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
@@ -354,7 +366,7 @@ ScriptsOnlyBuild:
     className: AudioPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: 1440c43ff975164ff7329232e397b536
+      Hash: 25d0273322694f6d4c9c72f3ca103ff8
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SongHandler
@@ -516,7 +528,7 @@ ScriptsOnlyBuild:
     className: Shadow
   - hash:
       serializedVersion: 2
-      Hash: f3039f8982285c629ee47496ace4a07e
+      Hash: 2582942f947a3c546b811bc8b7ee673f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -851,4 +863,5 @@ ScriptsOnlyBuild:
   - Assets/Scenes/Win.unity
   - Assets/Scenes/Lose.unity
   - Assets/Scenes/Help.unity
-  playerPath: C:/Users/Erik/Desktop/TAGD Game Jam run/TAGD Game Jam.exe
+  playerPath: C:/Users/William/Documents/GitHub/TAGD-Game-Jam-Fall-2019/TAGD Game
+    Jam.exe
