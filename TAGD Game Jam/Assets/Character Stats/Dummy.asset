@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf0aa2475217a124986f4e04d67f7c29, type: 3}
+  m_Name: Dummy
+  m_EditorClassIdentifier: 
+  health: 10
+  damage: 0
+  attackTimer: 50
+  icon: {fileID: 21300000, guid: c46e9a985a8ff8848a851b4ba14c01cb, type: 3}

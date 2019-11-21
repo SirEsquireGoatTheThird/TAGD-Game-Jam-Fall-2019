@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public UnityEvent UpdateTimeDuration;
     public UnityEvent PlayerDamaged;
     public UnityEvent NextEnemy;
+    public UnityEvent EnemyAlive;
 
     private void Awake()
     {
@@ -54,6 +55,10 @@ public class GameManager : MonoBehaviour
         if (NextEnemy == null)
         {
             NextEnemy = new UnityEvent();
+        }
+        if (EnemyAlive == null)
+        {
+            EnemyAlive = new UnityEvent();
         }
     }
 

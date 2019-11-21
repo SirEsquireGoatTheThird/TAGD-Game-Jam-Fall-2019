@@ -9,6 +9,7 @@ public class Timer : MonoBehaviour
     public Image fillImage;
     private PlayGrid m_grid;
     float time;
+    bool enemyDead = false;
 
     public void Start()
     {
@@ -18,11 +19,16 @@ public class Timer : MonoBehaviour
         GameManager.Instance.UpdateTimeDuration.AddListener(UpdateTimer);
         time = duration;
         GameManager.Instance.NextEnemy.AddListener(ResetTimer);
+        GameManager.Instance.NextEnemy.AddListener(EnemyDied);
+        GameManager.Instance.EnemyAlive.AddListener(EnemyAlive);
     }
 
     public void Update()
     {
-
+        if(enemyDead)
+        {
+            return;
+        }
         time -= Time.deltaTime;
 
         if(time > 0)
@@ -47,5 +53,14 @@ public class Timer : MonoBehaviour
     {
         duration = m_grid.duration;
         time = duration;
+    }
+
+    private void EnemyDied()
+    {
+        enemyDead = true;
+    }
+    private void EnemyAlive()
+    {
+        enemyDead = false;
     }
 }

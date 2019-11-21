@@ -889,6 +889,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2a223c9f1f0e2a74e80f33367c55bb27, type: 2}
   m_actionPhase: 0
   enemy:
+  - {fileID: 11400000, guid: d6bc93a979c343041859987e12a4b53c, type: 2}
   - {fileID: 11400000, guid: 1c1c0eea4ec7a8144a594a968ac6a99c, type: 2}
   - {fileID: 11400000, guid: 39de8572f33b871448e5db9ebf425692, type: 2}
   - {fileID: 11400000, guid: 1cd92ae7e857d3049abec1f954b411bd, type: 2}
@@ -966,7 +967,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5924665, y: 0.13585186}
   m_AnchorMax: {x: 0.84185416, y: 0.20600002}
-  m_AnchoredPosition: {x: -412, y: -49}
+  m_AnchoredPosition: {x: -412, y: -49.00006}
   m_SizeDelta: {x: -404, y: 28}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &328036137
@@ -2400,6 +2401,9 @@ MonoBehaviour:
   NextEnemy:
     m_PersistentCalls:
       m_Calls: []
+  EnemyAlive:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &844732972
 Transform:
   m_ObjectHideFlags: 0
@@ -3623,7 +3627,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 109f2bd7ed7ca974481ff83c856ec4c5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c46e9a985a8ff8848a851b4ba14c01cb, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1

@@ -24,4 +24,9 @@ public class Menu : MonoBehaviour
     {
         //Camera to (0, 0)
     }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("Menu");
+    }
 }

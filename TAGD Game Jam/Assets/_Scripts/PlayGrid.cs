@@ -149,7 +149,9 @@ public class PlayGrid : MonoBehaviour
         }
         if(player_health <= 0)
         {
-            Debug.Log("You died");
+            //Lose condition
+            //Debug.Log("You died");
+            SceneManager.LoadScene("Lose");
         }
 
 
@@ -163,6 +165,10 @@ public class PlayGrid : MonoBehaviour
             m_bulletSelected = false;
         }
 
+        if(enemyDied)
+        {
+            return;
+        }
         time -= Time.deltaTime;
 
         if (time < 0)
@@ -182,6 +188,7 @@ public class PlayGrid : MonoBehaviour
 
     private IEnumerator NextLevel()
     {
+        i++;
         enemyDied = true;
         GameObject smolVape = Instantiate(m_smallVape, m_enemyIcon.transform.position, Quaternion.identity);
 
@@ -191,7 +198,7 @@ public class PlayGrid : MonoBehaviour
         GameObject bigVape = Instantiate(m_bigVape, m_enemyIcon.transform.position, Quaternion.identity);
         yield return new WaitForSeconds(1f);
 
-        i += 1;
+        
         if (i < enemy.Length)
         {
             currentEnemy = enemy[i];
@@ -229,6 +236,12 @@ public class PlayGrid : MonoBehaviour
         player_health += 5;
         player_health = Mathf.Clamp(player_health, 0, 10);
         Health_UI.SetHealth(player_health);
+        GameManager.Instance.EnemyAlive.Invoke();
+        ResetPattern();
+        if (i == enemy.Length)
+        {
+            SceneManager.LoadScene("Win");
+        }
     }
 
     #region Game Initilization
@@ -506,27 +519,8 @@ public class PlayGrid : MonoBehaviour
 
             }
 
-            if (patterns[p].used)
-            {
-                patternCount++;
-            }
-            
         }
-        
 
-        switch (patternCount)
-        {
-            case 1:
-                AttackEnemy(1);
-                break;
-            case 2:
-                AttackEnemy(3);
-                break;
-            case 3:
-                AttackEnemy(6);
-                break;
-        }
-        patternCount = 0;
         return bullet;
     }
     private void RayCastTarget()
@@ -826,10 +820,14 @@ public class PlayGrid : MonoBehaviour
                 yield return null;
             }
         }
-        while(PatternCheckWithoutMovement())
+
+        i = 0;
+        while (PatternCheckWithoutMovement())
         {
             BulletActor movingBullet = PatternCheck();
             DirectionMove(movingBullet, movingBullet.direction);
+            AttackEnemy(1 + i);
+            i = Mathf.Clamp(i + 1, 0, 1);
             if(movingBullet != null)
             {
                 while(!movingBullet.inPosition)
@@ -841,6 +839,7 @@ public class PlayGrid : MonoBehaviour
         }
         ResetBulletsPattern();
 
+        // Fades the bullets to grey
         for (int i = 0; i < m_bullets.Length; i++)
         {
             SpriteRenderer bulletReference;
@@ -849,7 +848,7 @@ public class PlayGrid : MonoBehaviour
 
         }
 
-
+        // Moves the bullets 
         if (runTime > 0)
         {
             BulletActor bulletReference;
@@ -867,7 +866,7 @@ public class PlayGrid : MonoBehaviour
 
             }
         }
-
+        // Fades bullets to white
         for (int i = 0; i < m_bullets.Length; i++)
         {
             SpriteRenderer bulletReference;
