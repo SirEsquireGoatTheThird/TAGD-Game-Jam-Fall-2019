@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf0aa2475217a124986f4e04d67f7c29, type: 3}
   m_Name: Gunslinger Lich
   m_EditorClassIdentifier: 
-  health: 25
+  health: 20
   damage: 2
-  attackTimer: 80
+  attackTimer: 40
   icon: {fileID: -2469484084191693879, guid: fb70995af2bf9ea45ad9dd8080045104, type: 3}

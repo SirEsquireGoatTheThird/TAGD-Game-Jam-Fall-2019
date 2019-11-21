@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf0aa2475217a124986f4e04d67f7c29, type: 3}
   m_Name: Bandits
   m_EditorClassIdentifier: 
-  health: 16
+  health: 15
   damage: 1
-  attackTimer: 50
+  attackTimer: 27
   icon: {fileID: 21300000, guid: 8409e76ad20ef8648bb451f515ee71e4, type: 3}

@@ -514,6 +514,7 @@ public class PlayGrid : MonoBehaviour
                     Destroy(vfx1, 1f);
                     Destroy(vfx2, 1f);
                     Destroy(vfx3, 1f);
+                    patternCount++;
                 }
 
             }
@@ -825,9 +826,21 @@ public class PlayGrid : MonoBehaviour
         {
             BulletActor movingBullet = PatternCheck();
             DirectionMove(movingBullet, movingBullet.direction);
-            AttackEnemy(1 + z);
-            z = Mathf.Clamp(z + 1, 0, 1);
-            if(movingBullet != null)
+            if(patternCount == 2)
+            {
+                AttackEnemy(3);
+            }
+            if(patternCount == 3)
+            {
+                AttackEnemy(5);
+            }
+            else if(patternCount == 1)
+            {
+                AttackEnemy(1 + z);
+                z = Mathf.Clamp(z + 1, 0, 1);
+            }
+            patternCount = 0;
+            if (movingBullet != null)
             {
                 while(!movingBullet.inPosition)
                 {
