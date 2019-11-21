@@ -145,7 +145,6 @@ public class PlayGrid : MonoBehaviour
         if(enemy_health <= 0 && !enemyDied)
         {
             StartCoroutine(NextLevel());
-            enemyDied = true;
             return;
         }
         if(player_health <= 0)
@@ -156,7 +155,7 @@ public class PlayGrid : MonoBehaviour
         }
 
 
-        if (Input.GetMouseButtonDown(0) && !m_actionPhase)
+        if (Input.GetMouseButtonDown(0) && !m_actionPhase && !enemyDied)
         {
             RayCastTarget();
         }
@@ -166,11 +165,11 @@ public class PlayGrid : MonoBehaviour
             m_bulletSelected = false;
         }
 
-        if(enemyDied)
+        if(!enemyDied)
         {
-            return;
+            time -= Time.deltaTime;
         }
-        time -= Time.deltaTime;
+        
 
         if (time < 0)
         {
@@ -189,6 +188,8 @@ public class PlayGrid : MonoBehaviour
 
     private IEnumerator NextLevel()
     {
+        enemyDied = true;
+        GameManager.Instance.EnemyDied.Invoke();
         i++;
         GameObject smolVape = Instantiate(m_smallVape, m_enemyIcon.transform.position, Quaternion.identity);
 
@@ -223,7 +224,6 @@ public class PlayGrid : MonoBehaviour
                 }
             }
             m_actionPhase = false;
-            enemyDied = false;
             SpawnBullets();
 
             //Change the pattern set
@@ -242,6 +242,7 @@ public class PlayGrid : MonoBehaviour
         {
             SceneManager.LoadScene("Win");
         }
+        enemyDied = false;
     }
 
     #region Game Initilization

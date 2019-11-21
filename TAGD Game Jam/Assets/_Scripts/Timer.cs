@@ -19,7 +19,7 @@ public class Timer : MonoBehaviour
         GameManager.Instance.UpdateTimeDuration.AddListener(UpdateTimer);
         time = duration;
         GameManager.Instance.NextEnemy.AddListener(ResetTimer);
-        GameManager.Instance.NextEnemy.AddListener(EnemyDied);
+        GameManager.Instance.EnemyDied.AddListener(EnemyDied);
         GameManager.Instance.EnemyAlive.AddListener(EnemyAlive);
     }
 

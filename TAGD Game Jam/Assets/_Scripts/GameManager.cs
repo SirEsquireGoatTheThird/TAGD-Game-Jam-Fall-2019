@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public UnityEvent PlayerDamaged;
     public UnityEvent NextEnemy;
     public UnityEvent EnemyAlive;
+    public UnityEvent EnemyDied;
 
     private void Awake()
     {
@@ -59,6 +60,10 @@ public class GameManager : MonoBehaviour
         if (EnemyAlive == null)
         {
             EnemyAlive = new UnityEvent();
+        }
+        if (EnemyDied == null)
+        {
+            EnemyDied = new UnityEvent();
         }
     }
 
