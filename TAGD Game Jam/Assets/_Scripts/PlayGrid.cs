@@ -145,6 +145,7 @@ public class PlayGrid : MonoBehaviour
         if(enemy_health <= 0 && !enemyDied)
         {
             StartCoroutine(NextLevel());
+            enemyDied = true;
             return;
         }
         if(player_health <= 0)
@@ -189,7 +190,6 @@ public class PlayGrid : MonoBehaviour
     private IEnumerator NextLevel()
     {
         i++;
-        enemyDied = true;
         GameObject smolVape = Instantiate(m_smallVape, m_enemyIcon.transform.position, Quaternion.identity);
 
         yield return new WaitForSeconds(2f);
@@ -821,13 +821,13 @@ public class PlayGrid : MonoBehaviour
             }
         }
 
-        i = 0;
+        int z = 0;
         while (PatternCheckWithoutMovement())
         {
             BulletActor movingBullet = PatternCheck();
             DirectionMove(movingBullet, movingBullet.direction);
-            AttackEnemy(1 + i);
-            i = Mathf.Clamp(i + 1, 0, 1);
+            AttackEnemy(1 + z);
+            z = Mathf.Clamp(z + 1, 0, 1);
             if(movingBullet != null)
             {
                 while(!movingBullet.inPosition)

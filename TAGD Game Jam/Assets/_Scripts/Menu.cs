@@ -17,7 +17,7 @@ public class Menu : MonoBehaviour
 
     public void Help()
     {
-        // Camera to Another Position
+        SceneManager.LoadScene("Help");
     }
 
     public void LoadMenu()
