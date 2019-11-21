@@ -514,7 +514,6 @@ public class PlayGrid : MonoBehaviour
                     Destroy(vfx1, 1f);
                     Destroy(vfx2, 1f);
                     Destroy(vfx3, 1f);
-
                 }
 
             }
@@ -878,27 +877,6 @@ public class PlayGrid : MonoBehaviour
         StartCoroutine(patternTime());
 
         m_actionPhase = false;
-    }
-    private IEnumerator WaitForBullet(BulletActor bullet)
-    {
-        while(!bullet.inPosition)
-        {
-            yield return null;
-        }
-    }
-    private BulletActor WhichBulletIsMoving()
-    {
-        BulletActor bulletReference;
-        for (int i = 0; i < m_bullets.Length; i++)
-        {
-            bulletReference = m_bullets[i].GetComponent<BulletActor>();
-            if(!bulletReference.inPosition)
-            {
-                return bulletReference;
-            }
-
-        }
-        return null;
     }
     private void OnDrawGizmos()
     {
