@@ -145,6 +145,7 @@ public class PlayGrid : MonoBehaviour
         if(enemy_health <= 0 && !enemyDied)
         {
             StartCoroutine(NextLevel());
+            enemyDied = true;
             return;
         }
         if(player_health <= 0)
@@ -189,7 +190,6 @@ public class PlayGrid : MonoBehaviour
     private IEnumerator NextLevel()
     {
         i++;
-        enemyDied = true;
         GameObject smolVape = Instantiate(m_smallVape, m_enemyIcon.transform.position, Quaternion.identity);
 
         yield return new WaitForSeconds(2f);
