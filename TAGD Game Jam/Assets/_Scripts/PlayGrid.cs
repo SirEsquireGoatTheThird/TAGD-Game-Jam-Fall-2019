@@ -145,7 +145,6 @@ public class PlayGrid : MonoBehaviour
         if(enemy_health <= 0 && !enemyDied)
         {
             StartCoroutine(NextLevel());
-            enemyDied = true;
             return;
         }
         if(player_health <= 0)
@@ -156,7 +155,7 @@ public class PlayGrid : MonoBehaviour
         }
 
 
-        if (Input.GetMouseButtonDown(0) && !m_actionPhase)
+        if (Input.GetMouseButtonDown(0) && !m_actionPhase && !enemyDied)
         {
             RayCastTarget();
         }
@@ -166,11 +165,11 @@ public class PlayGrid : MonoBehaviour
             m_bulletSelected = false;
         }
 
-        if(enemyDied)
+        if(!enemyDied)
         {
-            return;
+            time -= Time.deltaTime;
         }
-        time -= Time.deltaTime;
+        
 
         if (time < 0)
         {
@@ -189,6 +188,8 @@ public class PlayGrid : MonoBehaviour
 
     private IEnumerator NextLevel()
     {
+        enemyDied = true;
+        GameManager.Instance.EnemyDied.Invoke();
         i++;
         GameObject smolVape = Instantiate(m_smallVape, m_enemyIcon.transform.position, Quaternion.identity);
 
@@ -223,7 +224,6 @@ public class PlayGrid : MonoBehaviour
                 }
             }
             m_actionPhase = false;
-            enemyDied = false;
             SpawnBullets();
 
             //Change the pattern set
@@ -242,6 +242,7 @@ public class PlayGrid : MonoBehaviour
         {
             SceneManager.LoadScene("Win");
         }
+        enemyDied = false;
     }
 
     #region Game Initilization
@@ -514,7 +515,7 @@ public class PlayGrid : MonoBehaviour
                     Destroy(vfx1, 1f);
                     Destroy(vfx2, 1f);
                     Destroy(vfx3, 1f);
-
+                    patternCount++;
                 }
 
             }
@@ -826,9 +827,21 @@ public class PlayGrid : MonoBehaviour
         {
             BulletActor movingBullet = PatternCheck();
             DirectionMove(movingBullet, movingBullet.direction);
-            AttackEnemy(1 + z);
-            z = Mathf.Clamp(z + 1, 0, 1);
-            if(movingBullet != null)
+            if(patternCount == 2)
+            {
+                AttackEnemy(3);
+            }
+            if(patternCount == 3)
+            {
+                AttackEnemy(5);
+            }
+            else if(patternCount == 1)
+            {
+                AttackEnemy(1 + z);
+                z = Mathf.Clamp(z + 1, 0, 1);
+            }
+            patternCount = 0;
+            if (movingBullet != null)
             {
                 while(!movingBullet.inPosition)
                 {
@@ -878,27 +891,6 @@ public class PlayGrid : MonoBehaviour
         StartCoroutine(patternTime());
 
         m_actionPhase = false;
-    }
-    private IEnumerator WaitForBullet(BulletActor bullet)
-    {
-        while(!bullet.inPosition)
-        {
-            yield return null;
-        }
-    }
-    private BulletActor WhichBulletIsMoving()
-    {
-        BulletActor bulletReference;
-        for (int i = 0; i < m_bullets.Length; i++)
-        {
-            bulletReference = m_bullets[i].GetComponent<BulletActor>();
-            if(!bulletReference.inPosition)
-            {
-                return bulletReference;
-            }
-
-        }
-        return null;
     }
     private void OnDrawGizmos()
     {
